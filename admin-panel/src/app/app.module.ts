@@ -1,23 +1,21 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NavbarComponent } from './navbar/navbar.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { LoginComponentComponent } from './login-component/login-component.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { LoginComponentComponent } from './login-component/login-component.component';
+import { AngularMaterialModule } from './angular-material.module';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponentComponent,
+    LoginComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -25,12 +23,11 @@ import { LoginComponentComponent } from './login-component/login-component.compo
     MDBBootstrapModule,
     FlexLayoutModule,
     MatSliderModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatSidenavModule
+    AngularMaterialModule,
+    FormsModule,ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

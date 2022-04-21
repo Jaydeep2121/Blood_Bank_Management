@@ -1,8 +1,11 @@
 .companyName {
   font-size: 90%;
 }
-a:hover {
+a:hover{
   color: white;
+}
+.mat-sidenav a:hover {
+  color: black;
 }
 div {
   overflow: inherit;
@@ -32,6 +35,7 @@ button {
   width: 250px;
 }
 .mat-sidenav a {
+  color: black;
   font-size: 15px;
 }
 .mat-sidenav-content {
