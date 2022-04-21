@@ -1,0 +1,40 @@
+.companyName {
+  font-size: 90%;
+}
+a:hover {
+  color: white;
+}
+div {
+  overflow: inherit;
+}
+a {
+  text-decoration: none;
+  font-size: 90%;
+  white-space: normal;
+}
+button {
+  font-size: 90%;
+  min-width: min-content;
+}
+.fixed-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-sidenav {
+  width: 250px;
+}
+.mat-sidenav a {
+  font-size: 15px;
+}
+.mat-sidenav-content {
+  font-size: 200%;
+  text-align: center;
+}
