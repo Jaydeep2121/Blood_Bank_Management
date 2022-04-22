@@ -1,13 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { MatSliderModule } from '@angular/material/slider';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+/* app routing */ 
+// import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+/* Components */
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+/* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
+/* Angular material */
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -22,6 +28,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     BrowserAnimationsModule,
     MDBBootstrapModule,
     FlexLayoutModule,
+    HttpClientModule,
+    // AppRoutingModule,
     MatSliderModule,
     AngularMaterialModule,
     FormsModule,ReactiveFormsModule
