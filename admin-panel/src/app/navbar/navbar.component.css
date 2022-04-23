@@ -1,7 +1,7 @@
 .companyName {
   font-size: 90%;
 }
-a:hover{
+.mat-toolbar a{
   color: white;
 }
 .mat-sidenav a:hover {

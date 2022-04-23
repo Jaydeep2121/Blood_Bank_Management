@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSliderModule } from '@angular/material/slider';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 /* app routing */ 
-// import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 /* Components */
 import { NavbarComponent } from './navbar/navbar.component';
@@ -29,7 +29,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MDBBootstrapModule,
     FlexLayoutModule,
     HttpClientModule,
-    // AppRoutingModule,
+    AppRoutingModule,
     MatSliderModule,
     AngularMaterialModule,
     FormsModule,ReactiveFormsModule

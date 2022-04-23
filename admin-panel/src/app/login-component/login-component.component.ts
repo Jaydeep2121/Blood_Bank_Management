@@ -12,17 +12,8 @@ export class LoginComponentComponent implements OnInit {
   constructor(private serv:LoginServiceService) { }
 
   ngOnInit(): void {
-    this.getdataFromApi();
   }
   LoginAdmin(form:NgForm){
-    const userName=form.value.username;
-    const password=form.value.password;
-  }
-  getdataFromApi(){
-    this.serv.getData().subscribe((res)=>{
-      console.log('response api :',res);
-    },(err)=>{
-      console.log('error is:',err);
-    });
+    this.serv.LoginAdmin(form);
   }
 }
