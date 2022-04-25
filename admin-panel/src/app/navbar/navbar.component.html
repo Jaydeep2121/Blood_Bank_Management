@@ -5,15 +5,18 @@
                 <mat-icon>menu</mat-icon>
             </button>
         </div>
-        <a mat-button class="companyName" routerLink="/">
+        <a mat-button class="companyName" routerLink="/login">
             <mat-icon>airplay</mat-icon>&nbsp;<span>WelCome Admin</span>
         </a>
         <span class="example-spacer"></span>
-        <div fxShow="true" fxHide.lt-md="true">
+        <div fxShow="true" fxHide.lt-md="true" *ngIf="!authenticated">
+            <a mat-raised-button color="accent" routerLink="/login">Exit</a>
+        </div>
+        <div fxShow="true" fxHide.lt-md="true" *ngIf="authenticated">
             <a mat-button routerLink="/Mprofiles">All Profiles</a>
             <a mat-button routerLink="/Mdetails">All Details</a>
             <a mat-button routerLink="/Adetails">Total Approvals</a>
-            <a mat-raised-button color="accent" routerLink="/login">Sign In</a>
+            <a mat-raised-button color="accent" (click)="logOut()">LogOut</a>
         </div>
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill class="example-container">
