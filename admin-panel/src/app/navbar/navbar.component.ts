@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { emitters } from '../emitters/emitters';
 import { Router } from '@angular/router';
-import { windowCount } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +24,7 @@ export class NavbarComponent implements OnInit {
       "api/logout",{withCredentials:true}).
        subscribe(()=>{
          this.authenticated=false;
-         this.router.navigate(['/']);
+         this.router.navigate(['/login']);
       });
   }
 }

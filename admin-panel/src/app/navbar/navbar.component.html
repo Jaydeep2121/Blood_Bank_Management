@@ -1,5 +1,5 @@
 <div style="height: 100vh;" class="fixed-header">
-    <mat-toolbar color="primary">
+    <mat-toolbar class="mat-elevation-z5" color="primary">
         <div fxShow="true" fxHide.gt-sm="true">
             <button mat-icon-button (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
@@ -10,13 +10,13 @@
         </a>
         <span class="example-spacer"></span>
         <div fxShow="true" fxHide.lt-md="true" *ngIf="!authenticated">
-            <a mat-raised-button color="accent" routerLink="/login">Exit</a>
+            <img style="width:2em; height:2em;color: white;cursor: pointer;" src="assets/images/myimage.png">
         </div>
         <div fxShow="true" fxHide.lt-md="true" *ngIf="authenticated">
             <a mat-button routerLink="/Mprofiles">All Profiles</a>
             <a mat-button routerLink="/Mdetails">All Details</a>
             <a mat-button routerLink="/Adetails">Total Approvals</a>
-            <a mat-raised-button color="accent" (click)="logOut()">LogOut</a>
+            <a (click)="logOut()"><img style="width:2em; height:2em;color: white;cursor: pointer;" src="assets/images/logout.png"></a>
         </div>
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill class="example-container">

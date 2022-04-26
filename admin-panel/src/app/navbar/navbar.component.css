@@ -42,3 +42,7 @@ button {
   font-size: 200%;
   text-align: center;
 }
+.mat-elevation-z5 {
+  position: relative;
+  z-index: 2;
+}
