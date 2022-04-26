@@ -1,30 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { emitters } from '../emitters/emitters';
-import { Router } from '@angular/router';
+import { NavbarService } from './navbar.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  authenticated=false;
-  constructor(private http:HttpClient,private router:Router) { }
+  authenticated = false;
+  constructor(public navSer: NavbarService) {}
 
   ngOnInit(): void {
-    emitters.authEmitter.subscribe(
-      (auth:boolean)=>{
-        this.authenticated=auth;
-      }
-    );
+    emitters.authEmitter.subscribe((auth: boolean) => {
+      this.authenticated = auth;
+    });
   }
-  logOut(){
-    this.http.post(
-      "api/logout",{withCredentials:true}).
-       subscribe(()=>{
-         this.authenticated=false;
-         this.router.navigate(['/login']);
-      });
+  async logOut() {
+    await this.navSer.logOut();
+    if(this.authenticated)this.authenticated=false;
   }
 }

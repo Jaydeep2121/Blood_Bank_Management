@@ -4,8 +4,21 @@
 .mat-toolbar a{
   color: white;
 }
+.mat-toolbar img{
+  width:2em; 
+  height:2em;
+  color: white;
+  cursor: pointer;
+}
 .mat-sidenav a:hover {
   color: black;
+}
+.mat-sidenav img{
+  width:1.5em; 
+  height:1.5em;
+  cursor: pointer;
+  display: block;
+  margin: auto;
 }
 div {
   overflow: inherit;
