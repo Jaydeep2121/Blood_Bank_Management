@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class LoginServiceService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
   LoginAdmin(Myform: any) {
     this.http
       .post('api/admin/login', Myform.value, { withCredentials: true })

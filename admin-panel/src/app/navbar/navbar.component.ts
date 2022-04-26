@@ -9,7 +9,7 @@ import { NavbarService } from './navbar.service';
 })
 export class NavbarComponent implements OnInit {
   authenticated = false;
-  constructor(public navSer: NavbarService) {}
+  constructor(public navSer: NavbarService) { }
 
   ngOnInit(): void {
     emitters.authEmitter.subscribe((auth: boolean) => {
@@ -18,6 +18,5 @@ export class NavbarComponent implements OnInit {
   }
   async logOut() {
     await this.navSer.logOut();
-    if(this.authenticated)this.authenticated=false;
   }
 }
