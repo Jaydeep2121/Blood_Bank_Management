@@ -9,12 +9,12 @@ const routes: Routes = [
   { path: '', component: HomeComponentComponent },
   {
     path: 'login',
-    component: LoginComponentComponent,
-    // canActivate: [AuthGuard]
+    component: LoginComponentComponent
   },
-  { path: 'Mprofiles', 
+  {
+    path: 'Mprofiles',
     component: ProfileComponent,
-    // canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
 ];
 @NgModule({
@@ -22,4 +22,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

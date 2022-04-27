@@ -12,9 +12,6 @@ export class LoginServiceService {
   LoginAdmin(Myform: any) {
     this.http
       .post('api/admin/login', Myform.value, { withCredentials: true })
-      .subscribe((val) => {
-        this.router.navigate(['/']);
-        console.log(val);
-      });
+      .subscribe(() => this.router.navigate(['/']));
   }
 }

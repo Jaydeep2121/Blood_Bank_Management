@@ -6,6 +6,6 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   constructor(private cookiser: CookieService) { }
   isloggedIn(){
-    return !!(this.cookiser.get('jwt').length === 0)
+    return !(this.cookiser.get('jwt').length === 0)
   }
 }
