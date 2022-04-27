@@ -7,7 +7,14 @@
 .mat-toolbar img{
   width:2em; 
   height:2em;
-  color: white;
+  cursor: pointer;
+}
+.active{
+   background: rgba(255,255,255,.15);
+}
+#menuimg1,#menuimg2{
+  width:2em; 
+  height:2em;
   cursor: pointer;
 }
 .mat-sidenav a:hover {

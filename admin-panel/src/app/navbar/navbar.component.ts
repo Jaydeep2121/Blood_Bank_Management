@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { emitters } from '../emitters/emitters';
 import { NavbarService } from './navbar.service';
 
@@ -7,16 +8,20 @@ import { NavbarService } from './navbar.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit,OnDestroy {
+  private Sub:Subscription;
   authenticated = false;
-  constructor(public navSer: NavbarService) { }
+  constructor(private navSer: NavbarService) { }
 
   ngOnInit(): void {
-    emitters.authEmitter.subscribe((auth: boolean) => {
+    this.Sub=emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });
   }
-  async logOut() {
-    await this.navSer.logOut();
+  logOut() {
+    this.navSer.logOut();
+  }
+  ngOnDestroy(): void {
+    this.Sub.unsubscribe();
   }
 }

@@ -5,7 +5,10 @@
                 <mat-icon>menu</mat-icon>
             </button>
         </div>
-        <a mat-button class="companyName" routerLink="/login">
+        <a mat-button class="companyName" *ngIf="!authenticated" routerLink="/login">
+            <mat-icon>airplay</mat-icon>&nbsp;<span>WelCome Admin</span>
+        </a>
+        <a mat-button class="companyName" *ngIf="authenticated">
             <mat-icon>airplay</mat-icon>&nbsp;<span>WelCome Admin</span>
         </a>
         <span class="example-spacer"></span>
@@ -13,9 +16,16 @@
             <img src="assets/images/myimage.png">
         </div>
         <div fxShow="true" fxHide.lt-md="true" *ngIf="authenticated">
-            <a mat-button routerLink="/Mprofiles">All Profiles</a>
-            <a mat-button routerLink="/Mdetails">All Details</a>
-            <a mat-button routerLink="/Adetails">Total Approvals</a>
+            <a mat-button routerLink="/" routerLinkActive="active"
+                                    [routerLinkActiveOptions]={exact:true}>Home</a>
+            <a mat-button routerLink="/Mprofiles" mat-accent routerLinkActive="active">All Profiles</a>
+            <a mat-button routerLink="/Mdetails" routerLinkActive="active">All Details</a>
+            <a mat-button routerLink="/Adetails" routerLinkActive="active">Total Approvals</a>
+            <a mat-button [matMenuTriggerFor]="menu"><img src="assets/images/profile.png" id="menuimg1"></a>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item><img src="assets/images/profile1.png" id="menuimg1">&nbsp;&nbsp;My Profile</button>
+                    <button mat-menu-item><img src="assets/images/setting.png" id="menuimg2">&nbsp;&nbsp;Setting</button>
+                </mat-menu>
             <a (click)="logOut()"><img src="assets/images/logout.png"></a>
         </div>
     </mat-toolbar>
@@ -25,6 +35,11 @@
                 <a mat-button routerLink="/Mprofiles">All Profiles</a>
                 <a mat-button routerLink="/Mdetails">All Details</a>
                 <a mat-button routerLink="/Adetails">Total Approvals</a>
+                <a mat-button [matMenuTriggerFor]="menu">My Profile</a>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item><img src="assets/images/profile1.png" id="menuimg1">&nbsp;&nbsp;My Profile</button>
+                    <button mat-menu-item><img src="assets/images/setting.png" id="menuimg2">&nbsp;&nbsp;Setting</button>
+                </mat-menu>
                 <a (click)="logOut()"><img src="assets/images/logout2.png"></a>
             </div>
         </mat-sidenav>

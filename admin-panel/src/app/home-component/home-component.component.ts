@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { HomeService } from './home.service';
+
 declare var google:any;
 @Component({
   selector: 'app-home-component',
@@ -7,7 +10,7 @@ declare var google:any;
   styleUrls: ['./home-component.component.css'],
 })
 export class HomeComponentComponent implements OnInit {
-  constructor(public homeSer: HomeService) {}
+  constructor(public homeSer: HomeService,private authgr:AuthGuard,private router: Router) {}
   ngOnInit(): void {
     this.homeSer.isAuthenticate();
     google.charts.load('current', {packages: ['corechart']});
