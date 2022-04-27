@@ -15,9 +15,9 @@ export class LoginComponentComponent implements OnInit {
               private serv: LoginServiceService,
               private authgr:AuthGuard) {}
   ngOnInit(): void {
-    if (this.authgr.canActivate()) {
-      this.router.navigate(['/']);
-    }
+    // if (this.authgr.canActivate()) {
+    //   this.router.navigate(['/']);
+    // }
   }
   LoginAdmin(form: NgForm) {
     this.serv.LoginAdmin(form);
