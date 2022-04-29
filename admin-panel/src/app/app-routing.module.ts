@@ -5,8 +5,8 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { DonorComponent } from './profiles/donor-component/donor.component';
 import { ProfileComponent } from './profiles/profile.component';
-import { UserComponent } from './profiles/user-component/user.component';
 import { EmployeeComponent } from './profiles/employee-component/employee.component';
+import { UsersComponent } from './profiles/users/users.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'Mprofiles',
     component: ProfileComponent,
     children: [
-      { path: 'users', component: UserComponent },
+      { path: 'users', component: UsersComponent },
       { path: 'donors', component: DonorComponent },
       { path: 'employee', component: EmployeeComponent },
     ],
