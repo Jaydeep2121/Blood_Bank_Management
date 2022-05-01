@@ -3,17 +3,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Double } from '@syncfusion/ej2-angular-charts';
-import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { UserServiceService } from '../services/user-service.service';
 
-export interface User{
-  name :string;
-  mobile: Double;
+export interface User {
+  name: string;
   email: string;
-  password:string;
-  imageUrl:string;
-  blood_group:string;
+  imageUrl: string;
 }
 @Component({
   selector: 'app-list-user',
@@ -21,28 +16,36 @@ export interface User{
   styleUrls: ['./list-user.component.css']
 })
 export class ListUserComponent implements OnInit {
-  @ViewChild(AngularMaterialModule) paginator: MatPaginator;
-  @ViewChild(AngularMaterialModule) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  // Important objects
   MyDataSource: any;
-  employeeList: User[];
-  displayedColumns: string[] = ['name','mobile', 'email', 'password','imageUrl','blood_group', 'action'];
+  userList: User[];
+  displayedColumns: string[] = ['Name', 'Email', 'imageUrl', 'action'];
 
-  constructor(private service: UserServiceService, private router: Router) {}
-
+  constructor(private serv: UserServiceService, private router: Router) { }
   ngOnInit(): void {
-    this.getUsers()
+    this.getUser();
   }
-  // To Get List Of Users
-  getUsers() {
-  this.service
-  .getUser()
-  .subscribe((data: User[]) => {
-  this.MyDataSource = new MatTableDataSource();
-  this.MyDataSource.data = data;
-  this.MyDataSource.paginator = this.paginator;
-  this.MyDataSource.sort = this.sort;
-  });
+  getUser() {
+    this.serv.getUser().subscribe((data: any) => {
+      this.MyDataSource = new MatTableDataSource();
+      this.MyDataSource = data;
+      this.MyDataSource.paginator = this.paginator;
+      this.MyDataSource.sort = this.sort;
+    });
+  }
+  // To Edit Employee
+  editUser(userid: string) {
+    this.router.navigate([`/Crud/edit/${userid}`]);
+  }
+  deleteEmployee(userid: string){
+    console.log(userid);
+  }
+  // Search specific result
+  filterUser(searchstring: string) {
+    searchstring = searchstring.trim();
+    searchstring = searchstring.toLowerCase();
+    this.MyDataSource.filter = searchstring;
   }
 }

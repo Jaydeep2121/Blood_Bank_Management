@@ -7,18 +7,23 @@ import { DonorComponent } from './profiles/donor-component/donor.component';
 import { ProfileComponent } from './profiles/profile.component';
 import { EmployeeComponent } from './profiles/employee-component/employee.component';
 import { UsersComponent } from './profiles/users/users.component';
+import { ListUserComponent } from './profiles/users/list-user/list-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
-  {
-    path: 'login',
-    component: LoginComponentComponent,
-  },
+  { path: 'login', component: LoginComponentComponent, },
   {
     path: 'Mprofiles',
     component: ProfileComponent,
     children: [
-      { path: 'users', component: UsersComponent },
+      {
+        path: 'users',
+        component: UsersComponent, children: [
+          { 
+            path: '', component: ListUserComponent 
+          }
+        ]
+      },
       { path: 'donors', component: DonorComponent },
       { path: 'employee', component: EmployeeComponent },
     ],
@@ -30,4 +35,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

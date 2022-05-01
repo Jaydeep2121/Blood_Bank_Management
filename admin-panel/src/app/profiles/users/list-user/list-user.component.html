@@ -1,36 +1,35 @@
-<!-- For User ID -->
-<ng-container matColumnDef="lastName">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-    <mat-cell *matCellDef="let data"> </mat-cell>
-</ng-container>
+<div>
+    <mat-table matSort #table [dataSource]="MyDataSource">
+        <ng-container matColumnDef="Name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let data"> {{data.name}} </mat-cell>
+        </ng-container>
 
-<!-- For Title -->
-<ng-container matColumnDef="email">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-    <mat-cell *matCellDef="let data"> </mat-cell>
-</ng-container>
+        <!-- For Title -->
+        <ng-container matColumnDef="Email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell *matCellDef="let data"> {{data.email}} </mat-cell>
+        </ng-container>
 
-<!-- For Completion Status -->
-<ng-container matColumnDef="phone">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Contact No </mat-header-cell>
-    <mat-cell *matCellDef="let data"> </mat-cell>
-</ng-container>
+        <!-- For Completion Status -->
+        <ng-container matColumnDef="imageUrl">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Profile </mat-header-cell>
+            <mat-cell *matCellDef="let data"> <img src="" alt=""> {{data.imageUrl}}</mat-cell>
+        </ng-container>
 
-<!-- For Completion Status -->
-<ng-container matColumnDef="action">
-    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-    <mat-cell *matCellDef="let data">
-        <!-- <button mat-button color="primary" (click)="editEmployee(data._id)">Edit</button> -->
-        <!-- <button mat-button color="warn" (click)="deleteEmployee(data._id)">Delete</button> -->
-    </mat-cell>
-</ng-container>
+        <!-- For Completion Status -->
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let data">
+                <button mat-button color="primary" (click)="editUser(data._id)">Edit</button>
+                <button mat-button color="warn" (click)="deleteEmployee(data._id)">Delete</button>
+            </mat-cell>
+        </ng-container>
 
-<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-<!-- </mat-table> -->
-
-<!-- To paginate between pages with search -->
-<mat-paginator #paginator [length]="employeeList && employeeList.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
-</mat-paginator>
-<!-- </div> -->
-<!-- </mat-card> -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <!-- To paginate between pages with search -->
+    <mat-paginator #paginator [length]="userList && userList.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+</div>

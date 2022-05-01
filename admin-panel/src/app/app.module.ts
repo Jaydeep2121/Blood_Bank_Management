@@ -23,8 +23,8 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { CookieService } from 'ngx-cookie-service';
 import { AddUserComponent } from './profiles/users/add-user/add-user.component';
 import { EditUserComponent } from './profiles/users/edit-user/edit-user.component';
-import { ListUserComponent } from './profiles/users/list-user/list-user.component';
 import { UsersComponent } from './profiles/users/users.component';
+import { ListUserComponent } from './profiles/users/list-user/list-user.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +37,8 @@ import { UsersComponent } from './profiles/users/users.component';
     ProfileComponent,
     AddUserComponent,
     EditUserComponent,
-    ListUserComponent,
     UsersComponent,
+    ListUserComponent
   ],
   imports: [
     BrowserModule,
