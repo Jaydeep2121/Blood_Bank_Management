@@ -1,43 +1,85 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { UserServiceService } from '../services/user-service.service';
+import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
+  constructor(private ser: UserServiceService, public router: Router) {}
+  srcResult: any;
+  GradeArray: any = [
+    'Select',
+    '9th Grade',
+    '10th Grade',
+    '11th Grade',
+    '12th Grade',
+  ];
+  form: FormGroup = new FormGroup(
+    {
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      username: new FormControl(null, [Validators.required]),
+      gender: new FormControl(null, Validators.required),
+      mobilenum: new FormControl(null, Validators.required),
+      password: new FormControl(null, [Validators.required]),
+      passwordConfirm: new FormControl(null, [Validators.required]),
+      selectopt:new FormControl(null,[Validators.required]),
+      profile:new FormControl(null,[Validators.required])
+    },
+    { validators: CustomValidators.passwordsMatching }
+  );
+  ngOnInit(): void {}
+  onFileSelected() {
+    const inputNode: any = document.querySelector('#file');
 
-  constructor(
-    private formbuild: FormBuilder,
-    private ser: UserServiceService,
-    private router: Router) { }
+    if (typeof FileReader !== 'undefined') {
+      const reader = new FileReader();
 
-  formGroup: FormGroup;
-  ngOnInit(): void {
-    this.initializeForm();
-  }
+      reader.onload = (e: any) => {
+        this.srcResult = e.target.result;
+      };
 
-  // To initialize Form
-  initializeForm() {
-    this.formGroup = this.formbuild.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
-    });
-  }
-
-  // Add Employee When Submit Button Is Clicked
-  addEmployee() {
-    if (this.formGroup.valid) {
-      let data = this.formGroup.value;
-      this.ser.addEmployee(data).subscribe(() => {
-        this.router.navigate(['/Crud']);
-      });
+      reader.readAsArrayBuffer(inputNode.files[0]);
     }
   }
 
+  addEmployee() {
+    console.log(this.form.value);
+  }
+
+  get email(): FormControl {
+    return this.form.get('email') as FormControl;
+  }
+
+  get username(): FormControl {
+    return this.form.get('username') as FormControl;
+  }
+
+  get mobilenum(): FormControl {
+    return this.form.get('mobilenum') as FormControl;
+  }
+
+  get password(): FormControl {
+    return this.form.get('password') as FormControl;
+  }
+
+  get passwordConfirm(): FormControl {
+    return this.form.get('passwordConfirm') as FormControl;
+  }
+  get selectopt():FormControl{
+    return this.form.get('grade') as FormControl;
+  }
+  get profile():FormControl{
+    return this.form.get('profile') as FormControl;
+  }
 }

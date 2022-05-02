@@ -21,7 +21,7 @@ export class ListUserComponent implements OnInit {
 
   MyDataSource: any;
   userList: User[];
-  displayedColumns: string[] = ['Name', 'Email', 'imageUrl', 'action'];
+  displayedColumns: string[] = ['Name', 'Email', 'Contact', 'action'];
 
   constructor(private serv: UserServiceService, private router: Router) { }
   ngOnInit(): void {

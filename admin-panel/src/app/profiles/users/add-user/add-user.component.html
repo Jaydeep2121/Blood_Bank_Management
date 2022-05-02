@@ -1,44 +1,56 @@
-<form role="form" [formGroup]="formGroup" (ngSubmit)="addEmployee()">
-    <table>
-        <tr>
-            <td>
-                <mat-form-field>
-                    <input formControlName="lastName" matInput placeholder="Last Name">
-                </mat-form-field>
-                <mat-error>
-                    <span *ngIf="formGroup.get('lastName')!.valid">Please enter lastname</span>
-                </mat-error>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <mat-form-field class="demo-full-width">
-                    <input formControlName="email" matInput placeholder="Email">
-                </mat-form-field>
-                <mat-error>
-                    <span *ngIf="formGroup.get('email')!.valid && formGroup.get('email')?.touched">Please enter
-                        email</span>
-                </mat-error>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <mat-form-field class="demo-full-width">
-                    <input formControlName="phone" matInput placeholder="Contact No">
-                </mat-form-field>
-                <mat-error>
-                    <span *ngIf="formGroup.get('phone')!.valid && formGroup.get('phone')?.touched">Please enter contact
-                        no</span>
-                </mat-error>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" class="content-center">
-                <button mat-raised-button color="accent" [disabled]="!formGroup.valid">Submit</button>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-    </table>
-</form>
+<h2 mat-dialog-title class="text-center">ADD USER</h2>
+<mat-card-content>
+    <form role="form" [formGroup]=form (ngSubmit)="addEmployee()">
+        <mat-form-field>
+            <input type="text" matInput placeholder="Username" formControlName="username">
+            <mat-error *ngIf="username.touched && username.hasError('required')">Username is required</mat-error>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <input type="email" matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="email.touched && email.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="email.touched && email.hasError('email')">Email must be valid</mat-error>
+        </mat-form-field><br>
+
+        <mat-radio-group aria-label="Select Gender" formControlName="gender">
+            <mat-radio-button value="m">Male</mat-radio-button>&nbsp;&nbsp;
+            <mat-radio-button value="f">Female</mat-radio-button>
+        </mat-radio-group><br>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="Mobile" formControlName="mobilenum">
+            <mat-error *ngIf="mobilenum.touched && mobilenum.hasError('required')">MobileNo is required</mat-error>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+            <mat-error *ngIf="password.touched && password.hasError('required')">Password is required</mat-error>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <input type="password" matInput placeholder="Password Confirmation" formControlName="passwordConfirm">
+            <mat-error *ngIf="passwordConfirm.touched && form.hasError('passwordsNotMatching')"><small>Passwords are not
+                matching</small></mat-error><br>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Grade</mat-label>
+            <mat-select formControlName="grade">
+                <mat-option [value]="gradeArray" *ngFor="let gradeArray of GradeArray">{{ gradeArray }}
+                </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="grade.touched && grade.hasError('required')"> is required</mat-error> -->
+        </mat-form-field>
+
+        <button type="button" color="accent" mat-raised-button (click)="fileInput.click()">Choose Profile</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" formControlName="profile">
+        <mat-error *ngIf="profile.touched"><small>Profile required</small></mat-error><br>
+        <mat-hint *ngIf="!form.valid"><small>Please fill out all needed information</small></mat-hint>
+
+        <div class="mbutton">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
+                [mat-dialog-close]="true">ADD</button>
+            &nbsp;<button mat-raised-button color="warn" mat-dialog-close>CLOSE</button>
+        </div>
+    </form>
+</mat-card-content>

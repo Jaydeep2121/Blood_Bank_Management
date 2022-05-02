@@ -11,7 +11,7 @@ import { ListUserComponent } from './profiles/users/list-user/list-user.componen
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
-  { path: 'login', component: LoginComponentComponent, },
+  { path: 'login', component: LoginComponentComponent },
   {
     path: 'Mprofiles',
     component: ProfileComponent,
@@ -19,9 +19,7 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent, children: [
-          { 
-            path: '', component: ListUserComponent 
-          }
+          { path: '', component: ListUserComponent }
         ]
       },
       { path: 'donors', component: DonorComponent },
