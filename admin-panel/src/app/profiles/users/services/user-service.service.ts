@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,6 +13,15 @@ export class UserServiceService {
   getUser() {
     return this.http.get('api/getUsers');
   }
+  //get blood group data
+  getGroup(){
+    return this.http.get('api/getGroups');
+  }
+
+  // To Create/Add New User
+  addUser(body: any):Observable<any> {
+    return this.http.post<any>('api/users', body);
+  }
 
   // To Get Employee Details For Single Record Using Id
   getEmployeeById(empid: string) {
@@ -23,10 +33,6 @@ export class UserServiceService {
     return this.http.post(`${this.uri}/updateEmployee/${id}`, body);
   }
 
-  // To Create/Add New Employee
-  addEmployee(body: any) {
-    return this.http.post(`${this.uri}/addEmployee`, body);
-  }
 
   // To Delete Any Employee
   deleteEmployee(empid: string) {

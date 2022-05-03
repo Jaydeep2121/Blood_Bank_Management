@@ -1,9 +1,9 @@
 <h2 mat-dialog-title class="text-center">ADD USER</h2>
 <mat-card-content>
-    <form role="form" [formGroup]=form (ngSubmit)="addEmployee()">
+    <form role="form" [formGroup]=form (ngSubmit)="addUserForm()">
         <mat-form-field>
-            <input type="text" matInput placeholder="Username" formControlName="username">
-            <mat-error *ngIf="username.touched && username.hasError('required')">Username is required</mat-error>
+            <input type="text" matInput placeholder="Username" formControlName="name">
+            <mat-error *ngIf="name.touched && name.hasError('required')">Username is required</mat-error>
         </mat-form-field><br>
 
         <mat-form-field>
@@ -15,11 +15,12 @@
         <mat-radio-group aria-label="Select Gender" formControlName="gender">
             <mat-radio-button value="m">Male</mat-radio-button>&nbsp;&nbsp;
             <mat-radio-button value="f">Female</mat-radio-button>
+            <mat-error *ngIf="gender.touched && gender.hasError('required')">Gender is required</mat-error>
         </mat-radio-group><br>
 
         <mat-form-field>
-            <input type="text" matInput placeholder="Mobile" formControlName="mobilenum">
-            <mat-error *ngIf="mobilenum.touched && mobilenum.hasError('required')">MobileNo is required</mat-error>
+            <input type="text" matInput placeholder="Mobile" formControlName="mobile">
+            <mat-error *ngIf="mobile.touched && mobile.hasError('required')">MobileNo is required</mat-error>
         </mat-form-field><br>
 
         <mat-form-field>
@@ -34,19 +35,19 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Grade</mat-label>
-            <mat-select formControlName="grade">
-                <mat-option [value]="gradeArray" *ngFor="let gradeArray of GradeArray">{{ gradeArray }}
+            <mat-label>Bl.Group</mat-label>
+            <mat-select formControlName="blood_group">
+                <mat-option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}
                 </mat-option>
             </mat-select>
-            <!-- <mat-error *ngIf="grade.touched && grade.hasError('required')"> is required</mat-error> -->
+            <mat-error *ngIf="blood_group.touched && blood_group.hasError('required')">Bl.Group is required</mat-error>
         </mat-form-field>
 
         <button type="button" color="accent" mat-raised-button (click)="fileInput.click()">Choose Profile</button>
-        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" formControlName="profile">
-        <mat-error *ngIf="profile.touched"><small>Profile required</small></mat-error><br>
+        <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file" formControlName="imageUrl">&nbsp;{{text}}
+        <mat-error *ngIf="imageUrl.touched && imageUrl.hasError('required')"><small>Profile is required</small></mat-error><br>
         <mat-hint *ngIf="!form.valid"><small>Please fill out all needed information</small></mat-hint>
-
+        <!-- <img [src]="url"> -->
         <div class="mbutton">
             <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
                 [mat-dialog-close]="true">ADD</button>

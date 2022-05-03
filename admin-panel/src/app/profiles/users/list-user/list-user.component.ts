@@ -8,7 +8,7 @@ import { UserServiceService } from '../services/user-service.service';
 export interface User {
   name: string;
   email: string;
-  imageUrl: string;
+  mobile: String;
 }
 @Component({
   selector: 'app-list-user',

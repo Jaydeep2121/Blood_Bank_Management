@@ -17,56 +17,59 @@ import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
 })
 export class AddUserComponent implements OnInit {
   constructor(private ser: UserServiceService, public router: Router) {}
-  srcResult: any;
-  GradeArray: any = [
-    'Select',
-    '9th Grade',
-    '10th Grade',
-    '11th Grade',
-    '12th Grade',
-  ];
+  text: any;
+  image: any;
+  GroupArray: any = [];
   form: FormGroup = new FormGroup(
     {
+      name: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      username: new FormControl(null, [Validators.required]),
       gender: new FormControl(null, Validators.required),
-      mobilenum: new FormControl(null, Validators.required),
+      mobile: new FormControl(null, Validators.required),
       password: new FormControl(null, [Validators.required]),
       passwordConfirm: new FormControl(null, [Validators.required]),
-      selectopt:new FormControl(null,[Validators.required]),
-      profile:new FormControl(null,[Validators.required])
+      blood_group: new FormControl(null, [Validators.required]),
+      imageUrl: new FormControl(null, [Validators.required]),
     },
     { validators: CustomValidators.passwordsMatching }
   );
-  ngOnInit(): void {}
-  onFileSelected() {
-    const inputNode: any = document.querySelector('#file');
-
-    if (typeof FileReader !== 'undefined') {
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.srcResult = e.target.result;
-      };
-
-      reader.readAsArrayBuffer(inputNode.files[0]);
-    }
+  ngOnInit(): void {
+    this.ser.getGroup().subscribe((data: any) => this.GroupArray.push(...data));
   }
 
-  addEmployee() {
-    console.log(this.form.value);
+  uploadFileEvt(imgFile: any) {
+    this.text = imgFile.target.files[0].name;
+    this.image = imgFile.target.files[0];
+  }
+  addUserForm() {
+    const value = this.form.value;
+    let formData = new FormData();
+    formData.append('name', value['name']);
+    formData.append('email', value['email']);
+    formData.append('gender', value['gender']);
+    formData.append('mobile', value['mobile']);
+    formData.append('password', value['password']);
+    formData.append('imageUrl', this.image);
+    formData.append('blood_group', value['blood_group']);
+    if (this.form.valid) {
+      this.ser.addUser(formData).subscribe((res) =>console.log(res));
+    }
   }
 
   get email(): FormControl {
     return this.form.get('email') as FormControl;
   }
 
-  get username(): FormControl {
-    return this.form.get('username') as FormControl;
+  get name(): FormControl {
+    return this.form.get('name') as FormControl;
   }
 
-  get mobilenum(): FormControl {
-    return this.form.get('mobilenum') as FormControl;
+  get gender(): FormControl {
+    return this.form.get('gender') as FormControl;
+  }
+
+  get mobile(): FormControl {
+    return this.form.get('mobile') as FormControl;
   }
 
   get password(): FormControl {
@@ -76,10 +79,10 @@ export class AddUserComponent implements OnInit {
   get passwordConfirm(): FormControl {
     return this.form.get('passwordConfirm') as FormControl;
   }
-  get selectopt():FormControl{
-    return this.form.get('grade') as FormControl;
+  get blood_group(): FormControl {
+    return this.form.get('blood_group') as FormControl;
   }
-  get profile():FormControl{
-    return this.form.get('profile') as FormControl;
+  get imageUrl(): FormControl {
+    return this.form.get('imageUrl') as FormControl;
   }
 }
