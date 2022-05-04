@@ -52,7 +52,7 @@ export class AddUserComponent implements OnInit {
     formData.append('imageUrl', this.image);
     formData.append('blood_group', value['blood_group']);
     if (this.form.valid) {
-      this.ser.addUser(formData).subscribe((res) =>console.log(res));
+      this.ser.addUser(formData);
     }
   }
 

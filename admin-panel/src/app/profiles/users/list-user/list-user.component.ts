@@ -2,7 +2,8 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 import { UserServiceService } from '../services/user-service.service';
 
 export interface User {
@@ -13,7 +14,7 @@ export interface User {
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.css']
+  styleUrls: ['./list-user.component.css'],
 })
 export class ListUserComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,7 +24,8 @@ export class ListUserComponent implements OnInit {
   userList: User[];
   displayedColumns: string[] = ['Name', 'Email', 'Contact', 'action'];
 
-  constructor(private serv: UserServiceService, private router: Router) { }
+  constructor(private serv: UserServiceService, 
+              public dialog: MatDialog) {}
   ngOnInit(): void {
     this.getUser();
   }
@@ -37,10 +39,11 @@ export class ListUserComponent implements OnInit {
   }
   // To Edit Employee
   editUser(userid: string) {
-    this.router.navigate([`/Crud/edit/${userid}`]);
+    this.dialog.open(EditUserComponent);
+    this.serv.change(userid);
   }
-  deleteEmployee(userid: string){
-    console.log(userid);
+  deleteUser(userid: string) {
+    this.serv.deleteUser(userid);
   }
   // Search specific result
   filterUser(searchstring: string) {

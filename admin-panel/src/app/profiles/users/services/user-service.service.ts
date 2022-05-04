@@ -1,41 +1,68 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Subject, BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class UserServiceService {
-  constructor(private http: HttpClient) {}
-  // Main api url to call api
-  uri = 'http://localhost:4000/employees';
+  public editDataDetails: string = '';
+  private msgsor = new BehaviorSubject(this.editDataDetails);
+  currval = this.msgsor.asObservable();
+  change(id: string) {
+    this.msgsor.next(id);
+  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   // To Get The List Of Employee
   getUser() {
     return this.http.get('api/getUsers');
   }
   //get blood group data
-  getGroup(){
+  getGroup() {
     return this.http.get('api/getGroups');
   }
-
   // To Create/Add New User
-  addUser(body: any):Observable<any> {
-    return this.http.post<any>('api/users', body);
+  addUser(body: any) {
+    this.http.post('api/users', body).subscribe(() => {
+      this.showDialog('User Data Has Been Saved');
+    });
   }
-
-  // To Get Employee Details For Single Record Using Id
-  getEmployeeById(empid: string) {
-    return this.http.get(`${this.uri}/editEmployee/${empid}`);
+  showDialog(title: string) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: title,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
-
-  // To Updated Specific Employee
-  updateEmployee(id: string, body: any) {
-    return this.http.post(`${this.uri}/updateEmployee/${id}`, body);
+  //
+  UpdateUser(body: any) {
+    this.http.patch('api/UpdateUser', body).subscribe((val) => {
+      this.showDialog('User Data Has Been Updated');
+    });
   }
-
-
-  // To Delete Any Employee
-  deleteEmployee(empid: string) {
-    return this.http.get(`${this.uri}/deleteEmployee/${empid}`);
+  // To Delete Any User
+  async deleteUser(usrid: string) {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    });
+    if (result.isConfirmed) {
+      this.http.get(`api/deleteUser/${usrid}`).subscribe(() => {
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+      });
+    }
+  }
+  // To Get User Details For Single Record Using Id
+  editUser(usrid: string): Observable<any> {
+    return this.http.get<any>(`api/editUser/${usrid}`);
   }
 }

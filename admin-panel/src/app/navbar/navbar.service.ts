@@ -8,7 +8,7 @@ import { emitters } from '../emitters/emitters';
   providedIn: 'root',
 })
 export class NavbarService {
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
   async logOut() {
     const result = await Swal.fire({
       title: 'Are you leaving?',
@@ -18,14 +18,13 @@ export class NavbarService {
       confirmButtonColor: '#20c997',
       cancelButtonColor: '#df4759',
       confirmButtonText: 'Yes',
-    })
+    });
     if (result.isConfirmed) {
-      Swal.fire('LoggedOut!', 'You have been loggedOut.', 'success');
-      this.http.post('api/logout', { withCredentials: true })
-        .subscribe(() => {
-          emitters.authEmitter.emit(false)
-          this.router.navigate(['/login']);
-        });
+      this.http.post('api/logout', { withCredentials: true }).subscribe(() => {
+        Swal.fire('LoggedOut!', 'You have been loggedOut.', 'success');
+        emitters.authEmitter.emit(false);
+        this.router.navigate(['/login']);
+      });
     }
   }
 }

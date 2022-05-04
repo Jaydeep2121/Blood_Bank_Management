@@ -94,13 +94,25 @@ strong {
 }
 .mat-raised-button:focus,
 .mat-icon-button:focus,
-.mat-menu-item:focus {
+.mat-menu-item:focus,button{
   outline: 0 !important;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+form {
+  width: 350px;
+}
+.mat-form-field {
+  width: 100%;
+}
+.mbutton {
+  float: right;
 }
 
 /* img {
     border-radius: 20px;
     height: 70px;
-   } */
+   } 
+*/
 
-/* End Table Class */
