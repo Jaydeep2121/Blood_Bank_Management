@@ -21,9 +21,9 @@
             <a mat-button routerLink="/Mprofiles" mat-accent routerLinkActive="active">All Profiles</a>
             <a mat-button routerLink="/Mdetails" routerLinkActive="active">All Details</a>
             <a mat-button routerLink="/Adetails" routerLinkActive="active">Total Approvals</a>
-            <a mat-button [matMenuTriggerFor]="menu"><img src="assets/images/profile.png" id="menuimg1"></a>
+            <a mat-button [matMenuTriggerFor]="menu" routerLinkActive="active"><img src="assets/images/profile.png" id="menuimg1"></a>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item><img src="assets/images/profile1.png" id="menuimg1">&nbsp;&nbsp;My Profile</button>
+                    <button routerLink="/perProfile" mat-menu-item><img src="assets/images/profile1.png" id="menuimg1">&nbsp;&nbsp;My Profile</button>
                     <button mat-menu-item><img src="assets/images/setting.png" id="menuimg2">&nbsp;&nbsp;Setting</button>
                 </mat-menu>
             <a (click)="logOut()"><img src="assets/images/logout.png"></a>

@@ -8,6 +8,7 @@ import { ProfileComponent } from './profiles/profile.component';
 import { EmployeeComponent } from './profiles/employee-component/employee.component';
 import { UsersComponent } from './profiles/users/users.component';
 import { ListUserComponent } from './profiles/users/list-user/list-user.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'employee', component: EmployeeComponent },
     ],
   },
+  { path:'perProfile',component:MyProfileComponent},
   { path: '**', component: HomeComponentComponent },
 ];
 @NgModule({

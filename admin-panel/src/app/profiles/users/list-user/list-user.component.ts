@@ -21,7 +21,7 @@ export class ListUserComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   MyDataSource: any;
-  userList: User[];
+  cdata:any;
   displayedColumns: string[] = ['Name', 'Email', 'Contact', 'action'];
 
   constructor(private serv: UserServiceService, 
@@ -31,6 +31,7 @@ export class ListUserComponent implements OnInit {
   }
   getUser() {
     this.serv.getUser().subscribe((data: any) => {
+      this.cdata=data.length;
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource = data;
       this.MyDataSource.paginator = this.paginator;
