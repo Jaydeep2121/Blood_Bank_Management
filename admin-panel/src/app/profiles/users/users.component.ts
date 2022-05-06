@@ -12,9 +12,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {}
   openDialog() {
-    const dialogRef = this.dialog.open(AddUserComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(AddUserComponent);
   }
 }

@@ -32,6 +32,8 @@
     <mat-sidenav-container fxFlexFill class="example-container">
         <mat-sidenav class="side-nav" color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
             <div fxLayout="column" *ngIf="authenticated">
+                <a mat-button routerLink="/" routerLinkActive="active"
+                                    [routerLinkActiveOptions]={exact:true}>Home</a>
                 <a mat-button routerLink="/Mprofiles">All Profiles</a>
                 <a mat-button routerLink="/Mdetails">All Details</a>
                 <a mat-button routerLink="/Adetails">Total Approvals</a>

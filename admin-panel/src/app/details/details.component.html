@@ -1,0 +1,35 @@
+<div class="container" *ngIf="router.url==='/Mdetails'">
+    <div class="row" class="main h-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <div class="white_box QA_section card_height_100 blud_card">
+                <div class="box_header m-0">
+                    <div class="main-title">
+                        <h3 class="m-0 text_white">Storage</h3>
+                    </div>
+                </div>
+                <div class="content_user">
+                    <p>Storage of red cells at 4 °C decreases the 
+                        metabolic rate of the cell </p>
+                    <a routerLink="/Mdetails/storage" class="btn_2">View More</a>
+                    <img src="../../assets/images/users_img.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <div class="white_box QA_section card_height_100 blud_card">
+                <div class="box_header m-0">
+                    <div class="main-title">
+                        <h3 class="m-0 text_white">Blood Bank</h3>
+                    </div>
+                </div>
+                <div class="content_user">
+                    <p>blood is collected from donors, typed, 
+                        separated into components</p>
+                    <a routerLink="/Mdetails/bbank" class="btn_2">View More</a>
+                    <img src="../../assets/images/users_img.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

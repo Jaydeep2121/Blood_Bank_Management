@@ -5,7 +5,6 @@
 /* @import '~@angular/material/prebuilt-themes/pink-bluegrey.css'; */
 /* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
 body {
-  /* margin: 0%; */
   margin: 0;
   font-family: Roboto, sans-serif;
 }
@@ -94,7 +93,8 @@ strong {
 }
 .mat-raised-button:focus,
 .mat-icon-button:focus,
-.mat-menu-item:focus,button{
+.mat-menu-item:focus,
+button {
   outline: 0 !important;
 }
 .mat-radio-button ~ .mat-radio-button {
@@ -109,9 +109,106 @@ form {
 .mbutton {
   float: right;
 }
-/* img {
-    border-radius: 20px;
-    height: 70px;
-   } 
-*/
-
+/*Profiles & Details Card Styles*/
+.card_height_100 {
+  height: calc(100% - 30px);
+}
+.main {
+  margin-top: -40px !important;
+  position: absolute;
+}
+.blud_card {
+  background: #4567ee !important;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+.blud_card p {
+  color: #bcd3ff;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.blud_card img {
+  width: 100%;
+}
+.white_box {
+  padding: 30px;
+  background-color: #fff;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+.btn_2 {
+  color: #4efea2;
+  border: 1px solid #4efea2;
+  padding: 11px 23px;
+  float: left;
+  text-transform: capitalize;
+  line-height: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: transparent;
+  white-space: nowrap;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  font: barlow, sans-serif;
+}
+.btn_2:hover {
+  background-color: #4efea2;
+  color: #fff !important;
+  font-weight: 400;
+}
+a {
+  text-decoration: none !important;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.main-title h3 {
+  font-family: barlow, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #2d1967;
+  line-height: 1.2;
+}
+.text_white {
+  color: #fff !important;
+}
+h3 {
+  font-size: 26px;
+}
+.blud_card p {
+  color: #bcd3ff;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+p {
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+  color: #828bb2;
+  font-family: barlow, sans-serif;
+  font-weight: 300;
+}
+/*Profiles & Details Card Styles*/
+/*Blood Bank & MyProfile Styles*/
+.mybutton{
+  border: none;
+  outline:none;
+}
+.form-control{
+  box-shadow: none;
+}
+.edit-show{
+  margin-left: 10px !important;
+}
+.edit-btn,.edit-show{
+  float: left;
+}
+mat-icon{
+  color: white;
+}
+/*Blood Bank & MyProfile Styles*/

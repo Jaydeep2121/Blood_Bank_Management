@@ -1,0 +1,26 @@
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #fcb898;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(252,184,152), rgb(223,247,231));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(252,184,152), rgb(223,247,231))
+}
+.gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #fcb898;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(252,184,152),rgb(223,247,231));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(252,184,152), rgb(223,247,231))
+}
+.edit-btn,.edit-show,button{
+    background-color: #fcb898;
+}
+/* button:hover{
+    background-color: #fcb898;
+} */

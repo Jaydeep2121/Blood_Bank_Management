@@ -9,6 +9,9 @@ import { EmployeeComponent } from './profiles/employee-component/employee.compon
 import { UsersComponent } from './profiles/users/users.component';
 import { ListUserComponent } from './profiles/users/list-user/list-user.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { DetailsComponent } from './details/details.component';
+import { StorageComponent } from './details/storage/storage.component';
+import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -19,15 +22,22 @@ const routes: Routes = [
     children: [
       {
         path: 'users',
-        component: UsersComponent, children: [
-          { path: '', component: ListUserComponent }
-        ]
+        component: UsersComponent,
+        children: [{ path: '', component: ListUserComponent }],
       },
       { path: 'donors', component: DonorComponent },
       { path: 'employee', component: EmployeeComponent },
     ],
   },
-  { path:'perProfile',component:MyProfileComponent},
+  {
+    path: 'Mdetails',
+    component: DetailsComponent,
+    children: [
+      { path: 'storage', component: StorageComponent },
+      { path: 'bbank', component: BloodBankComponent }
+    ],
+  },
+  { path: 'perProfile', component: MyProfileComponent },
   { path: '**', component: HomeComponentComponent },
 ];
 @NgModule({
@@ -35,4 +45,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

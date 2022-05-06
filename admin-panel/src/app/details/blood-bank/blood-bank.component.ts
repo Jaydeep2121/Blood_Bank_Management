@@ -1,24 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../home-component/home.service';
-import { CustomValidators } from '../public/_helpers/custom-validators';
-import { MyprofileService } from './myprofile.service';
-import AWN from 'awesome-notifications';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
-import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { HomeService } from 'src/app/home-component/home.service';
+import { MyprofileService } from 'src/app/my-profile/myprofile.service';
+import { ViewProfileComponent } from 'src/app/my-profile/view-profile/view-profile.component';
+import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
 
 @Component({
-  selector: 'app-my-profile',
-  templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.css'],
+  selector: 'app-blood-bank',
+  templateUrl: './blood-bank.component.html',
+  styleUrls: ['./blood-bank.component.css']
 })
-export class MyProfileComponent implements OnInit {
-  notifier = new AWN();
+export class BloodBankComponent implements OnInit {
   constructor(
     private homeSer: HomeService,
     private proSer: MyprofileService,
@@ -78,4 +71,5 @@ export class MyProfileComponent implements OnInit {
   get passwordConfirm(): FormControl {
     return this.form.get('passwordConfirm') as FormControl;
   }
+
 }
