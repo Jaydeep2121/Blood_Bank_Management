@@ -23,6 +23,7 @@ import { ViewProfileComponent } from './my-profile/view-profile/view-profile.com
 import { DetailsComponent } from './details/details.component';
 import { StorageComponent } from './details/storage/storage.component';
 import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
+import { BviewProfileComponent } from './details/blood-bank/bview-profile/bview-profile.component';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Angular material */
@@ -48,7 +49,8 @@ import { CookieService } from 'ngx-cookie-service';
     ViewProfileComponent,
     DetailsComponent,
     StorageComponent,
-    BloodBankComponent
+    BloodBankComponent,
+    BviewProfileComponent
   ],
   imports: [
     BrowserModule,

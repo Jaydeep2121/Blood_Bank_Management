@@ -10,6 +10,7 @@ export class ViewProfileComponent implements OnInit {
   name:string;
   email:string;
   mobile:string;
+  displayStyle = 'none';
   constructor(private proSer:MyprofileService) { }
   ngOnInit(): void {
     this.proSer.currval.subscribe((val:any)=>{
@@ -17,5 +18,11 @@ export class ViewProfileComponent implements OnInit {
       this.email=val[0]['email'];
       this.mobile=val[0]['mobile'];
     });
+  }
+  openPopup() {
+    this.displayStyle = 'block';
+  }
+  closePopup() {
+    this.displayStyle = 'none';
   }
 }

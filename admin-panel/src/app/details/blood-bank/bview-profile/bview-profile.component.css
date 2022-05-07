@@ -1,0 +1,11 @@
+.wrapper .social_media ul li,
+.wrapper .left {
+  background: whitesmoke;
+}
+.wrapper,
+p {
+  font-family: "Josefin Sans", sans-serif;
+}
+img {
+  cursor: pointer;
+}

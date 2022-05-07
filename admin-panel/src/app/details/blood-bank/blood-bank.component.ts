@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { HomeService } from 'src/app/home-component/home.service';
-import { MyprofileService } from 'src/app/my-profile/myprofile.service';
-import { ViewProfileComponent } from 'src/app/my-profile/view-profile/view-profile.component';
+import { BviewProfileComponent } from './bview-profile/bview-profile.component';
 import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
+import { DetailsService } from '../details.service';
 
 @Component({
   selector: 'app-blood-bank',
@@ -14,7 +14,7 @@ import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
 export class BloodBankComponent implements OnInit {
   constructor(
     private homeSer: HomeService,
-    private proSer: MyprofileService,
+    private detSer: DetailsService,
     public dialog: MatDialog
   ) {
     this.homeSer.isAuthenticate();
@@ -23,53 +23,47 @@ export class BloodBankComponent implements OnInit {
   form: FormGroup = new FormGroup(
     {
       name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      timing: new FormControl(null, [Validators.required]),
       mobile: new FormControl(null, Validators.required),
-      password: new FormControl(null, [Validators.required]),
-      passwordConfirm: new FormControl(null, [Validators.required]),
+      address: new FormControl(null, [Validators.required])
     },
     { validators: CustomValidators.passwordsMatching }
   );
   ngOnInit(): void {
     this.form.disable();
-    this.proSer.getadmin().subscribe((val) => this.patchData(val));
+    this.detSer.getbank().subscribe((val)=>this.patchData(val));
   }
   patchData(val: any) {
-    this.proSer.change(val);
+    this.detSer.change(val);
     this.form.patchValue({
       name: val[0].name,
-      email: val[0].email,
-      mobile: val[0].mobile,
-      password: val[0].password,
+      timing: val[0].timing,
+      mobile: val[0].contact,
+      address: val[0].address,
     });
   }
-  UpdAdminForm() {
-    delete this.form.value.passwordConfirm;
-    this.proSer.updateAdminData(this.form.value);
+  UpdbnkForm() {
+    this.detSer.updateBankData(this.form.value);
   }
   editClick() {
     this.form.disabled ? this.form.enable() : this.form.disable();
   }
   openDialog() {
-    this.dialog.open(ViewProfileComponent);
+    this.dialog.open(BviewProfileComponent);
   }
-  get email(): FormControl {
-    return this.form.get('email') as FormControl;
+  get timing(): FormControl {
+    return this.form.get('timing') as FormControl;
   }
 
   get name(): FormControl {
     return this.form.get('name') as FormControl;
   }
+  
   get mobile(): FormControl {
     return this.form.get('mobile') as FormControl;
   }
 
-  get password(): FormControl {
-    return this.form.get('password') as FormControl;
+  get address(): FormControl {
+    return this.form.get('address') as FormControl;
   }
-
-  get passwordConfirm(): FormControl {
-    return this.form.get('passwordConfirm') as FormControl;
-  }
-
 }
