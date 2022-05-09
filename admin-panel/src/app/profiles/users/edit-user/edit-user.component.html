@@ -47,7 +47,7 @@
         <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file" formControlName="imageUrl">&nbsp;{{text}}
         <mat-error *ngIf="imageUrl.touched && imageUrl.hasError('required')"><small>Profile is required</small></mat-error><br>
         <mat-hint *ngIf="!form.valid"><small>Please fill out all needed information</small></mat-hint>
-        <!-- <img [src]="url"> -->
+        
         <div class="mbutton">
             <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
                 [mat-dialog-close]="true">UPDATE</button>

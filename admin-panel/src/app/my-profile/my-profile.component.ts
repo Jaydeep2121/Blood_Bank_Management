@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../home-component/home.service';
 import { CustomValidators } from '../public/_helpers/custom-validators';
 import { MyprofileService } from './myprofile.service';
-import AWN from 'awesome-notifications';
 import { MatDialog } from '@angular/material/dialog';
 
 import {
@@ -18,7 +17,6 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
   styleUrls: ['./my-profile.component.css'],
 })
 export class MyProfileComponent implements OnInit {
-  notifier = new AWN();
   constructor(
     private homeSer: HomeService,
     private proSer: MyprofileService,
