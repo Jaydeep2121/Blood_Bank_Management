@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { ViewListProfileComponent } from './profiles/users/list-user/view-list-profile/view-list-profile.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CookieService } from 'ngx-cookie-service';
     DetailsComponent,
     StorageComponent,
     BloodBankComponent,
-    BviewProfileComponent
+    BviewProfileComponent,
+    ViewListProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,29 @@
 <div class="example-container mat-elevation-z8">
+    <div class="search-container">
+        <mat-form-field appearance="fill">
+            <input matInput autocomplete="off" (keyup)="filterData($event)" placeholder="Filter">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-select (selectionChange)="onChange($event)" placeholder="Gender">
+                <mat-option value="m">Male</mat-option>
+                <mat-option value="f">FeMale</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
     <mat-table matSort #table [dataSource]="MyDataSource">
+        <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+            <mat-cell *matCellDef="let data; let i = index;"> {{i+1}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="Name">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
             <mat-cell *matCellDef="let data"> {{data.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+            <mat-cell *matCellDef="let data"> {{data.gender}} </mat-cell>
         </ng-container>
 
         <!-- For Title -->
@@ -21,8 +42,15 @@
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
             <mat-cell *matCellDef="let data">
-                <button mat-button color="primary" (click)="editUser(data._id)"><mat-icon>mode_edit</mat-icon></button>
-                <button mat-button color="warn" (click)="deleteUser(data._id)"><mat-icon>delete_forever</mat-icon></button>
+                <a [routerLink]="" class="viewbtn btn btn-primary" (click)="openDialog(data._id)">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </a>&nbsp;
+                <a [routerLink]="" class="editbtn btn btn-warning" (click)="editUser(data._id)">
+                    <mat-icon>mode_edit</mat-icon>
+                </a>&nbsp;
+                <a [routerLink]="" class="delbtn btn btn-danger" (click)="deleteUser(data._id)">
+                    <mat-icon>delete_forever</mat-icon>
+                </a>&nbsp;
             </mat-cell>
         </ng-container>
 

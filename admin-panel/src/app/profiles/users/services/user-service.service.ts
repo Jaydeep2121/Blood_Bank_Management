@@ -14,7 +14,13 @@ export class UserServiceService {
     this.msgsor.next(id);
   }
   constructor(private http: HttpClient, private router: Router) {}
-
+  private _data: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public setData(data: object) {
+    this._data.next(data);
+  }
+  public getdata(): Observable<any> {
+    return this._data.asObservable();
+  }
   // To Get The List Of Employee
   getUser() {
     return this.http.get('api/getUsers');
