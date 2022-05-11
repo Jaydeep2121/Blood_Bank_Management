@@ -63,7 +63,7 @@ export class ListUserComponent implements OnInit {
     this.MyDataSource.filter = $event.target.value;
   }
   openDialog(userid: string) {
-    this.serv.editUser(userid).subscribe(val=>this.serv.setData(val))
+    this.serv.getUserref(userid).subscribe(val=>this.serv.setData(val));
     this.dialog.open(ViewListProfileComponent);
   }
   onChange($event:any){

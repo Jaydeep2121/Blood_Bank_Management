@@ -21,7 +21,7 @@ export class UserServiceService {
   public getdata(): Observable<any> {
     return this._data.asObservable();
   }
-  // To Get The List Of Employee
+  // To Get The List Of User
   getUser() {
     return this.http.get('api/getUsers');
   }
@@ -71,4 +71,14 @@ export class UserServiceService {
   editUser(usrid: string): Observable<any> {
     return this.http.get<any>(`api/editUser/${usrid}`);
   }
+  // To Get User Details For Single Record Using Id with ref
+  getUserref(usrid: string): Observable<any> {
+    return this.http.get<any>(`api/getUserRef/${usrid}`);
+  }
+  //loadImage
+  // loadImg(imgpath:string){
+  //   const data=this.http.get<any>(`api/getImage/${imgpath}`);
+  // }
 }
+
+

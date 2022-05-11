@@ -3,21 +3,31 @@
     background: #fcb898;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgb(252,184,152), rgb(223,247,231));
+    background: -webkit-linear-gradient(to right, rgb(255,115,92), rgb(223,247,231));
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgb(252,184,152), rgb(223,247,231))
+    background: linear-gradient(to right, rgb(255,115,92), rgb(223,247,231))
 }
 .gradient-custom-4 {
     /* fallback for old browsers */
     background: #fcb898;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgb(252,184,152),rgb(223,247,231));
+    background: -webkit-linear-gradient(to right, rgb(255,115,92),rgb(223,247,231));
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgb(252,184,152), rgb(223,247,231))
+    background: linear-gradient(to right, rgb(255,115,92), rgb(223,247,231))
 }
 .edit-btn,.edit-show,button{
-    background-color: #fcb898;
+    background-color: #ff735c;
+}
+.upldtxt{
+    padding-top: 10px;
+    float: left;
+    font-size: 14px;
+}
+.upldbtn{
+    margin-right: 10px;
+    background-color: #ff735c;
+    float: left;
 }

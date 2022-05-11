@@ -9,9 +9,11 @@ import { DetailsService } from '../details.service';
 @Component({
   selector: 'app-blood-bank',
   templateUrl: './blood-bank.component.html',
-  styleUrls: ['./blood-bank.component.css']
+  styleUrls: ['./blood-bank.component.css'],
 })
 export class BloodBankComponent implements OnInit {
+  text: string = '';
+  image: string = '';
   constructor(
     private homeSer: HomeService,
     private detSer: DetailsService,
@@ -25,13 +27,14 @@ export class BloodBankComponent implements OnInit {
       name: new FormControl(null, [Validators.required]),
       timing: new FormControl(null, [Validators.required]),
       mobile: new FormControl(null, Validators.required),
-      address: new FormControl(null, [Validators.required])
+      address: new FormControl(null, [Validators.required]),
+      imageUrl: new FormControl(null, [Validators.required]),
     },
     { validators: CustomValidators.passwordsMatching }
   );
   ngOnInit(): void {
     this.form.disable();
-    this.detSer.getbank().subscribe((val)=>this.patchData(val));
+    this.detSer.getbank().subscribe((val) => this.patchData(val));
   }
   patchData(val: any) {
     this.detSer.change(val);
@@ -42,8 +45,21 @@ export class BloodBankComponent implements OnInit {
       address: val[0].address,
     });
   }
+  uploadFileEvt(imgFile: any) {
+    this.text = imgFile.target.files[0].name;
+    this.image = imgFile.target.files[0];
+  }
   UpdbnkForm() {
-    this.detSer.updateBankData(this.form.value);
+    const value = this.form.value;
+    let formData = new FormData();
+    formData.append('name', value['name']);
+    formData.append('timing', value['timing']);
+    formData.append('mobile', value['mobile']);
+    formData.append('address', value['address']);
+    formData.append('imageUrl', this.image);
+    if (this.form.valid) {
+      this.detSer.updateBankData(formData);
+    }
   }
   editClick() {
     this.form.disabled ? this.form.enable() : this.form.disable();
@@ -58,12 +74,15 @@ export class BloodBankComponent implements OnInit {
   get name(): FormControl {
     return this.form.get('name') as FormControl;
   }
-  
+
   get mobile(): FormControl {
     return this.form.get('mobile') as FormControl;
   }
 
   get address(): FormControl {
     return this.form.get('address') as FormControl;
+  }
+  get imageUrl(): FormControl {
+    return this.form.get('imageUrl') as FormControl;
   }
 }

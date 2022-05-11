@@ -12,6 +12,7 @@ export class BviewProfileComponent implements OnInit {
   mobile: string;
   address: string;
   displayStyle = 'none';
+  imagPath: any;
   constructor(private detSer: DetailsService) {}
   ngOnInit(): void {
     this.detSer.currval.subscribe((val: any) => {
@@ -19,6 +20,7 @@ export class BviewProfileComponent implements OnInit {
       this.timing = val[0]['timing'];
       this.mobile = val[0]['contact'];
       this.address = val[0]['address'];
+      this.imagPath = val[0].imageUrl[0].path;
     });
   }
 

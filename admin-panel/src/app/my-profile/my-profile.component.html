@@ -30,7 +30,11 @@
         <input type="password" placeholder="Repeat your password" class="form-control form-control-lg"
           formControlName="passwordConfirm" />
       </div>
-
+      <div class="form-outline mb-4">
+        <button class="upldbtn" type="button" color="warn" mat-raised-button (click)="fileInput.click()">Choose Image</button>
+        <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file" formControlName="imageUrl">&nbsp;<span class="upldtxt">{{text}}</span>
+        <mat-error *ngIf="imageUrl.touched && imageUrl.hasError('required')"><small>Profile is required</small></mat-error><br>
+      </div>
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body mybutton"
           [disabled]="this.form.disabled">Change Details</button>

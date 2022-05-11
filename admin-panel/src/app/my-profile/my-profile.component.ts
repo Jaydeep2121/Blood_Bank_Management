@@ -17,6 +17,8 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
   styleUrls: ['./my-profile.component.css'],
 })
 export class MyProfileComponent implements OnInit {
+  text: string = '';
+  image: string = '';
   constructor(
     private homeSer: HomeService,
     private proSer: MyprofileService,
@@ -32,12 +34,17 @@ export class MyProfileComponent implements OnInit {
       mobile: new FormControl(null, Validators.required),
       password: new FormControl(null, [Validators.required]),
       passwordConfirm: new FormControl(null, [Validators.required]),
+      imageUrl: new FormControl(null, [Validators.required])
     },
     { validators: CustomValidators.passwordsMatching }
   );
   ngOnInit(): void {
     this.form.disable();
     this.proSer.getadmin().subscribe((val) => this.patchData(val));
+  }
+  uploadFileEvt(imgFile: any) {
+    this.text = imgFile.target.files[0].name;
+    this.image = imgFile.target.files[0];
   }
   patchData(val: any) {
     this.proSer.change(val);
@@ -75,5 +82,9 @@ export class MyProfileComponent implements OnInit {
 
   get passwordConfirm(): FormControl {
     return this.form.get('passwordConfirm') as FormControl;
+  }
+  
+  get imageUrl(): FormControl {
+    return this.form.get('imageUrl') as FormControl;
   }
 }

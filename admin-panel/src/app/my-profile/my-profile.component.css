@@ -21,3 +21,13 @@
 .edit-btn,.edit-show{
     background-color: #92e3a9;
 }
+.upldtxt{
+    padding-top: 10px;
+    float: left;
+    font-size: 14px;
+}
+.upldbtn{
+    margin-right: 10px;
+    background-color: #92e3a9;
+    float: left;
+}

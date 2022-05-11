@@ -12,15 +12,19 @@ export class ViewListProfileComponent implements OnInit {
   email: string;
   mobile: string;
   gender:string;
+  group:string;
+  img:any;
   constructor(private serv: UserServiceService) {}
   ngOnInit(): void {
-    this.serv.getdata().subscribe((data) => this.getUserByid(data));
+    this.serv.getdata().subscribe((data)=>this.getUserByid(data));
   }
   getUserByid(val: any) {
     this.name = val['name'];
     this.email = val['email'];
     this.mobile = val['mobile'];
     this.gender = val['gender'];
+    this.group = val['blood_group']['group'];
+    this.img = val.imageUrl[0].path;
   }
   openPopup() {
     this.displayStyle = 'block';
