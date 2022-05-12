@@ -3,17 +3,16 @@
     <img class="img-fluid" id="img" src="../../assets/images/editProfile.png" alt="">
   </div>
   <div class="col-md-6 form-details">
-    <br><button mat-raised-button class="edit-btn" (click)="editClick()">
+    <button mat-raised-button class="edit-btn" (click)="editClick()">
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-raised-button class="edit-show" (click)="openDialog()">
       <mat-icon>remove_red_eye</mat-icon>
-    </button><br><br>
+    </button>
     <form role="form" [formGroup]=form (ngSubmit)="UpdAdminForm()">
       <div class="form-outline mb-4">
         <input type="text" placeholder="Name" class="form-control form-control-lg" formControlName="name" />
       </div>
-
       <div class="form-outline mb-4">
         <input type="email" placeholder="Email" class="form-control form-control-lg" formControlName="email" />
       </div>
@@ -33,8 +32,8 @@
       <div class="form-outline mb-4">
         <button class="upldbtn" type="button" color="warn" mat-raised-button (click)="fileInput.click()">Choose Image</button>
         <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file" formControlName="imageUrl">&nbsp;<span class="upldtxt">{{text}}</span>
-        <mat-error *ngIf="imageUrl.touched && imageUrl.hasError('required')"><small>Profile is required</small></mat-error><br>
-      </div>
+        <mat-error *ngIf="imageUrl.touched && imageUrl.hasError('required')"><small>Profile is required</small></mat-error>
+      </div><br>
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body mybutton"
           [disabled]="this.form.disabled">Change Details</button>

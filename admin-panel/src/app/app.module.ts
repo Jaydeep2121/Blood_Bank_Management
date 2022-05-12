@@ -32,6 +32,8 @@ import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ViewListProfileComponent } from './profiles/users/list-user/view-list-profile/view-list-profile.component';
+import { StockComponent } from './details/storage/stock/stock.component';
+import { UrequestComponent } from './details/storage/urequest/urequest.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ViewListProfileComponent } from './profiles/users/list-user/view-list-p
     StorageComponent,
     BloodBankComponent,
     BviewProfileComponent,
-    ViewListProfileComponent
+    ViewListProfileComponent,
+    StockComponent,
+    UrequestComponent
   ],
   imports: [
     BrowserModule,

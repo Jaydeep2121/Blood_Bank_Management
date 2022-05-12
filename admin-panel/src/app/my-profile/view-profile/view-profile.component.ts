@@ -11,12 +11,14 @@ export class ViewProfileComponent implements OnInit {
   email:string;
   mobile:string;
   displayStyle = 'none';
+  imagPath: any;
   constructor(private proSer:MyprofileService) { }
   ngOnInit(): void {
     this.proSer.currval.subscribe((val:any)=>{
       this.name=val[0]['name'];
       this.email=val[0]['email'];
       this.mobile=val[0]['mobile'];
+      this.imagPath = val[0].imageUrl[0].path;
     });
   }
   openPopup() {

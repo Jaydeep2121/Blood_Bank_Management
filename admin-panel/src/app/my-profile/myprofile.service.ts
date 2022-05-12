@@ -17,7 +17,7 @@ export class MyprofileService {
   getadmin(): Observable<any> {
     return this.http.get<any>('api/getAdmin');
   }
-  getUser():Observable<any> {
+  getUser(): Observable<any> {
     return this.http.get<any>('api/getUsers');
   }
   updateAdminData(body: any) {

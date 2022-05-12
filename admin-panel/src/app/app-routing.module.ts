@@ -12,6 +12,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { DetailsComponent } from './details/details.component';
 import { StorageComponent } from './details/storage/storage.component';
 import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
+import { StockComponent } from './details/storage/stock/stock.component';
+import { UrequestComponent } from './details/storage/urequest/urequest.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -33,8 +35,16 @@ const routes: Routes = [
     path: 'Mdetails',
     component: DetailsComponent,
     children: [
-      { path: 'storage', component: StorageComponent },
-      { path: 'bbank', component: BloodBankComponent }
+      {
+        path: 'storage',
+        component: StorageComponent,
+        children: [
+          { path: '', component: StockComponent },
+          { path: 'stock', component: StockComponent },
+          { path: 'urequest', component:  UrequestComponent}
+        ],
+      },
+      { path: 'bbank', component: BloodBankComponent },
     ],
   },
   { path: 'perProfile', component: MyProfileComponent },

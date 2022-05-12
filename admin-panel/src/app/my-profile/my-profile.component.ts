@@ -4,11 +4,7 @@ import { CustomValidators } from '../public/_helpers/custom-validators';
 import { MyprofileService } from './myprofile.service';
 import { MatDialog } from '@angular/material/dialog';
 
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 @Component({
@@ -34,7 +30,7 @@ export class MyProfileComponent implements OnInit {
       mobile: new FormControl(null, Validators.required),
       password: new FormControl(null, [Validators.required]),
       passwordConfirm: new FormControl(null, [Validators.required]),
-      imageUrl: new FormControl(null, [Validators.required])
+      imageUrl: new FormControl(null, [Validators.required]),
     },
     { validators: CustomValidators.passwordsMatching }
   );
@@ -56,8 +52,16 @@ export class MyProfileComponent implements OnInit {
     });
   }
   UpdAdminForm() {
-    delete this.form.value.passwordConfirm;
-    this.proSer.updateAdminData(this.form.value);
+    const value = this.form.value;
+    let formData = new FormData();
+    formData.append('name', value['name']);
+    formData.append('mobile', value['mobile']);
+    formData.append('email', value['email']);
+    formData.append('password', value['password']);
+    formData.append('imageUrl', this.image);
+    if (this.form.valid) {
+      this.proSer.updateAdminData(formData);
+    }
   }
   editClick() {
     this.form.disabled ? this.form.enable() : this.form.disable();
@@ -83,7 +87,7 @@ export class MyProfileComponent implements OnInit {
   get passwordConfirm(): FormControl {
     return this.form.get('passwordConfirm') as FormControl;
   }
-  
+
   get imageUrl(): FormControl {
     return this.form.get('imageUrl') as FormControl;
   }

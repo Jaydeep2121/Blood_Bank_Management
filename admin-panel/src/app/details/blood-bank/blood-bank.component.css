@@ -20,6 +20,7 @@
 }
 .edit-btn,.edit-show,button{
     background-color: #ff735c;
+    margin-bottom: 15px;
 }
 .upldtxt{
     padding-top: 10px;

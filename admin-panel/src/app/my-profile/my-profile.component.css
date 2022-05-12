@@ -20,6 +20,7 @@
 }
 .edit-btn,.edit-show{
     background-color: #92e3a9;
+    margin-bottom: 15px;
 }
 .upldtxt{
     padding-top: 10px;
@@ -27,7 +28,10 @@
     font-size: 14px;
 }
 .upldbtn{
-    margin-right: 10px;
+    margin-right: 10px; 
     background-color: #92e3a9;
     float: left;
+}
+.form-details{
+    margin-top: 15px;
 }
