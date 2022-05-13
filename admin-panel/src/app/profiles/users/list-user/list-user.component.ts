@@ -22,9 +22,9 @@ export class ListUserComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  cdata: any;
   apiResponse:any = [];
   MyDataSource: any;
-  cdata: any;
   displayedColumns: string[] = [
     'position',
     'Name',
@@ -43,9 +43,9 @@ export class ListUserComponent implements OnInit {
   getUser() {
     this.serv.getUser().subscribe((data: any) => {
       this.apiResponse = data;
-      this.cdata = data.length;
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource = data;
+      this.cdata=data.length;
       this.MyDataSource.paginator = this.paginator;
       this.MyDataSource.sort = this.sort;
     });

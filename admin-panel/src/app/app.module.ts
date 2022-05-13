@@ -24,6 +24,10 @@ import { DetailsComponent } from './details/details.component';
 import { StorageComponent } from './details/storage/storage.component';
 import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
 import { BviewProfileComponent } from './details/blood-bank/bview-profile/bview-profile.component';
+import { ViewListProfileComponent } from './profiles/users/list-user/view-list-profile/view-list-profile.component';
+import { StockComponent } from './details/storage/stock/stock.component';
+import { UrequestComponent } from './details/storage/urequest/urequest.component';
+import { EditStockComponent } from './details/storage/stock/edit-stock/edit-stock.component';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Angular material */
@@ -31,9 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ViewListProfileComponent } from './profiles/users/list-user/view-list-profile/view-list-profile.component';
-import { StockComponent } from './details/storage/stock/stock.component';
-import { UrequestComponent } from './details/storage/urequest/urequest.component';
+import { AddStockComponent } from './details/storage/stock/add-stock/add-stock.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { UrequestComponent } from './details/storage/urequest/urequest.component
     BviewProfileComponent,
     ViewListProfileComponent,
     StockComponent,
-    UrequestComponent
+    UrequestComponent,
+    EditStockComponent,
+    AddStockComponent
   ],
   imports: [
     BrowserModule,

@@ -3,69 +3,65 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { EditUserComponent } from 'src/app/profiles/users/edit-user/edit-user.component';
-import { UserServiceService } from 'src/app/profiles/users/services/user-service.service';
+import { DetailsService } from '../../details.service';
 import * as _ from 'lodash';
-import { ViewListProfileComponent } from 'src/app/profiles/users/list-user/view-list-profile/view-list-profile.component';
+import { EditStockComponent } from './edit-stock/edit-stock.component';
+import { AddStockComponent } from './add-stock/add-stock.component';
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.css']
+  styleUrls: ['./stock.component.css'],
 })
 export class StockComponent implements OnInit {
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  apiResponse:any = [];
-  MyDataSource: any;
   cdata: any;
+  GroupArray: any = [];
+  apiResponse: any = [];
+  MyDataSource: any;
   displayedColumns: string[] = [
     'position',
-    'Name',
-    'Gender',
-    'Email',
-    'Contact',
+    'Volume',
+    'Day Left',
+    'Blood Group',
     'action',
   ];
 
-  constructor(
-    private serv: UserServiceService, 
-    public dialog: MatDialog) {}
+  constructor(private serv: DetailsService, public dialog: MatDialog) {}
   ngOnInit(): void {
-    this.getUser();
+    this.serv
+      .getGroup()
+      .subscribe((data: any) => this.GroupArray.push(...data));
+    this.getStock();
   }
-  getUser() {
-    this.serv.getUser().subscribe((data: any) => {
+  getStock() {
+    this.serv.getStock().subscribe((data: any) => {
       this.apiResponse = data;
-      this.cdata = data.length;
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource = data;
+      this.cdata=data.length;
       this.MyDataSource.paginator = this.paginator;
       this.MyDataSource.sort = this.sort;
     });
   }
-  // To Edit User
-  editUser(userid: string) {
-    this.dialog.open(EditUserComponent);
-    this.serv.change(userid);
+  openDialog(){
+    this.dialog.open(AddStockComponent);
   }
-  deleteUser(userid: string) {
-    this.serv.deleteUser(userid);
+  // To Edit Stock
+  editStock(stockid: string) {
+    this.dialog.open(EditStockComponent);
+    this.serv.change(stockid);
   }
-  // Search specific result
-  filterData($event : any){
-    this.MyDataSource.filter = $event.target.value;
+  deleteStock(stockid: string) {
+    this.serv.deleteStock(stockid);
   }
-  openDialog(userid: string) {
-    this.serv.getUserref(userid).subscribe(val=>this.serv.setData(val));
-    this.dialog.open(ViewListProfileComponent);
+  onChange($event: any) {
+    let filteredData = _.filter(this.apiResponse, (item: any) => {
+      return (
+        item.blood_group['group'].toLowerCase() == $event.value.toLowerCase()
+      );
+    });
+    this.MyDataSource = new MatTableDataSource(filteredData);
   }
-  onChange($event:any){
-    let filteredData = _.filter(this.apiResponse,(item:any) =>{
-      return item.gender.toLowerCase() ==  $event.value.toLowerCase();
-    })
-    this.MyDataSource = new MatTableDataSource(filteredData); 
-  }
-
 }

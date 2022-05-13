@@ -46,7 +46,7 @@ export class UserServiceService {
   }
   //
   UpdateUser(body: any) {
-    this.http.patch('api/UpdateUser', body).subscribe((val) => {
+    this.http.patch('api/UpdateUser', body).subscribe(() => {
       this.showDialog('User Data Has Been Updated');
     });
   }
@@ -75,10 +75,6 @@ export class UserServiceService {
   getUserref(usrid: string): Observable<any> {
     return this.http.get<any>(`api/getUserRef/${usrid}`);
   }
-  //loadImage
-  // loadImg(imgpath:string){
-  //   const data=this.http.get<any>(`api/getImage/${imgpath}`);
-  // }
 }
 
 

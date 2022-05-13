@@ -1,0 +1,29 @@
+<h2 mat-dialog-title class="text-center">ADD STOCKDATA</h2>
+<mat-card-content>
+    <form role="form" [formGroup]=form (ngSubmit)="addStockForm()">
+        <mat-form-field>
+            <input type="text" matInput placeholder="Volume" formControlName="volume">
+            <mat-error *ngIf="volume.touched && volume.hasError('required')">Volume is required</mat-error>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <input type="text" matInput placeholder="Day Left" formControlName="day_left">
+            <mat-error *ngIf="day_left.touched && day_left.hasError('required')">DayLeft is required</mat-error>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <mat-label>Bl.Group</mat-label>
+            <mat-select formControlName="blood_group">
+                <mat-option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="blood_group.touched && blood_group.hasError('required')">Bl.Group is required</mat-error>
+        </mat-form-field>
+
+        <div class="mbutton">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
+                [mat-dialog-close]="true">ADD</button>
+            &nbsp;<button mat-raised-button color="warn" mat-dialog-close>CLOSE</button>
+        </div>
+    </form>
+</mat-card-content>

@@ -10,7 +10,7 @@ export class UrequestComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('hi')
+    
   }
 
 }
