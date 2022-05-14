@@ -16,6 +16,13 @@ export class DetailsService {
     this.msgsor.next(id);
   }
   constructor(private http: HttpClient, private router: Router) {}
+  private _data: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public setData(data: object) {
+    this._data.next(data);
+  }
+  public getdata(): Observable<any> {
+    return this._data.asObservable();
+  }
   //get bank data
   getbank(): Observable<any> {
     return this.http.get<any>('api/getbank');
@@ -24,7 +31,11 @@ export class DetailsService {
   getGroup(): Observable<any> {
     return this.http.get<any>('api/getGroups');
   }
-  // To Create/Add New User
+  //get comp data
+  getComp(): Observable<any> {
+    return this.http.get<any>('api/getComp');
+  }
+  // To Create/Add New stock
   AddStock(body: any) {
     this.http.post('api/CreStock', body).subscribe(() => {
       this.showDialog('Stock Data Has Been Saved');
@@ -35,6 +46,11 @@ export class DetailsService {
     this.http.patch('api/UpdateStockdata', body).subscribe(() => {
       this.showDialog('Stock Data Has Been Updated');
     });
+  }
+  //get stockRef data
+  // To Get User Details For Single Record Using Id with ref
+  getStockref(sid: string): Observable<any> {
+    return this.http.get<any>(`api/getStockRef/${sid}`);
   }
   //update bloodbankdata
   updateBankData(body: any) {
@@ -61,6 +77,9 @@ export class DetailsService {
   //get stock data
   getStock(): Observable<any> {
     return this.http.get<any>('api/getStock');
+  }
+  getReqData():Observable<any>{
+    return this.http.get<any>('api/getReqData');
   }
   // To Get Stock Details For Single Record Using Id
   editStock(stockid: string): Observable<any> {

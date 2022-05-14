@@ -34,7 +34,7 @@ export class AddUserComponent implements OnInit {
     { validators: CustomValidators.passwordsMatching }
   );
   ngOnInit(): void {
-    this.ser.getGroup().subscribe((data: any) => this.GroupArray.push(...data));
+    this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
   }
 
   uploadFileEvt(imgFile: any) {

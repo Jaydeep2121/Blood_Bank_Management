@@ -7,10 +7,11 @@ import { DetailsService } from '../../details.service';
 import * as _ from 'lodash';
 import { EditStockComponent } from './edit-stock/edit-stock.component';
 import { AddStockComponent } from './add-stock/add-stock.component';
+import { ViewcomComponent } from './viewcom/viewcom.component';
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.css'],
+  styleUrls: ['./stock.component.css']
 })
 export class StockComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,7 +33,7 @@ export class StockComponent implements OnInit {
   ngOnInit(): void {
     this.serv
       .getGroup()
-      .subscribe((data: any) => this.GroupArray.push(...data));
+      .subscribe((data: any) => this.GroupArray=[...data]);
     this.getStock();
   }
   getStock() {
@@ -40,13 +41,17 @@ export class StockComponent implements OnInit {
       this.apiResponse = data;
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource = data;
-      this.cdata=data.length;
+      this.cdata = data.length;
       this.MyDataSource.paginator = this.paginator;
       this.MyDataSource.sort = this.sort;
     });
   }
-  openDialog(){
+  openDialog() {
     this.dialog.open(AddStockComponent);
+  }
+  opendataDialog(userid: string) {
+    this.serv.getStockref(userid).subscribe(val=>this.serv.setData(val));
+    this.dialog.open(ViewcomComponent);
   }
   // To Edit Stock
   editStock(stockid: string) {

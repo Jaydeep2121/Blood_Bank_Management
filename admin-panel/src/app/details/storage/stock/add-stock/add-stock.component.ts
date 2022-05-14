@@ -15,14 +15,17 @@ import { DetailsService } from 'src/app/details/details.service';
 })
 export class AddStockComponent implements OnInit {
   GroupArray: any = [];
+  ComArray: any = [];
   stockID: string = '';
   form: FormGroup = new FormGroup({
     volume: new FormControl(null, [Validators.required]),
     day_left: new FormControl(null, [Validators.required]),
     blood_group: new FormControl(null, [Validators.required]),
+    blood_compo: new FormControl(null, [Validators.required])
   });
   constructor(private ser: DetailsService) {
-    this.ser.getGroup().subscribe((data: any) => this.GroupArray.push(...data));
+    this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
+    this.ser.getComp().subscribe((data: any) => this.ComArray=[...data]);
   }
   addStockForm() {
     const value = this.form.value;
@@ -30,6 +33,7 @@ export class AddStockComponent implements OnInit {
     formData.append('volume', value['volume']);
     formData.append('day_left', value['day_left']);
     formData.append('blood_group', value['blood_group']);
+    formData.append('blood_compo', value['blood_compo']);
     if (this.form.valid) {
       this.ser.AddStock(formData);
     }
@@ -47,5 +51,9 @@ export class AddStockComponent implements OnInit {
 
   get blood_group(): FormControl {
     return this.form.get('blood_group') as FormControl;
+  }
+
+  get blood_comp(): FormControl {
+    return this.form.get('blood_compo') as FormControl;
   }
 }

@@ -15,15 +15,18 @@ import { DetailsService } from 'src/app/details/details.service';
 })
 export class EditStockComponent implements OnInit {
   GroupArray: any = [];
+  ComArray: any = [];
   stockID: string = '';
   form: FormGroup = new FormGroup({
     volume: new FormControl(null, [Validators.required]),
     day_left: new FormControl(null, [Validators.required]),
     blood_group: new FormControl(null, [Validators.required]),
+    blood_compo: new FormControl(null, [Validators.required])
   });
   constructor(private ser: DetailsService) {
     this.ser.currval.subscribe((val) => (this.stockID = val));
-    this.ser.getGroup().subscribe((data: any) => this.GroupArray.push(...data));
+    this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
+    this.ser.getComp().subscribe((data: any) => this.ComArray=[...data]);
   }
 
   ngOnInit(): void {
@@ -35,6 +38,7 @@ export class EditStockComponent implements OnInit {
     formData.append('volume', value['volume']);
     formData.append('day_left', value['day_left']);
     formData.append('blood_group', value['blood_group']);
+    formData.append('blood_compo', value['blood_compo']);
     if (this.form.valid) {
       this.ser.UpdateStock(formData);
     }
@@ -45,6 +49,7 @@ export class EditStockComponent implements OnInit {
         volume: val.volume,
         day_left: val.day_left,
         blood_group: val.blood_group,
+        blood_compo:val.blood_compo
       });
     });
   }
@@ -59,5 +64,9 @@ export class EditStockComponent implements OnInit {
 
   get blood_group(): FormControl {
     return this.form.get('blood_group') as FormControl;
+  }
+
+  get blood_comp(): FormControl {
+    return this.form.get('blood_compo') as FormControl;
   }
 }

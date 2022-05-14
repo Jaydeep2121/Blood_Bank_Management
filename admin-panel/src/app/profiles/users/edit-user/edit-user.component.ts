@@ -34,7 +34,7 @@ export class EditUserComponent implements OnInit {
   );
   constructor(private ser: UserServiceService) {
     this.ser.currval.subscribe((val) => (this.userID = val));
-    this.ser.getGroup().subscribe((data: any) => this.GroupArray.push(...data));
+    this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
   }
 
   ngOnInit(): void {

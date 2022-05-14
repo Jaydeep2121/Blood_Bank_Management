@@ -20,6 +20,15 @@
             <mat-error *ngIf="blood_group.touched && blood_group.hasError('required')">Bl.Group is required</mat-error>
         </mat-form-field>
 
+        <mat-form-field>
+            <mat-label>Bl.Comp</mat-label>
+            <mat-select formControlName="blood_compo">
+                <mat-option [value]="groupComData._id" *ngFor="let groupComData of ComArray">{{ groupComData.component }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="blood_comp.touched && blood_comp.hasError('required')">Bl.Comp is required</mat-error>
+        </mat-form-field>
+
         <div class="mbutton">
             <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
                 [mat-dialog-close]="true">UPDATE</button>
