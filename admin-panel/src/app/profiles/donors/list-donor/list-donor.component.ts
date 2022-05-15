@@ -3,22 +3,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { EditUserComponent } from '../edit-user/edit-user.component';
-import { UserServiceService } from '../services/user-service.service';
+import { EditDonorComponent } from '../edit-donor/edit-donor.component';
+import { DonorService } from '../services/donor.service';
 import * as _ from 'lodash';
-import { ViewListProfileComponent } from './view-list-profile/view-list-profile.component';
+import { ViewListDonorComponent } from './view-list-donor/view-list-donor.component';
 
-export interface User {
-  name: string;
-  email: string;
-  mobile: String;
-}
 @Component({
-  selector: 'app-list-user',
-  templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.css'],
+  selector: 'app-list-donor',
+  templateUrl: './list-donor.component.html',
+  styleUrls: ['./list-donor.component.css']
 })
-export class ListUserComponent implements OnInit {
+export class ListDonorComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -35,18 +30,18 @@ export class ListUserComponent implements OnInit {
   ];
 
   constructor(
-    private serv: UserServiceService, 
+    private serv: DonorService, 
     public dialog: MatDialog) {}
   ngOnInit(): void {
     this.serv.currval1.subscribe((val) => {
       if (val === 'load_ref') {
-        this.getUser();
+        this.getDonor();
       }
     });
-    this.getUser();
+    this.getDonor();
   }
-  getUser() {
-    this.serv.getUser().subscribe((data: any) => {
+  getDonor() {
+    this.serv.getDonor().subscribe((data: any) => {
       this.apiResponse = data;
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource = data;
@@ -55,12 +50,12 @@ export class ListUserComponent implements OnInit {
       this.MyDataSource.sort = this.sort;
     });
   }
-  // To Edit User
-  editUser(userid: string) {
-    this.dialog.open(EditUserComponent);
+  // To Edit donor
+  editDonor(userid: string) {
+    this.dialog.open(EditDonorComponent);
     this.serv.change(userid);
   }
-  deleteUser(userid: string) {
+  deleteDonor(userid: string) {
     this.serv.deleteUser(userid);
   }
   // Search specific result
@@ -68,8 +63,8 @@ export class ListUserComponent implements OnInit {
     this.MyDataSource.filter = $event.target.value;
   }
   openDialog(userid: string) {
-    this.serv.getUserref(userid).subscribe(val=>this.serv.setData(val));
-    this.dialog.open(ViewListProfileComponent);
+    this.serv.getDonorref(userid).subscribe(val=>this.serv.setData(val));
+    this.dialog.open(ViewListDonorComponent);
   }
   onChange($event:any){
     let filteredData = _.filter(this.apiResponse,(item:any) =>{
@@ -78,4 +73,3 @@ export class ListUserComponent implements OnInit {
     this.MyDataSource = new MatTableDataSource(filteredData); 
   }
 }
-

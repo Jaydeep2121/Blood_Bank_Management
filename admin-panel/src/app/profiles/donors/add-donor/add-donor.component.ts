@@ -1,3 +1,5 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   FormsModule,
   FormGroup,
@@ -5,20 +7,20 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { DonorService } from '../services/donor.service';
 import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
-import { UserServiceService } from '../services/user-service.service';
 
 @Component({
-  selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css'],
+  selector: 'app-add-donor',
+  templateUrl: './add-donor.component.html',
+  styleUrls: ['./add-donor.component.css']
 })
-export class EditUserComponent implements OnInit {
+export class AddDonorComponent implements OnInit {
+
+  constructor(private ser: DonorService, public router: Router) {}
   text: any;
   image: any;
   GroupArray: any = [];
-  userID: string = '';
   form: FormGroup = new FormGroup(
     {
       name: new FormControl(null, [Validators.required]),
@@ -32,20 +34,15 @@ export class EditUserComponent implements OnInit {
     },
     { validators: CustomValidators.passwordsMatching }
   );
-  constructor(private ser: UserServiceService) {
-    this.ser.currval.subscribe((val) => (this.userID = val));
-    this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
-  }
-
   ngOnInit(): void {
-    this.getUserByid(this.userID);
+    this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
   }
 
   uploadFileEvt(imgFile: any) {
     this.text = imgFile.target.files[0].name;
     this.image = imgFile.target.files[0];
   }
-  UpdateUserForm() {
+  addUserForm() {
     const value = this.form.value;
     let formData = new FormData();
     formData.append('name', value['name']);
@@ -56,20 +53,8 @@ export class EditUserComponent implements OnInit {
     formData.append('imageUrl', this.image);
     formData.append('blood_group', value['blood_group']);
     if (this.form.valid) {
-      this.ser.UpdateUser(formData,this.userID);
+      this.ser.addDonor(formData);
     }
-  }
-  getUserByid(id: string) {
-    this.ser.editUser(id).subscribe((val) => {
-      this.form.patchValue({
-        name: val.name,
-        email: val.email,
-        gender: val.gender,
-        mobile: val.mobile,
-        password: val.password,
-        blood_group: val.blood_group,
-      });
-    });
   }
 
   get email(): FormControl {
@@ -101,4 +86,5 @@ export class EditUserComponent implements OnInit {
   get imageUrl(): FormControl {
     return this.form.get('imageUrl') as FormControl;
   }
+
 }

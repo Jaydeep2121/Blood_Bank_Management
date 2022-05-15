@@ -25,8 +25,9 @@ export class UrequestComponent implements OnInit {
   displayedColumns: string[] = [
     'position',
     'Volume',
-    'Day Left',
+    'User',
     'Blood Group',
+    'Blood Compo.',
     'action',
   ];
 
@@ -34,14 +35,11 @@ export class UrequestComponent implements OnInit {
   ngOnInit(): void {
     this.serv
       .getGroup()
-      .subscribe((data: any) => this.GroupArray=[...data]);
-      this.serv.getReqData().subscribe((data: any) => {
-        console.log(data);
-      })
-    this.getStock();
+      .subscribe((data: any) => this.GroupArray=[...data]);  
+      this.getStock();
   }
   getStock() {
-    this.serv.getStock().subscribe((data: any) => {
+    this.serv.getReqData().subscribe((data: any) => {
       this.apiResponse = data;
       this.MyDataSource = new MatTableDataSource();
       this.MyDataSource = data;

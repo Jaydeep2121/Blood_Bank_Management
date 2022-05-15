@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
-import { DonorComponent } from './profiles/donor-component/donor.component';
+import { DonorsComponent } from './profiles/donors/donors.component';
 import { ProfileComponent } from './profiles/profile.component';
 import { EmployeeComponent } from './profiles/employee-component/employee.component';
 import { UsersComponent } from './profiles/users/users.component';
@@ -14,6 +14,7 @@ import { StorageComponent } from './details/storage/storage.component';
 import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
 import { StockComponent } from './details/storage/stock/stock.component';
 import { UrequestComponent } from './details/storage/urequest/urequest.component';
+import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -27,7 +28,11 @@ const routes: Routes = [
         component: UsersComponent,
         children: [{ path: '', component: ListUserComponent }],
       },
-      { path: 'donors', component: DonorComponent },
+      { 
+        path: 'donors', 
+        component: DonorsComponent,
+        children: [{ path: '', component: ListDonorComponent }],
+      },
       { path: 'employee', component: EmployeeComponent },
     ],
   },

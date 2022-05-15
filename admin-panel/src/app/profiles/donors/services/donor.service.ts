@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-export class UserServiceService {
+export class DonorService {
   public editDataDetails: string = '';
   private msgsor = new BehaviorSubject(this.editDataDetails);
   currval = this.msgsor.asObservable();
@@ -27,18 +27,18 @@ export class UserServiceService {
   public getdata(): Observable<any> {
     return this._data.asObservable();
   }
-  // To Get The List Of User
-  getUser() {
-    return this.http.get('api/getUsers');
+  // To Get The List Of Donor
+  getDonor() {
+    return this.http.get('api/getDonors');
   }
   //get blood group data
   getGroup() {
     return this.http.get('api/getGroups');
   }
   // To Create/Add New User
-  addUser(body: any) {
-    this.http.post('api/users', body).subscribe(() => {
-      this.showDialog('User Data Has Been Saved');
+  addDonor(body: any) {
+    this.http.post('api/donors', body).subscribe(() => {
+      this.showDialog('Donor Data Has Been Saved');
     });
   }
   showDialog(title: string) {
@@ -80,8 +80,8 @@ export class UserServiceService {
     return this.http.get<any>(`api/editUser/${usrid}`);
   }
   // To Get User Details For Single Record Using Id with ref
-  getUserref(usrid: string): Observable<any> {
-    return this.http.get<any>(`api/getUserRef/${usrid}`);
+  getDonorref(usrid: string): Observable<any> {
+    return this.http.get<any>(`api/getDonorref/${usrid}`);
   }
 }
 

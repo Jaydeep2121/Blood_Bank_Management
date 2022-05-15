@@ -40,7 +40,7 @@ export class EditStockComponent implements OnInit {
     formData.append('blood_group', value['blood_group']);
     formData.append('blood_compo', value['blood_compo']);
     if (this.form.valid) {
-      this.ser.UpdateStock(formData);
+      this.ser.UpdateStock(formData,this.stockID);
     }
   }
   getStockByid(id: string) {

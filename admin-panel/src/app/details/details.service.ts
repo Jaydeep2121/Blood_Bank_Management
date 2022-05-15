@@ -15,6 +15,12 @@ export class DetailsService {
   change(id: string) {
     this.msgsor.next(id);
   }
+  public editDataDetails1: string = '';
+  private msgsor1 = new BehaviorSubject(this.editDataDetails1);
+  currval1 = this.msgsor1.asObservable();
+  change1(data: string) {
+    this.msgsor1.next(data);
+  }
   constructor(private http: HttpClient, private router: Router) {}
   private _data: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public setData(data: object) {
@@ -42,8 +48,8 @@ export class DetailsService {
     });
   }
   //update stockdata
-  UpdateStock(body: any) {
-    this.http.patch('api/UpdateStockdata', body).subscribe(() => {
+  UpdateStock(body: any,sid: string) {
+    this.http.patch(`api/UpdateStockdata/${sid}`, body).subscribe(() => {
       this.showDialog('Stock Data Has Been Updated');
     });
   }
@@ -55,10 +61,11 @@ export class DetailsService {
   //update bloodbankdata
   updateBankData(body: any) {
     this.http.patch('api/UpdateBank', body).subscribe(() => {
-      this.showDialog('Data Has Been Updated');
+      this.showDialog('Stock Data Has Been Updated');
     });
   }
   showDialog(title: string) {
+    this.change1("load_ref");
     Swal.fire({
       position: 'top-end',
       icon: 'success',
@@ -98,6 +105,7 @@ export class DetailsService {
     });
     if (result.isConfirmed) {
       this.http.get(`api/deleteStock/${stockid}`).subscribe(() => {
+        this.change1("load_ref");
         Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       });
     }

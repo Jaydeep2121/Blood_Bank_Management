@@ -12,7 +12,6 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { EmployeeComponent } from './profiles/employee-component/employee.component';
-import { DonorComponent } from './profiles/donor-component/donor.component';
 import { ProfileComponent } from './profiles/profile.component';
 import { AddUserComponent } from './profiles/users/add-user/add-user.component';
 import { EditUserComponent } from './profiles/users/edit-user/edit-user.component';
@@ -29,6 +28,12 @@ import { StockComponent } from './details/storage/stock/stock.component';
 import { UrequestComponent } from './details/storage/urequest/urequest.component';
 import { AddStockComponent } from './details/storage/stock/add-stock/add-stock.component';
 import { EditStockComponent } from './details/storage/stock/edit-stock/edit-stock.component';
+import { ViewcomComponent } from './details/storage/stock/viewcom/viewcom.component';
+import { AddDonorComponent } from './profiles/donors/add-donor/add-donor.component';
+import { EditDonorComponent } from './profiles/donors/edit-donor/edit-donor.component';
+import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
+import { ViewListDonorComponent } from './profiles/donors/list-donor/view-list-donor/view-list-donor.component';
+import { DonorsComponent } from './profiles/donors/donors.component';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Angular material */
@@ -36,7 +41,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ViewcomComponent } from './details/storage/stock/viewcom/viewcom.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,6 @@ import { ViewcomComponent } from './details/storage/stock/viewcom/viewcom.compon
     NavbarComponent,
     LoginComponentComponent,
     HomeComponentComponent,
-    DonorComponent,
     EmployeeComponent,
     ProfileComponent,
     AddUserComponent,
@@ -62,7 +65,12 @@ import { ViewcomComponent } from './details/storage/stock/viewcom/viewcom.compon
     UrequestComponent,
     EditStockComponent,
     AddStockComponent,
-    ViewcomComponent
+    ListDonorComponent,
+    ViewcomComponent,
+    AddDonorComponent,
+    EditDonorComponent,
+    ViewListDonorComponent,
+    DonorsComponent
   ],
   imports: [
     BrowserModule,

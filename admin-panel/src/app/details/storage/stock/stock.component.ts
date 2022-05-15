@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Injectable } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { EditStockComponent } from './edit-stock/edit-stock.component';
 import { AddStockComponent } from './add-stock/add-stock.component';
 import { ViewcomComponent } from './viewcom/viewcom.component';
+
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
@@ -29,11 +30,17 @@ export class StockComponent implements OnInit {
     'action',
   ];
 
-  constructor(private serv: DetailsService, public dialog: MatDialog) {}
+  constructor(private serv: DetailsService, public dialog: MatDialog) {
+    this.serv.currval1.subscribe((val) => {
+      if (val === 'load_ref') {
+        this.getStock();
+      }
+    });
+  }
   ngOnInit(): void {
     this.serv
       .getGroup()
-      .subscribe((data: any) => this.GroupArray=[...data]);
+      .subscribe((data: any) => this.GroupArray = [...data]);
     this.getStock();
   }
   getStock() {
@@ -50,7 +57,7 @@ export class StockComponent implements OnInit {
     this.dialog.open(AddStockComponent);
   }
   opendataDialog(userid: string) {
-    this.serv.getStockref(userid).subscribe(val=>this.serv.setData(val));
+    this.serv.getStockref(userid).subscribe(val => this.serv.setData(val));
     this.dialog.open(ViewcomComponent);
   }
   // To Edit Stock
