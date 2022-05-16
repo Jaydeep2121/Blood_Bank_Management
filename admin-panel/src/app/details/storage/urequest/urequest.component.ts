@@ -5,21 +5,20 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsService } from '../../details.service';
 import * as _ from 'lodash';
-import { EditStockComponent } from '../stock/edit-stock/edit-stock.component';
 import { ViewcomComponent } from '../stock/viewcom/viewcom.component';
 
 @Component({
   selector: 'app-urequest',
   templateUrl: './urequest.component.html',
-  styleUrls: ['./urequest.component.css']
+  styleUrls: ['./urequest.component.css'],
 })
 export class UrequestComponent implements OnInit {
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   cdata: any;
   GroupArray: any = [];
+  StatusArray: any = [];
   apiResponse: any = [];
   MyDataSource: any;
   displayedColumns: string[] = [
@@ -31,12 +30,19 @@ export class UrequestComponent implements OnInit {
     'action',
   ];
 
-  constructor(private serv: DetailsService, public dialog: MatDialog) {}
+  constructor(private serv: DetailsService, public dialog: MatDialog) {
+    this.serv.currval1.subscribe((val) => {
+      if (val === 'load_ref') {
+        this.getStock();
+      }
+    });
+  }
   ngOnInit(): void {
+    this.serv.getReqApprl().subscribe((data) => (this.StatusArray = [...data]));
     this.serv
       .getGroup()
-      .subscribe((data: any) => this.GroupArray=[...data]);  
-      this.getStock();
+      .subscribe((data: any) => (this.GroupArray = [...data]));
+    this.getStock();
   }
   getStock() {
     this.serv.getReqData().subscribe((data: any) => {
@@ -48,15 +54,14 @@ export class UrequestComponent implements OnInit {
       this.MyDataSource.sort = this.sort;
     });
   }
-  
+
   opendataDialog(userid: string) {
-    this.serv.getStockref(userid).subscribe(val=>this.serv.setData(val));
+    this.serv.getStockref(userid).subscribe((val) => this.serv.setData(val));
     this.dialog.open(ViewcomComponent);
   }
   // To Edit Stock
-  editStock(stockid: string) {
-    this.dialog.open(EditStockComponent);
-    this.serv.change(stockid);
+  approvebtn(id: string) {
+    this.serv.getUrefref(id);
   }
   deleteStock(stockid: string) {
     this.serv.deleteStock(stockid);
