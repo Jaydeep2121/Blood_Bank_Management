@@ -5,7 +5,7 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { DonorsComponent } from './profiles/donors/donors.component';
 import { ProfileComponent } from './profiles/profile.component';
-import { EmployeeComponent } from './profiles/employee-component/employee.component';
+import { EmployeesComponent } from './profiles/employees/employees.component';
 import { UsersComponent } from './profiles/users/users.component';
 import { ListUserComponent } from './profiles/users/list-user/list-user.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
@@ -33,7 +33,7 @@ const routes: Routes = [
         component: DonorsComponent,
         children: [{ path: '', component: ListDonorComponent }],
       },
-      { path: 'employee', component: EmployeeComponent },
+      { path: 'employee', component: EmployeesComponent },
     ],
   },
   {

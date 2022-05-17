@@ -52,13 +52,13 @@ export class DonorService {
     });
   }
   //
-  UpdateUser(body: any,usrid: string) {
-    this.http.patch(`api/UpdateUser/${usrid}`, body).subscribe(() => {
-      this.showDialog('User Data Has Been Updated');
+  UpdateDonor(body: any,usrid: string) {
+    this.http.patch(`api/UpdateDonor/${usrid}`, body).subscribe(() => {
+      this.showDialog('Donor Data Has Been Updated');
     });
   }
   // To Delete Any User
-  async deleteUser(usrid: string) {
+  async deleteDonor(usrid: string) {
     const result = await Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -69,15 +69,15 @@ export class DonorService {
       confirmButtonText: 'Yes, delete it!',
     });
     if (result.isConfirmed) {
-      this.http.get(`api/deleteUser/${usrid}`).subscribe(() => {
+      this.http.get(`api/deleteDonor/${usrid}`).subscribe(() => {
         this.change1("load_ref");
         Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       });
     }
   }
   // To Get User Details For Single Record Using Id
-  editUser(usrid: string): Observable<any> {
-    return this.http.get<any>(`api/editUser/${usrid}`);
+  editDonor(usrid: string): Observable<any> {
+    return this.http.get<any>(`api/editDonor/${usrid}`);
   }
   // To Get User Details For Single Record Using Id with ref
   getDonorref(usrid: string): Observable<any> {

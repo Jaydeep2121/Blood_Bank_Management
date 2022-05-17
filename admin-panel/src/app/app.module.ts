@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
-import { EmployeeComponent } from './profiles/employee-component/employee.component';
 import { ProfileComponent } from './profiles/profile.component';
 import { AddUserComponent } from './profiles/users/add-user/add-user.component';
 import { EditUserComponent } from './profiles/users/edit-user/edit-user.component';
@@ -34,6 +33,7 @@ import { EditDonorComponent } from './profiles/donors/edit-donor/edit-donor.comp
 import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
 import { ViewListDonorComponent } from './profiles/donors/list-donor/view-list-donor/view-list-donor.component';
 import { DonorsComponent } from './profiles/donors/donors.component';
+import { EmployeesComponent } from './profiles/employees/employees.component';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Angular material */
@@ -48,7 +48,6 @@ import { CookieService } from 'ngx-cookie-service';
     NavbarComponent,
     LoginComponentComponent,
     HomeComponentComponent,
-    EmployeeComponent,
     ProfileComponent,
     AddUserComponent,
     EditUserComponent,
@@ -70,7 +69,8 @@ import { CookieService } from 'ngx-cookie-service';
     AddDonorComponent,
     EditDonorComponent,
     ViewListDonorComponent,
-    DonorsComponent
+    DonorsComponent,
+    EmployeesComponent
   ],
   imports: [
     BrowserModule,

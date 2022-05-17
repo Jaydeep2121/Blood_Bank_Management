@@ -56,7 +56,7 @@ export class ListDonorComponent implements OnInit {
     this.serv.change(userid);
   }
   deleteDonor(userid: string) {
-    this.serv.deleteUser(userid);
+    this.serv.deleteDonor(userid);
   }
   // Search specific result
   filterData($event : any){
