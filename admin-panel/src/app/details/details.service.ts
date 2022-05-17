@@ -63,6 +63,10 @@ export class DetailsService {
       this.showDialog('Stock Data Has Been Updated');
     });
   }
+  //update status
+  updateStatusReq(sid: string, body: any) {
+    this.http.patch(`api/UpdRequest/${sid}`, body).subscribe(() => {});
+  }
   //get stockRef data
   // To Get User Details For Single Record Using Id with ref
   getStockref(sid: string): Observable<any> {
@@ -84,10 +88,10 @@ export class DetailsService {
           ) {
             this.chckflag = 1;
             this.UpdateStockforreq(
-              {day_lt:0, quantity: element['volume'] - volume },
+              { quantity: element['volume'] - volume },
               element._id
             );
-            this.approveAndInsert(sid,{data:'approve'});
+            this.updateStatusReq(sid, { data: 'approve' });
             this.change1('load_ref');
           }
         });
@@ -138,10 +142,24 @@ export class DetailsService {
   editStock(stockid: string): Observable<any> {
     return this.http.get<any>(`api/editStock/${stockid}`);
   }
-  approveAndInsert(id: string, body: any) {
-    this.http.post<any>(`api/AddReqStatus/${id}`, body).subscribe(() => {
-      this.showDialog('Request Approved Successfully');
+  deniedAndUpdate(id: string) {
+    this.dialogDisplay(id, 'Yes, Denied it!');
+  }
+  async dialogDisplay(id: string, confirm: string) {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: confirm,
     });
+    if (result.isConfirmed) {
+      await this.updateStatusReq(id, { data: 'denied' });
+      this.change1('load_ref');
+      Swal.fire('Denieded!', 'Request has been Denied', 'success');
+    }
   }
   // To Delete Any User
   async deleteStock(stockid: string) {

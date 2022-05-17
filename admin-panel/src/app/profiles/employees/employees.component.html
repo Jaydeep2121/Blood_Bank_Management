@@ -1,1 +1,12 @@
-<p>employees works!</p>
+<mat-card>
+    <div class="alert alert-info">
+        <strong>EMPLOYEE-PROFILES</strong>
+    </div>
+</mat-card>
+<br />
+<mat-card>
+    <button class="add-user-btn" (click)="openDialog()" mat-raised-button color="warn">Add New Emp</button>
+    <mat-card-content>
+        <router-outlet></router-outlet>
+    </mat-card-content>
+</mat-card>

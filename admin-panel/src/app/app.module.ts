@@ -34,6 +34,10 @@ import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.comp
 import { ViewListDonorComponent } from './profiles/donors/list-donor/view-list-donor/view-list-donor.component';
 import { DonorsComponent } from './profiles/donors/donors.component';
 import { EmployeesComponent } from './profiles/employees/employees.component';
+import { AddEmployeeComponent } from './profiles/employees/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './profiles/employees/edit-employee/edit-employee.component';
+import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
+import { ViewEmpProfileComponent } from './profiles/employees/list-employee/view-emp-profile/view-emp-profile.component';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Angular material */
@@ -70,7 +74,11 @@ import { CookieService } from 'ngx-cookie-service';
     EditDonorComponent,
     ViewListDonorComponent,
     DonorsComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    AddEmployeeComponent,
+    EditEmployeeComponent,
+    ListEmployeeComponent,
+    ViewEmpProfileComponent
   ],
   imports: [
     BrowserModule,

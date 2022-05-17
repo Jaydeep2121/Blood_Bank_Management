@@ -37,20 +37,16 @@
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
             <mat-cell *matCellDef="let data">
-                <div *ngFor="let i of StatusArray">
-                    <button class="btn btn-success aprv-btn" *ngIf="i.status === 'approve' && i.req_data === data._id"
-                        disabled>Approved</button>
-                    <button class="btn btn-danger deni-btn" *ngIf="i.status === 'denied' && i.req_data === data._id"
-                        disabled>Denied</button>
-                    <a [routerLink]="" class="editbtn btn btn-primary" (click)="approvebtn(data._id)"
-                        *ngIf="i.req_data !== data._id">
-                        <img class="apprvimg" src="../../../../assets/images/approve.png" alt="">
-                    </a>&nbsp;
-                    <a [routerLink]="" *ngIf="i.req_data !== data._id" class="delbtn btn btn-danger"
-                        (click)="deleteStock(data._id)">
-                        <img class="deniimg" src="../../../../assets/images/denied.png" alt="">
-                    </a>&nbsp;
-                </div>
+                <button class="btn btn-success aprv-btn" *ngIf="data.status === 'approve'" disabled>Approved</button>
+                <button class="btn btn-danger deni-btn" *ngIf="data.status === 'denied'" disabled>Denied</button>
+                <a [routerLink]="" class="editbtn btn btn-primary" *ngIf="data.status === 'pending'"
+                    (click)="approvebtn(data._id)">
+                    <img class="apprvimg" src="../../../../assets/images/approve.png" alt="">
+                </a>&nbsp;
+                <a [routerLink]="" class="delbtn btn btn-danger" *ngIf="data.status === 'pending'"
+                    (click)="deniedbtn(data._id)">
+                    <img class="deniimg" src="../../../../assets/images/denied.png" alt="">
+                </a>&nbsp;
             </mat-cell>
         </ng-container>
 

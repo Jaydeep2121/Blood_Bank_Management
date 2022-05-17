@@ -15,6 +15,7 @@ import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
 import { StockComponent } from './details/storage/stock/stock.component';
 import { UrequestComponent } from './details/storage/urequest/urequest.component';
 import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
+import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -33,7 +34,11 @@ const routes: Routes = [
         component: DonorsComponent,
         children: [{ path: '', component: ListDonorComponent }],
       },
-      { path: 'employee', component: EmployeesComponent },
+      { 
+        path: 'employee', 
+        component: EmployeesComponent,
+        children: [{ path: '', component: ListEmployeeComponent }], 
+      },
     ],
   },
   {

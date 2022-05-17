@@ -18,7 +18,6 @@ export class UrequestComponent implements OnInit {
 
   cdata: any;
   GroupArray: any = [];
-  StatusArray: any = [];
   apiResponse: any = [];
   MyDataSource: any;
   displayedColumns: string[] = [
@@ -38,7 +37,6 @@ export class UrequestComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.serv.getReqApprl().subscribe((data) => (this.StatusArray = [...data]));
     this.serv
       .getGroup()
       .subscribe((data: any) => (this.GroupArray = [...data]));
@@ -63,8 +61,8 @@ export class UrequestComponent implements OnInit {
   approvebtn(id: string) {
     this.serv.getUrefref(id);
   }
-  deleteStock(stockid: string) {
-    this.serv.deleteStock(stockid);
+  deniedbtn(id: string) {
+    this.serv.deniedAndUpdate(id);
   }
   onChange($event: any) {
     let filteredData = _.filter(this.apiResponse, (item: any) => {
