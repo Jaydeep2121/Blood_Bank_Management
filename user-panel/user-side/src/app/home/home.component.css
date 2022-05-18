@@ -4,6 +4,7 @@
     margin: auto;  
 }
 .mainClass{
+    position: relative;
     overflow-x: hidden;
 }
 .learnAbt{
