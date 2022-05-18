@@ -1,0 +1,38 @@
+<div id="wrap">
+	<nav>
+		<div class="logo">
+			e-Rakt&nbsp;<strong>Kosh</strong>
+		</div>
+		<button type="button" class="btn-hamburger" data-action="nav-toggle" (click)="OnNavToggle()">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<ul class="nav-menu">
+			<li class="nav-item"><a routerLink="/home">Home</a></li>
+			<li class="nav-item dropdown">
+				<a href="#" data-action="dropdown-toggle" (click)="ondropClick()">Looking For Blood</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">Blood Availability</a>
+                    <a class="dropdown-item" href="#">Register for Request</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a href="#" data-action="dropdown-toggle" (click)="ondropClick()">Want To Donate</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">Donor Login</a>
+                    <a class="dropdown-item" href="#">Appointment</a>
+				</div>
+			</li>
+            <li class="nav-item dropdown">
+				<a href="#" data-action="dropdown-toggle" (click)="ondropClick()">Blood Bank Login</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">eRaktkosh Login</a>
+				</div>
+			</li>
+		</ul>
+	</nav><br><br><br>
+    <router-outlet></router-outlet>
+</div>
