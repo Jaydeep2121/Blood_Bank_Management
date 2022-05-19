@@ -4,8 +4,8 @@
 			<nav class="navbar navbar-expand-lg my-navbar">
 				<a class="navbar-brand" href="#"><span class="logo">
 						<img src="../../assets/images/logo5.png" class="img-fluid"
-							style="width:30px; margin:-3px 0px 0px 0px;">Vishweb
-						design</span>
+							style="width:30px; margin:-3px 0px 0px 0px;">e-RaktKosh
+					</span>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -16,15 +16,29 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav m-auto">
 						<li class="nav-item active">
-							<a class="nav-link" href="#">Products<span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Downloads</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Enterprice</a>
+							<a class="nav-link" routerLink="/home">Home<span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Looking For Blood
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#">Blood Availability</a>
+								<a class="dropdown-item" href="#">Thalassemia Request</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Want to Donate
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#">Donor Login</a>
+								<a class="dropdown-item" href="#">Appointment for Blood Bank</a>
+							</div>
+						</li>
+						<!-- <li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Pricing
@@ -35,22 +49,34 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#">Something else here</a>
 							</div>
+						</li> -->
+						<li class="nav-item">
+							<a class="nav-link" routerLink="/gallery">Gallery</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Blog</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Resources</a>
+							<a class="nav-link" routerLink="/contact">Contact Us</a>
 						</li>
 					</ul>
 					<form class="form-inline my-2 my-lg-0">
-						<button class="header-btn my-2 my-sm-0" type="submit">Subscribe free</button>
+						<button class="header-btn my-2 my-sm-0" type="submit">e-Raktkosh Login</button>
 					</form>
 				</div>
 			</nav>
-
 		</div>
 	</div>
 </header>
+<section class="content-banner" *ngIf="router.url==='/home' || router.url==='/'">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-12">
+				<div class="banner-con text-center">
+					<p class="first-title">Donate Blood &amp; Save a Life</p>
+					<p class="banner-des">Blood Donation Is A Small Act Of Kindness That Does Great And Big Wonders.</p>
+					<a href="#" class="banner-btn">Donate Now</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <br><br><br>
 <router-outlet></router-outlet>
