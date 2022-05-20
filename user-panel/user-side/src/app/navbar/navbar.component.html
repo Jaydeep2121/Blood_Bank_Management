@@ -16,50 +16,37 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav m-auto">
 						<li class="nav-item active">
-							<a class="nav-link" routerLink="/home">Home<span class="sr-only">(current)</span></a>
+							<a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse" routerLink="/home">Home<span class="sr-only">(current)</span></a>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							<div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Looking For Blood
-							</a>
+							</div>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Blood Availability</a>
-								<a class="dropdown-item" href="#">Thalassemia Request</a>
+								<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse" routerLink="">Blood Availability</a>
+								<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse" routerLink="">Thalassemia Request</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							<div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Want to Donate
-							</a>
+							</div>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Donor Login</a>
-								<a class="dropdown-item" href="#">Appointment for Blood Bank</a>
+								<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse" routerLink="">Appointment for Blood Bank</a>
 							</div>
 						</li>
-						<!-- <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Pricing
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Action</a>
-								<a class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</div>
-						</li> -->
 						<li class="nav-item">
-							<a class="nav-link" routerLink="/gallery">Gallery</a>
+							<a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse" routerLink="/gallery">Gallery</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" routerLink="/contact">Contact Us</a>
+							<a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse" routerLink="/contact">Contact Us</a>
 						</li>
 					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<button class="header-btn my-2 my-sm-0" type="submit">e-Raktkosh Login</button>
-					</form>
+					<div class="form-inline my-2 my-lg-0">
+						<a style="text-decoration: none;" class="header-btn my-2 my-sm-0" type="submit" routerLink="/login">e-Raktkosh Login</a>
+					</div>
 				</div>
 			</nav>
 		</div>
