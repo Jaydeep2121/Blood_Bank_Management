@@ -1,1 +1,77 @@
-<p>user form</p>
+<div class='box'>
+    <div class='box-form'>
+        <div class='box-login-tab'></div>
+        <div class='box-login-title'>
+            <div class='i i-login'></div>
+            <h2>REGISTER</h2>
+        </div>
+        <div class='box-login'>
+            <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+                <div class='fieldset-body' id='login_form'>
+                    <a class='b b-form i i-more' title='Mais Informações'></a>
+                    <p class='field'>
+                        <label for='user'>NAME
+                            <mat-error
+                            *ngIf="(regForm.get('userName')?.dirty || regForm.get('userName')?.touched) && regForm.get('userName')?.errors?.required">
+                                *Name is required
+                            </mat-error>
+                        </label>
+                        <input type='text' formControlName="userName" id='user' name='user' title='Username' />
+                        <span id='valida' class='i i-warning'></span>
+                    </p>
+                    <p class='field'>
+                        <label for='user'>E-MAIL
+                            <mat-error
+                                *ngIf="!regForm.get('userEmail')?.errors?.required && (regForm.get('userEmail')?.errors?.pattern)">
+                                *Please enter a valid email
+                            </mat-error>
+                            <mat-error class="valid_pass"
+                                *ngIf="regForm.get('userEmail')?.invalid && (regForm.get('userEmail')?.dirty || regForm.get('userEmail')?.touched) && regForm.get('userEmail')?.errors?.required">
+                                *Email is required
+                            </mat-error>
+                        </label>
+                        <input type='text' formControlName="userEmail" id='user' name='user' title='Username' />
+                        <span id='valida' class='i i-warning'></span>
+                    </p>
+                    <p class='field'>
+                        <label for='user'>
+                            <input type="radio" name="gen" formControlName="gender" value="m">&nbsp;Male&nbsp;
+                            <input type="radio" name="gen" formControlName="gender" value="f">&nbsp;Female
+                            <mat-error *ngIf="(regForm.get('gender')?.dirty || regForm.get('gender')?.touched) && regForm.get('gender')?.errors?.required">*Gender is required</mat-error>
+                        </label><br>
+                    </p>
+                    <p class='field'>
+                        <label for='user'>CONTACT
+                            <mat-error
+                                *ngIf="!regForm.get('userCont')?.errors?.required && (regForm.get('userCont')?.errors?.pattern)">
+                                *Please enter a valid ContactNo
+                            </mat-error>
+                            <mat-error class="valid_pass"
+                                *ngIf="regForm.get('userCont')?.invalid && (regForm.get('userCont')?.dirty || regForm.get('userCont')?.touched) && regForm.get('userCont')?.errors?.required">
+                                *Contact is required
+                            </mat-error>
+                        </label>
+                        <input type='text' formControlName="userCont" id='user' name='user' title='Username' />
+                        <span id='valida' class='i i-warning'></span>
+                    </p>
+                    <p class='field'>
+                        <label for='pass'>PASSWORD
+                            <mat-error *ngIf="!regForm.get('userPass')?.errors?.required && !regForm.get('userPass')?.valid">
+                                <div>*Password must be >=8 </div>
+                                <div>Contains num,upper,lower,spec chars</div>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="regForm.get('userPass')?.invalid && (regForm.get('userPass')?.dirty || regForm.get('userPass')?.touched) && regForm.get('userPass')?.errors?.required">
+                                *Password is required
+                            </mat-error>
+                        </label>
+                        <input type='password' formControlName="userPass" id='pass' name='pass' title='Password' />
+                        <span id='valida' class='i i-close'></span>
+                    </p>
+                    <input type='submit' [disabled]="!regForm.valid" id='do_login' value='REGISTER'
+                        title='Get Started' />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

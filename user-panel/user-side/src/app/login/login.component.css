@@ -389,3 +389,9 @@ Credits
   text-decoration: none;
   color: rgba(255,255,255,0.2);
 }
+mat-error{
+  font-size: 10px;
+  color: #fe4066;
+  float: right; 
+  margin-top: -9px;
+}

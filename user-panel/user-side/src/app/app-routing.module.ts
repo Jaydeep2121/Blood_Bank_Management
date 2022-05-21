@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
+import { UserRegComponent } from './user-reg/user-reg.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     children: [{ path: '', component: FooterComponent }],
   },
   { path: 'login', component: LoginComponent },
+  { path:'regi',component:UserRegComponent }
 ];
 
 @NgModule({

@@ -6,16 +6,34 @@
             <h2>LOGIN</h2>
         </div>
         <div class='box-login'>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class='fieldset-body' id='login_form'>
-                    <button onclick="openLoginInfo();" class='b b-form i i-more' title='Mais Informações'></button>
+                    <a onclick="openLoginInfo();" class='b b-form i i-more' title='Mais Informações'></a>
                     <p class='field'>
-                        <label for='user'>E-MAIL</label>
+                        <label for='user'>E-MAIL
+                            <mat-error
+                                *ngIf="!loginForm.get('userEmail')?.errors?.required && (loginForm.get('userEmail')?.errors?.pattern)">
+                                *Please enter a valid email
+                            </mat-error>
+                            <mat-error class="valid_pass"
+                                *ngIf="loginForm.get('userEmail')?.invalid && (loginForm.get('userEmail')?.dirty || loginForm.get('userEmail')?.touched) && loginForm.get('userEmail')?.errors?.required">
+                                *Email is required
+                            </mat-error>
+                        </label>
                         <input type='text' formControlName="userEmail" id='user' name='user' title='Username' />
                         <span id='valida' class='i i-warning'></span>
                     </p>
                     <p class='field'>
-                        <label for='pass'>PASSWORD</label>
+                        <label for='pass'>PASSWORD
+                            <mat-error *ngIf="!loginForm.get('userPass')?.errors?.required && !loginForm.get('userPass')?.valid">
+                                <div>*Password must be >=8 </div>
+                                <div>Contains num,upper,lower,spec chars</div>
+                            </mat-error>
+                            <mat-error
+                                *ngIf="loginForm.get('userPass')?.invalid && (loginForm.get('userPass')?.dirty || loginForm.get('userPass')?.touched) && loginForm.get('userPass')?.errors?.required">
+                                Password is required
+                            </mat-error>
+                        </label>
                         <input type='password' formControlName="userPass" id='pass' name='pass' title='Password' />
                         <span id='valida' class='i i-close'></span>
                     </p>
@@ -23,7 +41,8 @@
                     <label class='checkbox'>
                         <input type='checkbox' value='TRUE' title='Keep me Signed in' /> Keep me Signed in
                     </label>
-                    <input type='submit' id='do_login' value='GET STARTED' title='Get Started' />
+                    <input type='submit' [disabled]="!loginForm.valid" id='do_login' value='GET STARTED'
+                        title='Get Started' />
                 </div>
             </form>
         </div>
@@ -35,6 +54,6 @@
         <button onclick="" class='b-support' title='Forgot Password?'> Forgot Password?</button>
         <button routerLink="/contact" class='b-support' title='Contact Support'> Contact Support</button>
         <div class='line-wh'></div>
-        <button onclick="" class='b-cta' title='Sign up now!'> CREATE ACCOUNT</button>
+        <button onclick="" class='b-cta' title='Sign up now!' routerLink="/regi"> CREATE ACCOUNT</button>
     </div>
 </div>

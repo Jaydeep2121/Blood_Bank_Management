@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SlickCarouselModule } from 'ngx-slick-carousel';  
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 // Angular Material Module
 import { AngularMaterialModule } from './angular-material.module';
 // component Files
@@ -29,6 +30,7 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   imports: [
+    HttpClientModule,
     AngularMaterialModule,
     BrowserModule,
     AppRoutingModule,
