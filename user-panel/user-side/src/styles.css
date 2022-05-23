@@ -214,6 +214,7 @@ a {
   width: 100%;
   z-index: 99;
   background-color: transparent;
+  /* background-color: #282d32; */
 }
 
 .logo {
@@ -233,7 +234,9 @@ a {
 .nav-item .nav-link:hover {
   color: #fe4066;
 }
-
+.nav-item .header-btn:hover {
+  color: #ffffff;
+}
 .header-btn {
   color: #ffffff;
   border-radius: 30px;

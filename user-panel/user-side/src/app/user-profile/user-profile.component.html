@@ -1,0 +1,118 @@
+<div class="container rounded bg-white mt-5 mb-5">
+    <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                        width="150px"
+                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                        class="font-weight-bold">User Name</span><span
+                        class="text-black-50">UserEmail123@gmail.com</span><span> </span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Name</label>
+                            <div class="frmerr"
+                                *ngIf="(regForm.get('userName')?.dirty || regForm.get('userName')?.touched) && regForm.get('userName')?.errors?.required">
+                                *Name is required
+                            </div>
+                            <input type="text" formControlName="userName" class="form-control" placeholder="Enter Name">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Email ID</label>
+                            <div class="frmerr"
+                                *ngIf="!regForm.get('userEmail')?.errors?.required && (regForm.get('userEmail')?.errors?.pattern)">
+                                *Please enter a valid email
+                            </div>
+                            <div class="frmerr valid_pass"
+                                *ngIf="regForm.get('userEmail')?.invalid && (regForm.get('userEmail')?.dirty || regForm.get('userEmail')?.touched) && regForm.get('userEmail')?.errors?.required">
+                                *Email is required
+                            </div>
+                            <input type="text" formControlName="userEmail" class="form-control"
+                                placeholder="Enter Email ID">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Mobile Number</label>
+                            <div class="frmerr"
+                                *ngIf="!regForm.get('userCont')?.errors?.required && (regForm.get('userCont')?.errors?.pattern)">
+                                *Please enter a valid ContactNo
+                            </div>
+                            <div class="frmerr"
+                                *ngIf="regForm.get('userCont')?.invalid && (regForm.get('userCont')?.dirty || regForm.get('userCont')?.touched) && regForm.get('userCont')?.errors?.required">
+                                *Contact is required
+                            </div>
+                            <input type="text" formControlName="userCont" class="form-control"
+                                placeholder="Enter Phone Number" value="">
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <input type="radio" formControlName="gender" name="gender" value="m">&nbsp;Male&nbsp;
+                            <input type="radio" formControlName="gender" name="gender" value="f">&nbsp;Female
+                            <div class="frmerr"
+                                *ngIf="(regForm.get('gender')?.dirty || regForm.get('gender')?.touched) && regForm.get('gender')?.errors?.required">
+                                *Gender is required
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label class="labels">Blood Group</label>
+                            <div class="frmerr"
+                                *ngIf="regForm.get('blood_group')?.touched && !regForm.get('blood_group')?.valid">
+                                *Bl.Group is required
+                            </div>
+                            <select class="form-select" class="form-control" formControlName="blood_group">
+                                <option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group
+                                    }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col mt-3">
+                        <div class="frmerr" 
+                            *ngIf="regForm.get('imageUrl')?.invalid && regForm.get('imageUrl')?.touched">
+                            *Profile is required
+                        </div>
+                        <button type="button" class="fileupd" (click)="fileInput.click()">Choose Profile</button>
+                        <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file"
+                            formControlName="imageUrl">&nbsp;{{text}}
+                    </div>
+                    <div class="mt-5 text-center"><button [disabled]="!regForm.valid"
+                            class="btn btn-primary profile-button" type="submit">Update
+                            Profile</button></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center"><span class="edit-ac">Edit
+                            Account</span></div><br>
+                    <div class="col-md-12">
+                        <label class="labels">User Password</label>
+                        <div class="frmpaserr"
+                            *ngIf="!regForm.get('userPass')?.errors?.required && !regForm.get('userPass')?.valid">
+                            <div>*Password must be >=8 </div>
+                            <div>Contains num,upper,lower,spec chars</div>
+                        </div>
+                        <div class="frmerr"
+                            *ngIf="regForm.get('userPass')?.invalid && (regForm.get('userPass')?.dirty || regForm.get('userPass')?.touched) && regForm.get('userPass')?.errors?.required">
+                            *Password is required
+                        </div>
+                        <input type="password" formControlName="userPass" class="form-control" placeholder="password">
+                    </div> <br>
+                    <div class="col-md-12">
+                        <label class="labels">User Confirm Password</label>
+                        <div class="frmerr"
+                            *ngIf="regForm.get('passwordConfirm')?.touched && regForm.hasError('passwordsNotMatching')">
+                            *Passwords are not matching
+                        </div>
+                        <input type="password" formControlName="passwordConfirm" class="form-control"
+                            placeholder="confirm password">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -6,6 +6,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { LoginComponent } from './login/login.component';
 import { UserRegComponent } from './user-reg/user-reg.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     component: ContactUsComponent,
     children: [{ path: '', component: FooterComponent }],
   },
+  { path:'usr_profile', component:UserProfileComponent},
   { path: 'login', component: LoginComponent },
   { path:'regi',component:UserRegComponent }
 ];

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +18,10 @@ export class HomeComponent implements OnInit {
     "dots": true,  
     "infinite": true  
   };   
-  constructor() { }
+  constructor(private serv:HomeService) { }
 
   ngOnInit(): void {
+    this.serv.isAuthenticate();
   }
 
 }

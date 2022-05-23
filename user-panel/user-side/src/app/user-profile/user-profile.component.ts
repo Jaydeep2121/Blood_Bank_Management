@@ -1,27 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RegisService } from './regis.service';
-import { CustomValidators } from 'src/app/public/_helpers/custom-validators'
-import { Router } from '@angular/router';
+import { ProfileService } from './profile.service';
+import { CustomValidators } from '../public/_helpers/custom-validators';
+import { HomeService } from '../home/home.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
-  selector: 'app-user-reg',
-  templateUrl: './user-reg.component.html',
-  styleUrls: ['./user-reg.component.css'],
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
-export class UserRegComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
   regForm: FormGroup;
   text: any;
   image: any;
   GroupArray: any = [];
-  constructor(
-    private serv: RegisService,
-    private router:Router
-    ) {}
+  constructor(private serv: ProfileService,private aser:HomeService,private lser:LoginService) {}
 
   ngOnInit(): void {
-    this.formData();
+    this.aser.isAuthenticate();
+    this.lser.currval.subscribe(data=>{
+      console.log(data);
+    })
     this.serv.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
+    this.formData();
+  }
+  getUserByid(id: string) {
+    console.log(id)
+    //this.serv.editUser(id).subscribe((val) => {
+      //console.log(val);
+      // this.regForm.patchValue({
+      //   name: val.name,
+      //   email: val.email,
+      //   gender: val.gender,
+      //   mobile: val.mobile,
+      //   password: val.password,
+      //   blood_group: val.blood_group,
+      // });
+    // });
   }
   formData() {
     this.regForm = new FormGroup({
@@ -64,8 +80,9 @@ export class UserRegComponent implements OnInit {
     formData.append('password', value['userPass']);
     formData.append('imageUrl', this.image);
     formData.append('blood_group', value['blood_group']);
-    this.serv.RegiUser(formData);
-    this.regForm.reset();
-    this.router.navigate(['/login']);
+    console.log(formData)
+    // this.serv.RegiUser(formData);
+    // this.regForm.reset();
   }
 }
+

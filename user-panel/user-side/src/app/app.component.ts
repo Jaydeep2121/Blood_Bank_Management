@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        this.show_el = event.url !== "/login" && event.url !== "/regi";
+        this.show_el = event.url !== "/login" && event.url !== "/regi" && event.url !== "/usr_profile";
       }
     });
   }

@@ -1,0 +1,53 @@
+section {
+    background-color: white !important;
+}
+.form-control:focus {
+    box-shadow: none;
+    border-color: #fe4066;
+}
+.frmerr{
+    font-size: 10px;
+    color: #fe4066;
+    float: right; 
+    margin-top: 6px;
+}
+.frmpaserr{
+    font-size: 10px;
+    color: #fe4066;
+    float: right; 
+}
+.fileupd{
+    color:#df405a;
+    outline: none;
+    border:none;
+    margin-left: -15px;
+    float: left;
+    border-radius: 10px;
+    padding: 5px;
+}
+.profile-button {
+    background: #fe4066;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+.edit-ac{
+    padding-left: 15px;
+}
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}

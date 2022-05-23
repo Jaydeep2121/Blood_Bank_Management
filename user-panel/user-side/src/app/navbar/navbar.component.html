@@ -44,9 +44,19 @@
 							<a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse" routerLink="/contact">Contact Us</a>
 						</li>
 					</ul>
-					<div class="form-inline my-2 my-lg-0">
-						<a style="text-decoration: none;" data-toggle="collapse" data-target=".navbar-collapse" class="header-btn my-2 my-sm-0" type="submit" routerLink="/login">e-Raktkosh Login</a>
+					<div class="form-inline my-2 my-lg-0" *ngIf="authenticated">
+						<li class="nav-item dropdown" style="padding:7px 22px;list-style-type: none;">
+							<div class="header-btn my-2 my-sm-0 nav-link dropdown-toggle" id="navbarDropdown" role="button"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								My Profile
+							</div>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse" routerLink="/usr_profile">My Profile</a>
+								<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse" (click)="logOut()">Logout</a>
+							</div>
+						</li>
 					</div>
+					<a style="cursor: pointer;text-decoration: none;" data-toggle="collapse" data-target=".navbar-collapse" class="header-btn my-2 my-sm-0" routerLink="/login" *ngIf="!authenticated">e-Raktkosh Login</a>
 				</div>
 			</nav>
 		</div>
