@@ -19,7 +19,8 @@
           <mat-form-field class="example-full-width">
             <input matInput type="password" placeholder="Password" formControlName="password">    
             <mat-error *ngIf="!loginForm.get('password')?.errors?.required">
-              Password length must be greater than or equal to 8 and password must contain one or more uppercase , lowercase , numeric and special characters
+              <div>*Password must be >=8 </div>
+              <div>Contains num,upper,lower,spec chars</div>
             </mat-error>
             <mat-error *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) && loginForm.get('password')?.errors?.required">
               Password is required
