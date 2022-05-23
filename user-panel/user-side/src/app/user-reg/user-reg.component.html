@@ -10,17 +10,16 @@
                 <div class='fieldset-body' id='login_form'>
                     <a class='b b-form i i-more' title='Mais Informações'></a>
                     <p class='field'>
-                        <label for='user'>NAME
+                        <label for='name'>NAME
                             <mat-error
-                            *ngIf="(regForm.get('userName')?.dirty || regForm.get('userName')?.touched) && regForm.get('userName')?.errors?.required">
+                                *ngIf="(regForm.get('userName')?.dirty || regForm.get('userName')?.touched) && regForm.get('userName')?.errors?.required">
                                 *Name is required
                             </mat-error>
                         </label>
-                        <input type='text' formControlName="userName" id='user' name='user' title='Username' />
-                        <span id='valida' class='i i-warning'></span>
+                        <input type='text' formControlName="userName" name='user' title='Username' />
                     </p>
                     <p class='field'>
-                        <label for='user'>E-MAIL
+                        <label for='email'>E-MAIL
                             <mat-error
                                 *ngIf="!regForm.get('userEmail')?.errors?.required && (regForm.get('userEmail')?.errors?.pattern)">
                                 *Please enter a valid email
@@ -30,18 +29,19 @@
                                 *Email is required
                             </mat-error>
                         </label>
-                        <input type='text' formControlName="userEmail" id='user' name='user' title='Username' />
-                        <span id='valida' class='i i-warning'></span>
+                        <input type='text' formControlName="userEmail" name='user' title='Username' />
                     </p>
                     <p class='field'>
                         <label for='user'>
-                            <input type="radio" name="gen" formControlName="gender" value="m">&nbsp;Male&nbsp;
-                            <input type="radio" name="gen" formControlName="gender" value="f">&nbsp;Female
-                            <mat-error *ngIf="(regForm.get('gender')?.dirty || regForm.get('gender')?.touched) && regForm.get('gender')?.errors?.required">*Gender is required</mat-error>
+                            <input type="radio" formControlName="gender" value="m">&nbsp;Male&nbsp;
+                            <input type="radio" formControlName="gender" value="f">&nbsp;Female
+                            <mat-error
+                                *ngIf="(regForm.get('gender')?.dirty || regForm.get('gender')?.touched) && regForm.get('gender')?.errors?.required">
+                                *Gender is required</mat-error>
                         </label><br>
                     </p>
                     <p class='field'>
-                        <label for='user'>CONTACT
+                        <label for='contact'>CONTACT
                             <mat-error
                                 *ngIf="!regForm.get('userCont')?.errors?.required && (regForm.get('userCont')?.errors?.pattern)">
                                 *Please enter a valid ContactNo
@@ -51,12 +51,12 @@
                                 *Contact is required
                             </mat-error>
                         </label>
-                        <input type='text' formControlName="userCont" id='user' name='user' title='Username' />
-                        <span id='valida' class='i i-warning'></span>
+                        <input type='text' formControlName="userCont" name='user' title='Username' />
                     </p>
                     <p class='field'>
                         <label for='pass'>PASSWORD
-                            <mat-error *ngIf="!regForm.get('userPass')?.errors?.required && !regForm.get('userPass')?.valid">
+                            <mat-error
+                                *ngIf="!regForm.get('userPass')?.errors?.required && !regForm.get('userPass')?.valid">
                                 <div>*Password must be >=8 </div>
                                 <div>Contains num,upper,lower,spec chars</div>
                             </mat-error>
@@ -65,8 +65,38 @@
                                 *Password is required
                             </mat-error>
                         </label>
-                        <input type='password' formControlName="userPass" id='pass' name='pass' title='Password' />
-                        <span id='valida' class='i i-close'></span>
+                        <input type='password' formControlName="userPass" name='pass' title='Password' />
+                    </p>
+                    <p class='field'>
+                        <label for='co.pass'>CONF. PASS
+                            <mat-error
+                                *ngIf="regForm.get('passwordConfirm')?.touched && regForm.hasError('passwordsNotMatching')">
+                                *Passwords are not matching
+                            </mat-error>
+                        </label>
+                        <input type='password' formControlName="passwordConfirm" name='pass' title='Password' />
+                    </p>
+                    <p class='field'>
+                        <label for='grp'>
+                            <mat-error
+                                *ngIf="regForm.get('blood_group')?.touched && !regForm.get('blood_group')?.valid">
+                                *Bl.Group is required
+                            </mat-error>
+                        </label>
+                        <select formControlName="blood_group">
+                            <option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}
+                            </option>
+                        </select>
+                    </p>
+                    <p class='field'>
+                        <label for='prof'>
+                            <mat-error *ngIf="regForm.get('imageUrl')?.invalid && regForm.get('imageUrl')?.touched">
+                                *Profile is required
+                            </mat-error>
+                        </label>
+                        <button type="button" class="fileupd" (click)="fileInput.click()">Choose Profile</button>
+                        <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file"
+                            formControlName="imageUrl">&nbsp;{{text}}
                     </p>
                     <input type='submit' [disabled]="!regForm.valid" id='do_login' value='REGISTER'
                         title='Get Started' />

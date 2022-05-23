@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { FeatureComponent } from './feature/feature.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UserRegComponent } from './user-reg/user-reg.component';
@@ -23,7 +22,6 @@ import { LoginComponent } from './login/login.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    FeatureComponent,
     GalleryComponent,
     ContactUsComponent,
     UserRegComponent,

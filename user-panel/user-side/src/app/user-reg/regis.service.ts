@@ -15,6 +15,10 @@ export class RegisService {
       this.showDialog('Your Registration Done');
     });
   }
+  //get blood group data
+  getGroup() {
+    return this.http.get('api/getGroups');
+  }
   showDialog(title: string) {
     Swal.fire({
       position: 'top-end',

@@ -11,12 +11,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [{ path: '', component: FooterComponent, outlet: 'footer' }],
+    children: [{ path: '', component: FooterComponent }],
   },
   {
     path: 'home',
     component: HomeComponent,
-    children: [{ path: '', component: FooterComponent, outlet: 'footer' }],
+    children: [{ path: '', component: FooterComponent }],
   },
   {
     path: 'gallery',

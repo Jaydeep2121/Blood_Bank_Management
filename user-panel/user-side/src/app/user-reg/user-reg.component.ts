@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisService } from './regis.service';
+import { CustomValidators } from 'src/app/public/_helpers/custom-validators'
 
 @Component({
   selector: 'app-user-reg',
@@ -9,10 +10,14 @@ import { RegisService } from './regis.service';
 })
 export class UserRegComponent implements OnInit {
   regForm: FormGroup;
+  text: any;
+  image: any;
+  GroupArray: any = [];
   constructor(private serv: RegisService) {}
 
   ngOnInit(): void {
     this.formData();
+    this.serv.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
   }
   formData() {
     this.regForm = new FormGroup({
@@ -31,14 +36,31 @@ export class UserRegComponent implements OnInit {
       ]),
       userCont: new FormControl('', [
         Validators.required,
-        Validators.pattern('^([9]{1})([234789]{1})([0-9]{8})$'),  
+        Validators.pattern('^([6789]{1})([234789]{1})([0-9]{8})$'),  
       ]),
-    });
+      passwordConfirm: new FormControl('', [Validators.required]),
+      blood_group: new FormControl('', [Validators.required]),
+      imageUrl: new FormControl('', [Validators.required]),
+    },{ validators: CustomValidators.passwordsMatching });
+  }
+  uploadFileEvt(imgFile: any) {
+    this.text = imgFile.target.files[0].name;
+    this.image = imgFile.target.files[0];
   }
   onSubmit() {
     if (!this.regForm.valid) {
       return;
     }
-    // this.serv.RegiUser(this.loginForm.value);
+    const value = this.regForm.value;
+    let formData = new FormData();
+    formData.append('name', value['userName']);
+    formData.append('email', value['userEmail']);
+    formData.append('gender', value['gender']);
+    formData.append('mobile', value['userCont']);
+    formData.append('password', value['userPass']);
+    formData.append('imageUrl', this.image);
+    formData.append('blood_group', value['blood_group']);
+    this.serv.RegiUser(formData);
+    this.regForm.reset();
   }
 }
