@@ -14,30 +14,41 @@ export class UserProfileComponent implements OnInit {
   regForm: FormGroup;
   text: any;
   image: any;
+  userID:string;
+  name:string;
+  email:string;
+  imagPath:string;
   GroupArray: any = [];
   constructor(private serv: ProfileService,private aser:HomeService,private lser:LoginService) {}
 
   ngOnInit(): void {
     this.aser.isAuthenticate();
     this.lser.currval.subscribe(data=>{
-      console.log(data);
+      this.userID=data;
+      this.getUserByid(this.userID);
     })
+    this.serv.currval1.subscribe((val) => {
+      if (val === 'load_ref') {
+        this.getUserByid(this.userID);
+      }
+    });
     this.serv.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
     this.formData();
   }
   getUserByid(id: string) {
-    console.log(id)
-    //this.serv.editUser(id).subscribe((val) => {
-      //console.log(val);
-      // this.regForm.patchValue({
-      //   name: val.name,
-      //   email: val.email,
-      //   gender: val.gender,
-      //   mobile: val.mobile,
-      //   password: val.password,
-      //   blood_group: val.blood_group,
-      // });
-    // });
+    this.serv.editUser('dhar12@gmail.com').subscribe((val) => {
+      this.name=val.name;this.email=val.email;
+      this.userID=val._id;
+      this.imagPath = val.imageUrl[0].path;
+      this.regForm.patchValue({
+        userName: val.name,
+        userEmail: val.email,
+        gender: val.gender,
+        userCont: val.mobile,
+        // userPass: val.password,
+        blood_group: val.blood_group,
+      });
+    });
   }
   formData() {
     this.regForm = new FormGroup({
@@ -80,9 +91,9 @@ export class UserProfileComponent implements OnInit {
     formData.append('password', value['userPass']);
     formData.append('imageUrl', this.image);
     formData.append('blood_group', value['blood_group']);
-    console.log(formData)
-    // this.serv.RegiUser(formData);
-    // this.regForm.reset();
+    if (this.regForm.valid) {
+      this.serv.UpdateUser(formData,this.userID);
+    }
   }
 }
 

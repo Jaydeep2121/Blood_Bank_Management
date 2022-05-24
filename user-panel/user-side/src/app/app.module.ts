@@ -4,6 +4,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 // Angular Material Module
 import { AngularMaterialModule } from './angular-material.module';
 // component Files
@@ -16,6 +17,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UserRegComponent } from './user-reg/user-reg.component';
 import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BloodAvaComponent } from './blood-ava/blood-ava.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,13 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ContactUsComponent,
     UserRegComponent,
     LoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    BloodAvaComponent
   ],
   imports: [
     HttpClientModule,
     AngularMaterialModule,
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="page-header">
+        <h3 class="text-danger">Blood Stock Availability<button class="btn">Request</button></h3>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Search Blood Stock</div>
+        <br>
+        <div class="panel-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Volume</th>
+                        <th>Blood Group</th>
+                        <th>Blood Component</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let stock of stocklist | paginate :{
+                        itemsPerPage: itemsPerPage,
+                        currentPage: page,
+                        totalItems: totalItems
+                    }; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{stock.volume}}</td>
+                        <td>{{stock.blood_group['group']}}</td>
+                        <td>{{stock.blood_compo['component']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <pagination-controls class="pagi" (pageChange)="gty((page = $event))"></pagination-controls>
+</div>
+<br><br>
+<router-outlet></router-outlet>
