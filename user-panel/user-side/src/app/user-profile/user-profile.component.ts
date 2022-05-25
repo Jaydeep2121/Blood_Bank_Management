@@ -23,10 +23,8 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.aser.isAuthenticate();
-    this.lser.currval.subscribe(data=>{
-      this.userID=data;
-      this.getUserByid(this.userID);
-    })
+    this.userID=localStorage.getItem('eid');
+    this.getUserByid(this.userID);
     this.serv.currval1.subscribe((val) => {
       if (val === 'load_ref') {
         this.getUserByid(this.userID);
@@ -36,7 +34,7 @@ export class UserProfileComponent implements OnInit {
     this.formData();
   }
   getUserByid(id: string) {
-    this.serv.editUser('dhar12@gmail.com').subscribe((val) => {
+    this.serv.editUser(id).subscribe((val) => {
       this.name=val.name;this.email=val.email;
       this.userID=val._id;
       this.imagPath = val.imageUrl[0].path;

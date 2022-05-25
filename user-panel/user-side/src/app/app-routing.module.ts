@@ -33,7 +33,9 @@ const routes: Routes = [
   { 
     path:'bloodav',
     component:BloodAvaComponent,
-    children: [{ path: '', component: FooterComponent }] 
+    children: [
+      { path: '', component: FooterComponent }
+    ] 
   },
   { path:'usr_profile', component:UserProfileComponent},
   { path: 'login', component: LoginComponent },

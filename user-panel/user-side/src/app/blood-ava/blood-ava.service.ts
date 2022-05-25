@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,30 @@ import { Observable } from 'rxjs';
 export class BloodAvaService {
 
   constructor(private http:HttpClient) { }
-  getpage(page:any){
-    return this.http.get<any>(`api/pagger/`+page)
+  sortdata(sortby:any,sortwith:any){
+    return this.http.get<any>(`api/sort/`+sortby+`/`+sortwith)
   }
-  
+  //get group data
+  getGroup(): Observable<any> {
+    return this.http.get<any>('api/getGroups');
+  }
+  //get comp data
+  getComp(): Observable<any> {
+    return this.http.get<any>('api/getComp');
+  }
+  // To Create/Add New stock
+  AddRequest(body: any) {
+    this.http.post('api/CreRequest', body).subscribe(() => {
+      this.showDialog('Request Done');
+    });
+  }
+  showDialog(title: string) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: title,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
 }

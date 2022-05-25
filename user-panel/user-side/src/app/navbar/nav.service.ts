@@ -12,6 +12,7 @@ export class NavService {
   constructor(private http: HttpClient, private router: Router) {}
   logOut() {
       this.http.post('api/logout', { withCredentials: true }).subscribe(() => {
+        localStorage.removeItem('eid');
         emitters.authEmitter.emit(false);
         this.router.navigate(['/home']);
       });

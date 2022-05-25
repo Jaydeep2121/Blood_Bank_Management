@@ -23,12 +23,42 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
-button{
+.btn{
     float: right;
     color: #a94442;
     text-transform: uppercase;
     background-color: #f2dede;
+    outline: none !important;
+    box-shadow: none;
 }
 .pagi{
     float: right;
+}
+.search{
+    width: 300px;
+    float: right;
+}
+i{
+    cursor: pointer;
+}
+.err{
+    font-size: 10px;
+    color: red;
+}
+.close-btn{
+    background-color: gray;
+}
+.submit-btn{
+    background-color: #7299df;
+}
+.close-btn,.submit-btn{
+    outline:none;
+    font-weight: 500;
+    color: white;
+    border: none;
+    padding: 5px;
+}
+.form-control{
+    outline: none !important;
+    box-shadow: none;
 }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SlickCarouselModule } from 'ngx-slick-carousel';  
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 // Angular Material Module
@@ -37,6 +38,7 @@ import { BloodAvaComponent } from './blood-ava/blood-ava.component';
     AngularMaterialModule,
     NgxPaginationModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     SlickCarouselModule

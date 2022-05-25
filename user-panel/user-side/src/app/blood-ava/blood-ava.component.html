@@ -1,22 +1,23 @@
 <app-navbar></app-navbar>
 <div class="container">
     <div class="page-header">
-        <h3 class="text-danger">Blood Stock Availability<button class="btn">Request</button></h3>
+        <h3 class="text-danger">Blood Stock Availability<button data-toggle="modal" data-target="#exampleModalCenter"
+                class="btn">Request</button></h3>
     </div>
     <div class="panel panel-danger">
-        <div class="panel-heading">Search Blood Stock</div>
-        <br>
+        <div class="panel-heading">Search Blood Stock</div><br>
+        <input class="form-control" type="text" placeholder="Search.."><br><br>
         <div class="panel-body">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>S.No</th>
-                        <th>Volume</th>
-                        <th>Blood Group</th>
-                        <th>Blood Component</th>
+                        <th>Volume&nbsp;<i (click)="onApply('volume')" class="fa fa-sort"></i></th>
+                        <th>Blood Group&nbsp;<i (click)="onApply('group')" class="fa fa-sort"></i></th>
+                        <th>Blood Component&nbsp;<i (click)="onApply('component')" class="fa fa-sort"></i></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody *ngIf="stocklist?.length != 0">
                     <tr *ngFor="let stock of stocklist | paginate :{
                         itemsPerPage: itemsPerPage,
                         currentPage: page,
@@ -28,10 +29,64 @@
                         <td>{{stock.blood_compo['component']}}</td>
                     </tr>
                 </tbody>
+                <tbody *ngIf="stocklist?.length == 0">
+                    <tr>
+                        <td style="font-weight:500;text-align: center;color:red" colspan="4" class="no-data">No Data
+                            Found!</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
-    <pagination-controls class="pagi" (pageChange)="gty((page = $event))"></pagination-controls>
+    <div *ngIf="stocklist?.length != 0">
+        <pagination-controls class="pagi" (pageChange)="gty((page = $event))"></pagination-controls>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Send Request</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]=form (ngSubmit)="addStockForm()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" formControlName="volume" placeholder="Enter Quantity" class="form-control">
+                        <div class="err" *ngIf="volume.touched && volume.hasError('required')">Qty is required</div>
+                        <div class="err"
+                            *ngIf="!form.get('volume')?.errors?.required && (form.get('volume')?.errors?.pattern)">
+                            *Enter Number only
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_group">
+                            <option value="none" selected>Select BloodGroup</option>
+                            <option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}</option>
+                        </select>
+                        <div class="err" *ngIf="blood_group.touched && blood_group.hasError('required')">Bl.Group is
+                            required</div>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_compo">
+                            <option selected>Select BloodComponent</option>
+                            <option [value]="groupComData._id" *ngFor="let groupComData of ComArray">{{ groupComData.component }}</option>
+                        </select>
+                        <div class="err" *ngIf="blood_comp.touched && blood_comp.hasError('required')">Bl.Comp is
+                            required</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-dismiss="modal">Close</button>
+                    <button type="submit" class="submit-btn" data-dismiss="modal" [disabled]="!form.valid">Do Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <br><br>
 <router-outlet></router-outlet>
