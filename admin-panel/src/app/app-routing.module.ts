@@ -16,6 +16,8 @@ import { StockComponent } from './details/storage/stock/stock.component';
 import { UrequestComponent } from './details/storage/urequest/urequest.component';
 import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
 import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
+import { CampsComponent } from './details/camps/camps.component';
+import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -55,6 +57,11 @@ const routes: Routes = [
         ],
       },
       { path: 'bbank', component: BloodBankComponent },
+      { 
+        path: 'camps', 
+        component:  CampsComponent,
+        children: [{ path: '', component: ListCampComponent }],
+      }
     ],
   },
   { path: 'perProfile', component: MyProfileComponent },

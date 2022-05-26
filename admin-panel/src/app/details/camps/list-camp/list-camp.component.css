@@ -1,0 +1,12 @@
+mat-cell {
+    height: 80px !important;
+}
+a{
+    padding: 3px 5px;
+}
+mat-table {
+    max-height: 500px;
+}
+.filter{
+    float: right !important;
+}

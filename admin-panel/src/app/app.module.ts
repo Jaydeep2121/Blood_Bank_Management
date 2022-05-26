@@ -45,6 +45,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { CampsComponent } from './details/camps/camps.component';
+import { AddCampComponent } from './details/camps/add-camp/add-camp.component';
+import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
+import { EditCampComponent } from './details/camps/edit-camp/edit-camp.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +82,11 @@ import { CookieService } from 'ngx-cookie-service';
     AddEmployeeComponent,
     EditEmployeeComponent,
     ListEmployeeComponent,
-    ViewEmpProfileComponent
+    ViewEmpProfileComponent,
+    CampsComponent,
+    AddCampComponent,
+    ListCampComponent,
+    EditCampComponent
   ],
   imports: [
     BrowserModule,
