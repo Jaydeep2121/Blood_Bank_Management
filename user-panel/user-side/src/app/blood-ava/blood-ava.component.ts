@@ -21,28 +21,35 @@ export class BloodAvaComponent implements OnInit {
   ComArray: any = [];
   page: number = 1;
   data: any;
+  Uid: string;
   totalItems: any;
   sort: string = 'asc';
   itemsPerPage = 3;
-  constructor(private serv: BloodAvaService, private http: HttpClient,private homSer:HomeService) {}
+  constructor(
+    private serv: BloodAvaService,
+    private http: HttpClient,
+    private homSer: HomeService
+  ) {}
   form: FormGroup = new FormGroup({
     volume: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
     ]),
     blood_group: new FormControl(null, [Validators.required]),
     blood_compo: new FormControl(null, [Validators.required]),
   });
   addStockForm() {
-    const value = this.form.value;
-    let formData = new FormData();
-    formData.append('volume', value['volume']);
-    formData.append('refuser','628b4ad0a7abb1467744e748');
-    formData.append('blood_group', value['blood_group']);
-    formData.append('blood_compo', value['blood_compo']);
-    if (this.form.valid) {
-      this.serv.AddRequest(formData);
-    }
+    this.serv.editUser(localStorage.getItem('eid')).subscribe((val) => {
+      const value = this.form.value;
+      let formData = new FormData();
+      formData.append('volume', value['volume']);
+      formData.append('refuser', val._id);
+      formData.append('blood_group', value['blood_group']);
+      formData.append('blood_compo', value['blood_compo']);
+      if (this.form.valid) {
+        this.serv.AddRequest(formData);
+      }
+    });
   }
   ngOnInit(): void {
     this.homSer.isAuthenticate();

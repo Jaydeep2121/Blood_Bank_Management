@@ -1,0 +1,21 @@
+.bookbtn,.bookedbtn{
+    padding: 5px;
+    outline: none;
+    border: none;
+    color:white;
+    font-weight: 500;
+    border-radius: 10px;
+    margin: auto !important;
+}
+.bookbtn{
+    background-color: #33b5e5;
+}
+.bookedbtn{
+    background-color: #ff4444;
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+table {
+    display: block;
+    overflow-x: auto;
+}

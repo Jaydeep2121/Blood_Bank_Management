@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { UserRegComponent } from './user-reg/user-reg.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BloodAvaComponent } from './blood-ava/blood-ava.component';
+import { CampComponent } from './camp/camp.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,13 @@ const routes: Routes = [
   { 
     path:'bloodav',
     component:BloodAvaComponent,
+    children: [
+      { path: '', component: FooterComponent }
+    ] 
+  },
+  { 
+    path:'camp',
+    component:CampComponent,
     children: [
       { path: '', component: FooterComponent }
     ] 

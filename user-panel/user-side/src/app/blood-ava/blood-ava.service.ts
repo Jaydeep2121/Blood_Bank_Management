@@ -26,6 +26,10 @@ export class BloodAvaService {
       this.showDialog('Request Done');
     });
   }
+  // To Get User Details For Single Record Using Id
+  editUser(usrid: string): Observable<any> {
+    return this.http.get<any>(`api/editUserByEmail/${usrid}`);
+  }
   showDialog(title: string) {
     Swal.fire({
       position: 'top-end',

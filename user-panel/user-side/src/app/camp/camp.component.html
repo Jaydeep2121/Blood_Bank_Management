@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="block-sec">
+    <div class="page-header">
+        <h3 class="text-danger">Camp Schedule</h3>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Search Camp</div><br>
+        <input class="form-control search" id="myInput" type="text" placeholder="Search.."><br><br>
+        <div class="panel-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Date&nbsp;<i (click)="onApply('date')" class="fa fa-sort"></i></th>
+                        <th>Time&nbsp;<i (click)="onApply('time')" class="fa fa-sort"></i></th>
+                        <th>CampName&nbsp;<i (click)="onApply('camp_name')" class="fa fa-sort"></i></th>
+                        <th>Address&nbsp;<i (click)="onApply('address')" class="fa fa-sort"></i></th>
+                        <th>Conducted By&nbsp;<i (click)="onApply('conducted_by')" class="fa fa-sort"></i></th>
+                        <th>Organized by&nbsp;<i (click)="onApply('organized_by')" class="fa fa-sort"></i></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="camplist?.length != 0" id="myTable">
+                    <tr *ngFor="let camp of camplist | paginate :{
+                        itemsPerPage: itemsPerPage,
+                        currentPage: page,
+                        totalItems: totalItems
+                    }; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{camp.date}}</td>
+                        <td>{{camp.time}}</td>
+                        <td>{{camp.camp_name}}</td>
+                        <td>{{camp.address}}</td>
+                        <td>{{camp.conducted_by}}</td>
+                        <td>{{camp.organized_by}}</td>
+                        <td *ngFor="let ids of idArr">
+                            <button class="bookbtn" *ngIf="ids.refcamp!==camp._id" (click)="bookApp(camp._id)">BOOK</button>
+                            <button class="bookedbtn" *ngIf="ids.refcamp===camp._id" (click)="bookApp(camp._id)" disabled>BOOKED</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="camplist?.length == 0" id="myTable">
+                    <tr>
+                        <td style="font-weight:500;text-align: center;color:red" colspan="8" class="no-data">No Data
+                            Found!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="camplist?.length != 0">
+        <pagination-controls class="pagi" (pageChange)="gty((page = $event))"></pagination-controls>
+    </div>
+</div>
+<br><br>
+<router-outlet></router-outlet>

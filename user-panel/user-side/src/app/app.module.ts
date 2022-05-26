@@ -19,6 +19,7 @@ import { UserRegComponent } from './user-reg/user-reg.component';
 import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BloodAvaComponent } from './blood-ava/blood-ava.component';
+import { CampComponent } from './camp/camp.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BloodAvaComponent } from './blood-ava/blood-ava.component';
     UserRegComponent,
     LoginComponent,
     UserProfileComponent,
-    BloodAvaComponent
+    BloodAvaComponent,
+    CampComponent
   ],
   imports: [
     HttpClientModule,
