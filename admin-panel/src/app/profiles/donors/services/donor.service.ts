@@ -7,12 +7,6 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class DonorService {
-  public editDataDetails: string = '';
-  private msgsor = new BehaviorSubject(this.editDataDetails);
-  currval = this.msgsor.asObservable();
-  change(id: string) {
-    this.msgsor.next(id);
-  }
   public editDataDetails1: string = '';
   private msgsor1 = new BehaviorSubject(this.editDataDetails1);
   currval1 = this.msgsor1.asObservable();
@@ -27,35 +21,15 @@ export class DonorService {
   public getdata(): Observable<any> {
     return this._data.asObservable();
   }
-  // To Get The List Of Donor
-  getDonor() {
-    return this.http.get('api/getDonors');
+  getappoint(): Observable<any> {
+    return this.http.get<any>('api/getDonorAp');
   }
-  //get blood group data
-  getGroup() {
-    return this.http.get('api/getGroups');
+  GetCamp(): Observable<any> {
+    return this.http.get<any>('api/getCamp');
   }
-  // To Create/Add New User
-  addDonor(body: any) {
-    this.http.post('api/donors', body).subscribe(() => {
-      this.showDialog('Donor Data Has Been Saved');
-    });
-  }
-  showDialog(title: string) {
-    this.change1("load_ref");
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: title,
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  }
-  //
-  UpdateDonor(body: any,usrid: string) {
-    this.http.patch(`api/UpdateDonor/${usrid}`, body).subscribe(() => {
-      this.showDialog('Donor Data Has Been Updated');
-    });
+  // To Get User Details For Single Record Using Id with ref
+  getDonorref(usrid: string): Observable<any> {
+    return this.http.get<any>(`api/getAppRef/${usrid}`);
   }
   // To Delete Any User
   async deleteDonor(usrid: string) {
@@ -74,14 +48,6 @@ export class DonorService {
         Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       });
     }
-  }
-  // To Get User Details For Single Record Using Id
-  editDonor(usrid: string): Observable<any> {
-    return this.http.get<any>(`api/editDonor/${usrid}`);
-  }
-  // To Get User Details For Single Record Using Id with ref
-  getDonorref(usrid: string): Observable<any> {
-    return this.http.get<any>(`api/getDonorref/${usrid}`);
   }
 }
 

@@ -8,26 +8,23 @@ import { DonorService } from '../../services/donor.service';
 })
 export class ViewListDonorComponent implements OnInit {
   displayStyle: string = '';
-  name: string;
-  email: string;
-  mobile: string;
-  gender:string;
-  group:string;
-  img:any;
+  date:string;
+  time:string;
+  campname: string;
+  address: string;
+  img:string;
   constructor(private serv: DonorService) {}
   ngOnInit(): void {
     this.serv.getdata().subscribe((data)=>{
-      console.log(data);
       this.getDonorByid(data)
     });
   }
   getDonorByid(val: any) {
-    this.name = val['name'];
-    this.email = val['email'];
-    this.mobile = val['mobile'];
-    this.gender = val['gender'];
-    this.group = val['blood_group']['group'];
-    this.img = val.imageUrl[0].path;
+    this.date=val['refcamp']['date'];
+    this.time=val['refcamp']['time'];
+    this.campname=val['refcamp']['camp_name'].toLowerCase();
+    this.address=val['refcamp']['address'].toLowerCase();
+    this.img = val['refuser']['imageUrl'][0].path;
   }
   openPopup() {
     this.displayStyle = 'block';

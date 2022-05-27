@@ -1,6 +1,9 @@
 .wrapper,p{
     font-family: "Josefin Sans", sans-serif;
 }
+p{
+    font-size: 14px !important;
+}
 img{
     cursor: pointer;
 }

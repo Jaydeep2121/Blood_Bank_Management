@@ -7,6 +7,3 @@ a{
 mat-table {
     max-height: 500px;
 }
-.filter{
-    float: right !important;
-}

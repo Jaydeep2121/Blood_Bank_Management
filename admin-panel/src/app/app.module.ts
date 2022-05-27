@@ -28,8 +28,6 @@ import { UrequestComponent } from './details/storage/urequest/urequest.component
 import { AddStockComponent } from './details/storage/stock/add-stock/add-stock.component';
 import { EditStockComponent } from './details/storage/stock/edit-stock/edit-stock.component';
 import { ViewcomComponent } from './details/storage/stock/viewcom/viewcom.component';
-import { AddDonorComponent } from './profiles/donors/add-donor/add-donor.component';
-import { EditDonorComponent } from './profiles/donors/edit-donor/edit-donor.component';
 import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
 import { ViewListDonorComponent } from './profiles/donors/list-donor/view-list-donor/view-list-donor.component';
 import { DonorsComponent } from './profiles/donors/donors.component';
@@ -38,6 +36,10 @@ import { AddEmployeeComponent } from './profiles/employees/add-employee/add-empl
 import { EditEmployeeComponent } from './profiles/employees/edit-employee/edit-employee.component';
 import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
 import { ViewEmpProfileComponent } from './profiles/employees/list-employee/view-emp-profile/view-emp-profile.component';
+import { CampsComponent } from './details/camps/camps.component';
+import { AddCampComponent } from './details/camps/add-camp/add-camp.component';
+import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
+import { EditCampComponent } from './details/camps/edit-camp/edit-camp.component';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Angular material */
@@ -45,10 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { CampsComponent } from './details/camps/camps.component';
-import { AddCampComponent } from './details/camps/add-camp/add-camp.component';
-import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
-import { EditCampComponent } from './details/camps/edit-camp/edit-camp.component';
+import { AddDonorComponent } from './profiles/donors/add-donor/add-donor.component';
 
 @NgModule({
   declarations: [
@@ -74,8 +73,6 @@ import { EditCampComponent } from './details/camps/edit-camp/edit-camp.component
     AddStockComponent,
     ListDonorComponent,
     ViewcomComponent,
-    AddDonorComponent,
-    EditDonorComponent,
     ViewListDonorComponent,
     DonorsComponent,
     EmployeesComponent,
@@ -86,7 +83,8 @@ import { EditCampComponent } from './details/camps/edit-camp/edit-camp.component
     CampsComponent,
     AddCampComponent,
     ListCampComponent,
-    EditCampComponent
+    EditCampComponent,
+    AddDonorComponent
   ],
   imports: [
     BrowserModule,

@@ -15,5 +15,4 @@ export class DonorsComponent implements OnInit {
   openDialog() {
     this.dialog.open(AddDonorComponent);
   }
-
 }
