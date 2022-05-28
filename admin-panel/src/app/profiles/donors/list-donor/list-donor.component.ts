@@ -18,6 +18,7 @@ export class ListDonorComponent implements OnInit {
 
   cdata: any;
   apiResponse:any = [];
+  userArr:any=[];
   MyDataSource: any;
   displayedColumns: string[] = [
     'position',
@@ -41,10 +42,11 @@ export class ListDonorComponent implements OnInit {
   }
   getDonor() {
     this.serv.getappoint().subscribe((data: any) => {
-      this.apiResponse = [data[0]?.refuser];
+      data.map((ele:any)=>this.userArr[this.userArr.length]=ele.refuser);
+      this.apiResponse = this.userArr;
       this.MyDataSource = new MatTableDataSource();
-      this.MyDataSource = [data[0]?.refuser];      
-      this.cdata=data[0]?.refuser.length;
+      this.MyDataSource = this.userArr;      
+      this.cdata=this.userArr.length;
       this.MyDataSource.paginator = this.paginator;
       this.MyDataSource.sort = this.sort;
     });

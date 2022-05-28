@@ -27,9 +27,27 @@ export class DonorService {
   GetCamp(): Observable<any> {
     return this.http.get<any>('api/getCamp');
   }
+  GetUser(): Observable<any> {
+    return this.http.get<any>('api/getUsers');
+  }
+  AddApp(body:any){
+    this.http.post<any>('api/addApp',body).subscribe(() => {
+      this.showDialog('Appointment Added!!');
+    });
+  }
   // To Get User Details For Single Record Using Id with ref
   getDonorref(usrid: string): Observable<any> {
     return this.http.get<any>(`api/getAppRef/${usrid}`);
+  }
+  showDialog(title: string) {
+    this.change1("load_ref");
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: title,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
   // To Delete Any User
   async deleteDonor(usrid: string) {

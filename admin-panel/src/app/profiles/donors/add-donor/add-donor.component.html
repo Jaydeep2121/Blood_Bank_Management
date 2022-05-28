@@ -1,6 +1,6 @@
 <h2 mat-dialog-title class="text-center">ADD APPOINTMENT</h2>
 <mat-card-content>
-    <form role="form" [formGroup]=form (ngSubmit)="addStockForm()">
+    <form role="form" [formGroup]=form (ngSubmit)="addAppForm()">
         <mat-form-field>
             <mat-label>CampName</mat-label>
             <mat-select formControlName="campfield">
@@ -11,12 +11,12 @@
         </mat-form-field>
         
         <mat-form-field>
-            <mat-label>Bl.Comp</mat-label>
-            <mat-select formControlName="blood_compo">
-                <mat-option [value]="groupComData._id" *ngFor="let groupComData of ComArray">{{ groupComData.component }}
+            <mat-label>UserNames</mat-label>
+            <mat-select formControlName="userfield">
+                <mat-option [value]="user._id" *ngFor="let user of userNames">{{ user.email }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="blood_comp.touched && blood_comp.hasError('required')">Bl.Comp is required</mat-error>
+            <mat-error *ngIf="userfield.touched && userfield.hasError('required')">*UserName is required</mat-error>
         </mat-form-field>
 
         <div class="mbutton">

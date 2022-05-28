@@ -31,6 +31,7 @@ import { ViewcomComponent } from './details/storage/stock/viewcom/viewcom.compon
 import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
 import { ViewListDonorComponent } from './profiles/donors/list-donor/view-list-donor/view-list-donor.component';
 import { DonorsComponent } from './profiles/donors/donors.component';
+import { AddDonorComponent } from './profiles/donors/add-donor/add-donor.component';
 import { EmployeesComponent } from './profiles/employees/employees.component';
 import { AddEmployeeComponent } from './profiles/employees/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './profiles/employees/edit-employee/edit-employee.component';
@@ -47,7 +48,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { AddDonorComponent } from './profiles/donors/add-donor/add-donor.component';
 
 @NgModule({
   declarations: [

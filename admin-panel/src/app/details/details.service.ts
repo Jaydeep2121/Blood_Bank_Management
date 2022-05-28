@@ -82,7 +82,7 @@ export class DetailsService {
       this.getStock().subscribe((sdata) => {
         sdata.forEach((element: any) => {
           if (
-            compo === element['blood_compo'] &&
+            compo === element['blood_compo']['_id'] &&
             group === element['blood_group']['group'] &&
             volume <= element['volume']
           ) {
