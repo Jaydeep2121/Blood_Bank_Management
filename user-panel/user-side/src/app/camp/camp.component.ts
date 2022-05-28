@@ -16,7 +16,6 @@ export class CampComponent implements OnInit {
   totalItems: any;
   page: number = 1;
   idArr:any = [];
-
   constructor(
     private homSer: HomeService,
     private serv: CampService,
