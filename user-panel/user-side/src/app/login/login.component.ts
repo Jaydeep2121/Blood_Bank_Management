@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { WebService } from '../web.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -11,9 +12,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(
     private serv: LoginService,
+    private webser:WebService
   ) {}
 
   ngOnInit(): void {
+    this.webser.loadJsFile("../../assets/JsFiles/LoginPage.js"); 
     this.loginForm = new FormGroup({
       userEmail: new FormControl('', [
         Validators.required,

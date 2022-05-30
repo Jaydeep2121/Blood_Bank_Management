@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { HomeService } from '../home/home.service';
+import { WebService } from '../web.service';
 import { CampService } from './camp.service';
+import { emitters } from '../emitters/emitters';
 
 @Component({
   selector: 'app-camp',
@@ -14,16 +17,24 @@ export class CampComponent implements OnInit {
   sort: string = 'asc';
   itemsPerPage = 3;
   totalItems: any;
+  userId:string;
   page: number = 1;
   idArr:any = [];
+  private Sub:Subscription;
+  authenticated:boolean = false;
   constructor(
     private homSer: HomeService,
     private serv: CampService,
-    private http: HttpClient
+    private http: HttpClient,
+    private webser:WebService
   ) {}
 
   ngOnInit(): void {
+    this.webser.loadJsFile("../../assets/JsFiles/NavBar.js"); 
     this.homSer.isAuthenticate();
+    this.Sub=emitters.authEmitter.subscribe((auth: boolean) => {
+      this.authenticated = auth;
+    });
     this.serv.getAppoint().subscribe(res=>this.idArr=[...res]);
     this.http
       .get<any>(`api/getCamp?page=${1}&size=${this.itemsPerPage}`)
@@ -47,8 +58,15 @@ export class CampComponent implements OnInit {
     });
   }
   bookApp(id:string){
+    if(!this.authenticated){
+      this.webser.showErrorDialog();
+    }
     this.serv.editUser(localStorage.getItem('eid')).subscribe((val) => {
-      this.serv.addappit({camp_id:id,user_id:val._id});
+      this.userId=val._id;
+      this.serv.addappit({campfield:id,userfield:this.userId});
     });
+  }
+  ngOnDestroy(): void {
+    this.Sub.unsubscribe();
   }
 }

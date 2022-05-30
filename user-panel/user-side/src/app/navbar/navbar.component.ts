@@ -12,12 +12,15 @@ import { NavService } from './nav.service';
 export class NavbarComponent implements OnInit ,OnDestroy {
   private Sub:Subscription;
   authenticated:boolean = false;
-  constructor(public router:Router,private navSer:NavService) { }
+  constructor(public route:Router,private navSer:NavService) { }
 
   ngOnInit(): void {
     this.Sub=emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });
+  }
+  donatenwClick(){
+    this.route.navigate(['/camp']);
   }
   logOut() {
     this.navSer.logOut();

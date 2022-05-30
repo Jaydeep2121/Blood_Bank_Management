@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class CampService {
-
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient) {  }
   sortdata(sortby:any,sortwith:any){
     return this.http.get<any>(`api/Campsort/`+sortby+`/`+sortwith)
   }

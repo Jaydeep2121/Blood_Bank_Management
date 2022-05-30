@@ -1,0 +1,5 @@
+.banner-btn:hover {
+    cursor: pointer;
+    color: #fe4066 !important;
+    background-color: white !important;
+}

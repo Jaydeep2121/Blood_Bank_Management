@@ -213,8 +213,8 @@ a {
   left: 0;
   width: 100%;
   z-index: 99;
-  background-color: transparent;
-  /* background-color: #282d32; */
+  /* background-color: transparent; */
+  background-color: #282d32;
 }
 
 .logo {

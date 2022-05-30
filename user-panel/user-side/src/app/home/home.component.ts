@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebService } from '../web.service';
 import { HomeService } from './home.service';
 
 @Component({
@@ -18,10 +19,10 @@ export class HomeComponent implements OnInit {
     "dots": true,  
     "infinite": true  
   };   
-  constructor(private serv:HomeService) { }
+  constructor(private serv:HomeService,private webser:WebService) { }
 
   ngOnInit(): void {
+    this.webser.loadJsFile("../../assets/JsFiles/NavBar.js"); 
     this.serv.isAuthenticate();
   }
-
 }

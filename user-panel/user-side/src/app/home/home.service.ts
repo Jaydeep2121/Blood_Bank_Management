@@ -15,7 +15,6 @@ export class HomeService {
       },
       (err) => {
         emitters.authEmitter.emit(false);
-        this.router.navigate(['/home']);
       }
     );
   }

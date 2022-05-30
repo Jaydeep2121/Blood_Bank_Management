@@ -62,14 +62,14 @@
 		</div>
 	</div>
 </header>
-<section class="content-banner" *ngIf="router.url==='/home' || router.url==='/'">
+<section class="content-banner" *ngIf="route.url==='/home' || route.url==='/'">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-12">
 				<div class="banner-con text-center">
 					<p class="first-title">Donate Blood &amp; Save a Life</p>
 					<p class="banner-des">Blood Donation Is A Small Act Of Kindness That Does Great And Big Wonders.</p>
-					<a href="#" class="banner-btn">Donate Now</a>
+					<a (click)="donatenwClick()" class="banner-btn">Donate Now</a>
 				</div>
 			</div>
 		</div>

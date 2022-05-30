@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, KeyValueDiffers, OnInit } from '@angular/core';
 import { BloodAvaService } from './blood-ava.service';
+import { emitters } from '../emitters/emitters';
 import {
   FormsModule,
   FormGroup,
@@ -9,6 +10,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { HomeService } from '../home/home.service';
+import { WebService } from '../web.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-blood-ava',
@@ -25,10 +28,13 @@ export class BloodAvaComponent implements OnInit {
   totalItems: any;
   sort: string = 'asc';
   itemsPerPage = 3;
+  private Sub:Subscription;
+  authenticated:boolean = false;
   constructor(
     private serv: BloodAvaService,
     private http: HttpClient,
-    private homSer: HomeService
+    private homSer: HomeService,
+    private webser:WebService
   ) {}
   form: FormGroup = new FormGroup({
     volume: new FormControl('', [
@@ -52,7 +58,11 @@ export class BloodAvaComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.webser.loadJsFile("../../assets/JsFiles/NavBar.js"); 
     this.homSer.isAuthenticate();
+    this.Sub=emitters.authEmitter.subscribe((auth: boolean) => {
+      this.authenticated = auth;
+    });
     this.serv
       .getGroup()
       .subscribe((data: any) => (this.GroupArray = [...data]));

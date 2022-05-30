@@ -16,6 +16,7 @@ section,address{
   vertical-align: baseline;
 }
 .btn-custom {
+  float:left;
   text-transform: uppercase;
   text-align: center;
   -webkit-transition: 0.3s 0.2s ease-out;
