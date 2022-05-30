@@ -18,6 +18,7 @@ import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.comp
 import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
 import { CampsComponent } from './details/camps/camps.component';
 import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
+import { ApprlComponent } from './apprl/apprl.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
@@ -65,6 +66,7 @@ const routes: Routes = [
     ],
   },
   { path: 'perProfile', component: MyProfileComponent },
+  { path: 'apprl',component:ApprlComponent },
   { path: '**', component: HomeComponentComponent },
 ];
 @NgModule({

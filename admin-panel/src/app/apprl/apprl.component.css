@@ -1,0 +1,6 @@
+a{
+    padding: 3px 5px;
+}
+mat-table {
+    max-height: 500px;
+}

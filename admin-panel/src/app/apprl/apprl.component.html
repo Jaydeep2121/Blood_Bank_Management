@@ -1,0 +1,53 @@
+<mat-card>
+    <div class="alert alert-info">
+        <strong>EMPLOYEE APPROVAL DETAILS</strong>
+    </div>
+</mat-card>
+<mat-card>
+    <mat-card-content>
+        <div class="example-container mat-elevation-z8">
+            <div class="search-cont">
+                <mat-form-field appearance="fill">
+                    <input matInput autocomplete="off" (keyup)="filterData($event)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <mat-table matSort #table [dataSource]="MyDataSource">
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+                    <mat-cell *matCellDef="let data; let i = index;"> {{i+1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Emp Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> EmpName </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data['refemp'].name}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Emp Contact">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> EmpContact </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data['refemp'].mobile}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Volume">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Volume </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data['refrequest'].volume}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Bl.Group">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Blood Group </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data['refrequest'].blood_group.group}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Bl.Component">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Blood Component </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data['refrequest'].blood_compo.component}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <!-- To paginate between pages with search -->
+            <mat-paginator #paginator [length]="cdata" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSliderModule } from '@angular/material/slider';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 /* app routing */ 
@@ -41,6 +41,7 @@ import { CampsComponent } from './details/camps/camps.component';
 import { AddCampComponent } from './details/camps/add-camp/add-camp.component';
 import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
 import { EditCampComponent } from './details/camps/edit-camp/edit-camp.component';
+import { ApprlComponent } from './apprl/apprl.component';
 /* Angular Flex Layout */
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Angular material */
@@ -48,6 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { LoadingInterceptor } from './auth/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,8 @@ import { CookieService } from 'ngx-cookie-service';
     AddCampComponent,
     ListCampComponent,
     EditCampComponent,
-    AddDonorComponent
+    AddDonorComponent,
+    ApprlComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,10 @@ import { CookieService } from 'ngx-cookie-service';
     AngularMaterialModule,
     FormsModule,ReactiveFormsModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor}
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
