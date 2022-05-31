@@ -102,7 +102,7 @@ import { LoadingInterceptor } from './auth/loading.interceptor';
   ],
   providers: [
     CookieService,
-    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor}
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

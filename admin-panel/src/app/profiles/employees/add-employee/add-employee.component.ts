@@ -13,78 +13,66 @@ import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.css']
+  styleUrls: ['./add-employee.component.css'],
 })
 export class AddEmployeeComponent implements OnInit {
-
+  regForm: FormGroup;
   constructor(private ser: EmployeeService, public router: Router) {}
   text: any;
   image: any;
   GroupArray: any = [];
-  form: FormGroup = new FormGroup(
-    {
-      name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      gender: new FormControl(null, Validators.required),
-      mobile: new FormControl(null, Validators.required),
-      password: new FormControl(null, [Validators.required]),
-      passwordConfirm: new FormControl(null, [Validators.required]),
-      blood_group: new FormControl(null, [Validators.required]),
-      imageUrl: new FormControl(null, [Validators.required]),
-    },
-    { validators: CustomValidators.passwordsMatching }
-  );
-  ngOnInit(): void {
-    this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
-  }
 
+  ngOnInit(): void {
+    this.formData();
+    this.ser.getGroup().subscribe((data: any) => (this.GroupArray = [...data]));
+  }
+  formData() {
+    this.regForm = new FormGroup(
+      {
+        userName: new FormControl('', [Validators.required]),
+        userEmail: new FormControl('', [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(
+            '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$'
+          ),
+        ]),
+        gender: new FormControl('', [Validators.required]),
+        userPass: new FormControl('', [
+          Validators.required,
+          Validators.pattern(
+            '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
+          ),
+        ]),
+        userCont: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^([6789]{1})([0-9]{1})([0-9]{8})$'),
+        ]),
+        passwordConfirm: new FormControl('', [Validators.required]),
+        blood_group: new FormControl('', [Validators.required]),
+        imageUrl: new FormControl('', [Validators.required]),
+      },
+      { validators: CustomValidators.passwordsMatching }
+    );
+  }
   uploadFileEvt(imgFile: any) {
     this.text = imgFile.target.files[0].name;
     this.image = imgFile.target.files[0];
   }
   addEmpForm() {
-    const value = this.form.value;
+    if (!this.regForm.valid) {
+      return;
+    }
+    const value = this.regForm.value;
     let formData = new FormData();
-    formData.append('name', value['name']);
-    formData.append('email', value['email']);
+    formData.append('name', value['userName']);
+    formData.append('email', value['userEmail']);
     formData.append('gender', value['gender']);
-    formData.append('mobile', value['mobile']);
-    formData.append('password', value['password']);
+    formData.append('mobile', value['userCont']);
+    formData.append('password', value['userPass']);
     formData.append('imageUrl', this.image);
     formData.append('blood_group', value['blood_group']);
-    if (this.form.valid) {
-      this.ser.addEmp(formData);
-    }
+    this.ser.addEmp(formData);
+    this.regForm.reset();
   }
-
-  get email(): FormControl {
-    return this.form.get('email') as FormControl;
-  }
-
-  get name(): FormControl {
-    return this.form.get('name') as FormControl;
-  }
-
-  get gender(): FormControl {
-    return this.form.get('gender') as FormControl;
-  }
-
-  get mobile(): FormControl {
-    return this.form.get('mobile') as FormControl;
-  }
-
-  get password(): FormControl {
-    return this.form.get('password') as FormControl;
-  }
-
-  get passwordConfirm(): FormControl {
-    return this.form.get('passwordConfirm') as FormControl;
-  }
-  get blood_group(): FormControl {
-    return this.form.get('blood_group') as FormControl;
-  }
-  get imageUrl(): FormControl {
-    return this.form.get('imageUrl') as FormControl;
-  }
-
 }

@@ -24,6 +24,9 @@ export class CampService {
   getCamp(): Observable<any>  {
     return this.http.get<any>('api/getCamp');
   }
+  searchData(data:string): Observable<any>  {
+    return this.http.get<any>(`api/getSearch/${data}`);
+  }
   // To Delete camp
   async deleteCamp(usrid: string) {
     const result = await Swal.fire({

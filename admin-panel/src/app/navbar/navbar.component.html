@@ -34,15 +34,15 @@
         <mat-sidenav class="side-nav" color="primary" #sidenav fxLayout="column" mode="over" opened="false"
             fxHide.gt-sm="true">
             <div fxLayout="column" *ngIf="authenticated">
-                <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Home</a>
-                <a mat-button routerLink="/Mprofiles">All Profiles</a>
-                <a mat-button routerLink="/Mdetails">All Details</a>
-                <a mat-button routerLink="/apprl">Total Approvals</a>
+                <a mat-button (click)="sidenav.toggle()" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]={exact:true}>Home</a>
+                <a mat-button (click)="sidenav.toggle()" routerLink="/Mprofiles">All Profiles</a>
+                <a mat-button (click)="sidenav.toggle()" routerLink="/Mdetails">All Details</a>
+                <a mat-button (click)="sidenav.toggle()" routerLink="/apprl">Total Approvals</a>
                 <a mat-button [matMenuTriggerFor]="menu">My Profile</a>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item routerLink="/perProfile"><img src="assets/images/profile1.png"
+                    <button (click)="sidenav.toggle()" mat-menu-item routerLink="/perProfile"><img src="assets/images/profile1.png"
                             id="menuimg1">&nbsp;&nbsp;My Profile</button>
-                    <button mat-menu-item><img src="assets/images/setting.png"
+                    <button (click)="sidenav.toggle()" mat-menu-item><img src="assets/images/setting.png"
                             id="menuimg2">&nbsp;&nbsp;Setting</button>
                 </mat-menu>
                 <a (click)="logOut()"><img src="assets/images/logout2.png"></a>

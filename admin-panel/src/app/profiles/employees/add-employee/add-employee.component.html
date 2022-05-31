@@ -1,37 +1,62 @@
 <h2 mat-dialog-title class="text-center">ADD EMPLOYEE</h2>
 <mat-card-content>
-    <form role="form" [formGroup]=form (ngSubmit)="addEmpForm()">
+    <form role="form" [formGroup]=regForm (ngSubmit)="addEmpForm()">
         <mat-form-field>
-            <input type="text" matInput placeholder="Username" formControlName="name">
-            <mat-error *ngIf="name.touched && name.hasError('required')">EmployeeName is required</mat-error>
+            <input type="text" matInput placeholder="Username" formControlName="userName">
+            <mat-error
+                *ngIf="(regForm.get('userName')?.dirty || regForm.get('userName')?.touched) && regForm.get('userName')?.errors?.required">
+                *Name is required
+            </mat-error>
         </mat-form-field><br>
 
         <mat-form-field>
-            <input type="email" matInput placeholder="Email" formControlName="email">
-            <mat-error *ngIf="email.touched && email.hasError('required')">Email is required</mat-error>
-            <mat-error *ngIf="email.touched && email.hasError('email')">Email must be valid</mat-error>
+            <input type="email" matInput placeholder="Email" formControlName="userEmail">
+            <mat-error
+                *ngIf="!regForm.get('userEmail')?.errors?.required && (regForm.get('userEmail')?.errors?.pattern)">
+                *Please enter a valid email
+            </mat-error>
+            <mat-error class="valid_pass"
+                *ngIf="regForm.get('userEmail')?.invalid && (regForm.get('userEmail')?.dirty || regForm.get('userEmail')?.touched) && regForm.get('userEmail')?.errors?.required">
+                *Email is required
+            </mat-error>
         </mat-form-field><br>
 
         <mat-radio-group aria-label="Select Gender" formControlName="gender">
             <mat-radio-button value="m">Male</mat-radio-button>&nbsp;&nbsp;
             <mat-radio-button value="f">Female</mat-radio-button>
-            <mat-error *ngIf="gender.touched && gender.hasError('required')">Gender is required</mat-error>
+            <mat-error
+                *ngIf="(regForm.get('gender')?.dirty || regForm.get('gender')?.touched) && regForm.get('gender')?.errors?.required">
+                *Gender is required</mat-error>
         </mat-radio-group><br>
 
         <mat-form-field>
-            <input type="text" matInput placeholder="Mobile" formControlName="mobile">
-            <mat-error *ngIf="mobile.touched && mobile.hasError('required')">MobileNo is required</mat-error>
+            <input type="text" matInput placeholder="Mobile" formControlName="userCont">
+            <mat-error *ngIf="!regForm.get('userCont')?.errors?.required && (regForm.get('userCont')?.errors?.pattern)">
+                *Please enter a valid ContactNo
+            </mat-error>
+            <mat-error class="valid_pass"
+                *ngIf="regForm.get('userCont')?.invalid && (regForm.get('userCont')?.dirty || regForm.get('userCont')?.touched) && regForm.get('userCont')?.errors?.required">
+                *Contact is required
+            </mat-error>
         </mat-form-field><br>
 
         <mat-form-field>
-            <input type="password" matInput placeholder="Password" formControlName="password">
-            <mat-error *ngIf="password.touched && password.hasError('required')">Password is required</mat-error>
+            <input type="password" matInput placeholder="Password" formControlName="userPass">
+            <mat-error *ngIf="!regForm.get('userPass')?.errors?.required && !regForm.get('userPass')?.valid">
+                <div>*Password must be >=8 </div>
+                <div>Contains num,upper,lower,spec chars</div>
+            </mat-error>
+            <mat-error
+                *ngIf="regForm.get('userPass')?.invalid && (regForm.get('userPass')?.dirty || regForm.get('userPass')?.touched) && regForm.get('userPass')?.errors?.required">
+                *Password is required
+            </mat-error>
         </mat-form-field><br>
 
         <mat-form-field>
             <input type="password" matInput placeholder="Password Confirmation" formControlName="passwordConfirm">
-            <mat-error *ngIf="passwordConfirm.touched && form.hasError('passwordsNotMatching')"><small>Passwords are not
-                matching</small></mat-error><br>
+            <mat-error *ngIf="regForm.get('passwordConfirm')?.touched && regForm.hasError('passwordsNotMatching')">
+                *Passwords are not matching
+            </mat-error><br>
         </mat-form-field>
 
         <mat-form-field>
@@ -40,16 +65,21 @@
                 <mat-option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="blood_group.touched && blood_group.hasError('required')">Bl.Group is required</mat-error>
+            <mat-error *ngIf="regForm.get('blood_group')?.touched && !regForm.get('blood_group')?.valid">
+                *Bl.Group is required
+            </mat-error>
         </mat-form-field>
 
         <button type="button" color="accent" mat-raised-button (click)="fileInput.click()">Choose Profile</button>
-        <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file" formControlName="imageUrl">&nbsp;{{text}}
-        <mat-error *ngIf="imageUrl.touched && imageUrl.hasError('required')"><small>Profile is required</small></mat-error><br>
-        <mat-hint *ngIf="!form.valid"><small>Please fill out all needed information</small></mat-hint>
-        
+        <input hidden (change)="uploadFileEvt($event)" #fileInput type="file" id="file"
+            formControlName="imageUrl">&nbsp;{{text}}
+        <mat-error *ngIf="regForm.get('imageUrl')?.invalid && regForm.get('imageUrl')?.touched">
+            *Profile is required
+        </mat-error><br>
+        <mat-hint *ngIf="!regForm.valid"><small>Please fill out all needed information</small></mat-hint>
+
         <div class="mbutton">
-            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
+            <button mat-raised-button color="primary" type="submit" [disabled]="!regForm.valid"
                 [mat-dialog-close]="true">ADD</button>
             &nbsp;<button mat-raised-button color="warn" mat-dialog-close>CLOSE</button>
         </div>

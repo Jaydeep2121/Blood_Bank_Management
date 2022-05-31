@@ -61,6 +61,7 @@ button {
 }
 .mat-sidenav-content {
   text-align: center;
+  overflow:scroll;
 }
 .mat-elevation-z5 {
   position: relative;

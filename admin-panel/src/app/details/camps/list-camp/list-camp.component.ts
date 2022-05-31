@@ -60,12 +60,15 @@ export class ListCampComponent implements OnInit {
   }
   // Search specific result
   filterData($event: any) {
-    this.MyDataSource.filter = $event.target.value;
-  }
-  onChange($event: any) {
-    let filteredData = _.filter(this.apiResponse, (item: any) => {
-      return item.gender.toLowerCase() == $event.value.toLowerCase();
+    // this.MyDataSource.filter = $event.target.value;
+    this.caSer.searchData($event.target.value).subscribe(data=>{
+      console.log(data);
     });
-    this.MyDataSource = new MatTableDataSource(filteredData);
   }
+  // onChange($event: any) {
+  //   let filteredData = _.filter(this.apiResponse, (item: any) => {
+  //     return item.gender.toLowerCase() == $event.value.toLowerCase();
+  //   });
+  //   this.MyDataSource = new MatTableDataSource(filteredData);
+  // }
 }
