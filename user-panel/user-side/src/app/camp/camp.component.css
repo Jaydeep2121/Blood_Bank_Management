@@ -15,7 +15,7 @@
     cursor: not-allowed;
     pointer-events: all !important;
 }
-table {
+.dataTable {
     display: block;
     overflow-x: auto;
 }

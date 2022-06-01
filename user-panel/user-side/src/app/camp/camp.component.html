@@ -5,9 +5,9 @@
     </div>
     <div class="panel panel-danger">
         <div class="panel-heading">Search Camp</div><br>
-        <input class="form-control search" id="myInput" type="text" placeholder="Search.."><br><br>
+        <input class="form-control search" (keyup)="filterData($event)" type="text" placeholder="Search.."><br><br>
         <div class="panel-body">
-            <table class="table table-bordered table-hover">
+            <table class="dataTable table table-bordered table-hover" *ngIf="notFound!=='not found'">
                 <thead>
                     <tr>
                         <th>S.No</th>
@@ -43,6 +43,27 @@
                     <tr>
                         <td style="font-weight:500;text-align: center;color:red" colspan="8" class="no-data">No Data
                             Found!</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered table-hover" *ngIf="notFound==='not found'">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Date&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Time&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>CampName&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Address&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Conducted By&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Organized by&nbsp;<i class="fa fa-sort"></i></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8" style="text-align: center;color: red;">
+                            No Records Found!
+                        </td>
                     </tr>
                 </tbody>
             </table>

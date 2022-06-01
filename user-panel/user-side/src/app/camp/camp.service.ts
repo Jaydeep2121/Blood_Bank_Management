@@ -19,6 +19,9 @@ export class CampService {
   getAppoint(): Observable<any> {
     return this.http.get<any>('api/getappomt');
   }
+  searchData(data:string): Observable<any>  {
+    return this.http.get<any>(`api/getCampSearch/${data}`);
+  }
   // Book and add appointment
   async addappit(body: object) {
     const result = await Swal.fire({
