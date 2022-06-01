@@ -28,6 +28,7 @@ export class ListEmployeeComponent implements OnInit {
     'Contact',
     'action',
   ];
+  notFound: string;
 
   constructor(
     private serv: EmployeeService, 
@@ -59,18 +60,26 @@ export class ListEmployeeComponent implements OnInit {
     this.serv.deleteEmp(userid);
   }
   // Search specific result
-  filterData($event : any){
-    this.MyDataSource.filter = $event.target.value;
+  filterData($event: any) {
+    console.log($event.target.value);
+    this.notFound='';
+    if ($event.target.value.length === 0) {
+      this.getEmp();
+    } else if ($event.target.value.length > 0) {
+      this.serv.searchData($event.target.value).subscribe(
+        (table_data) => {
+          this.MyDataSource = new MatTableDataSource(table_data);
+          this.MyDataSource = this.MyDataSource.filteredData.data;
+        },
+        (err) => {
+          this.notFound = 'not found';
+        }
+      );
+    }
   }
   openDialog(userid: string) {
     this.serv.getEmpref(userid).subscribe(val=>this.serv.setData(val));
     this.dialog.open(ViewEmpProfileComponent);
-  }
-  onChange($event:any){
-    let filteredData = _.filter(this.apiResponse,(item:any) =>{
-      return item.gender.toLowerCase() ==  $event.value.toLowerCase();
-    })
-    this.MyDataSource = new MatTableDataSource(filteredData); 
   }
 
 }

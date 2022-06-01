@@ -30,6 +30,9 @@ export class DonorService {
   GetUser(): Observable<any> {
     return this.http.get<any>('api/getUsers');
   }
+  searchData(data:string): Observable<any>  {
+    return this.http.get<any>(`api/getDonorSearch/${data}`);
+  }
   AddApp(body:any){
     this.http.post<any>('api/addApp',body).subscribe(() => {
       this.showDialog('Appointment Added!!');

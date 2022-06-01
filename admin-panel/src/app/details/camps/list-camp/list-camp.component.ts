@@ -19,6 +19,7 @@ export class ListCampComponent implements OnInit {
   cdata: any;
   apiResponse: any = [];
   MyDataSource: any;
+  notFound: string;
   displayedColumns: string[] = [
     'position',
     'Date',
@@ -58,17 +59,20 @@ export class ListCampComponent implements OnInit {
   deleteUser(userid: string) {
     this.caSer.deleteCamp(userid);
   }
-  // Search specific result
   filterData($event: any) {
-    // this.MyDataSource.filter = $event.target.value;
-    this.caSer.searchData($event.target.value).subscribe(data=>{
-      console.log(data);
-    });
+    this.notFound='';
+    if ($event.target.value.length === 0) {
+      this.getCamp();
+    } else if ($event.target.value.length > 0) {
+      this.caSer.searchData($event.target.value).subscribe(
+        (table_data) => {
+          this.MyDataSource = new MatTableDataSource(table_data);
+          this.MyDataSource = this.MyDataSource.filteredData.data;
+        },
+        (err) => {
+          this.notFound = 'not found';
+        }
+      );
+    }
   }
-  // onChange($event: any) {
-  //   let filteredData = _.filter(this.apiResponse, (item: any) => {
-  //     return item.gender.toLowerCase() == $event.value.toLowerCase();
-  //   });
-  //   this.MyDataSource = new MatTableDataSource(filteredData);
-  // }
 }

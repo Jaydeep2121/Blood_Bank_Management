@@ -37,6 +37,9 @@ export class EmployeeService {
   getGroup() {
     return this.http.get('api/getGroups');
   }
+  searchData(data:string): Observable<any>  {
+    return this.http.get<any>(`api/getEmpSearch/${data}`);
+  }
   // To Create/Add New Emp
   addEmp(body: any) {
     this.http.post('api/emps', body).subscribe(() => {

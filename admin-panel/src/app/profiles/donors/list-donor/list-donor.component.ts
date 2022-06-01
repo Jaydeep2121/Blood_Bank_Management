@@ -28,6 +28,7 @@ export class ListDonorComponent implements OnInit {
     'Contact',
     'action',
   ];
+  notFound: string;
 
   constructor(
     private serv: DonorService, 
@@ -42,6 +43,7 @@ export class ListDonorComponent implements OnInit {
   }
   getDonor() {
     this.serv.getappoint().subscribe((data: any) => {
+      this.userArr=[];
       data.map((ele:any)=>this.userArr[this.userArr.length]=ele.refuser);
       this.apiResponse = this.userArr;
       this.MyDataSource = new MatTableDataSource();
@@ -55,18 +57,24 @@ export class ListDonorComponent implements OnInit {
   deleteDonor(userid: string) {
     this.serv.deleteDonor(userid);
   }
-  // Search specific result
-  filterData($event : any){
-    this.MyDataSource.filter = $event.target.value;
+  filterData($event: any) {
+    this.notFound='';
+    if ($event.target.value.length === 0) {
+      this.getDonor();
+    } else if ($event.target.value.length > 0) {
+      this.serv.searchData($event.target.value).subscribe(
+        (table_data) => {
+          this.MyDataSource = new MatTableDataSource(table_data);
+          this.MyDataSource = this.MyDataSource.filteredData.data;
+        },
+        (err) => {
+          this.notFound = 'not found';
+        }
+      );
+    }
   }
   openDialog(userid: string) {
     this.serv.getDonorref(userid).subscribe(val=>this.serv.setData(val));
     this.dialog.open(ViewListDonorComponent);
-  }
-  onChange($event:any){
-    let filteredData = _.filter(this.apiResponse,(item:any) =>{
-      return item.gender.toLowerCase() ==  $event.value.toLowerCase();
-    })
-    this.MyDataSource = new MatTableDataSource(filteredData); 
   }
 }

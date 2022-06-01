@@ -31,6 +31,9 @@ export class UserServiceService {
   getUser() {
     return this.http.get('api/getUsers');
   }
+  searchData(data:string): Observable<any>  {
+    return this.http.get<any>(`api/getUserSearch/${data}`);
+  }
   //get blood group data
   getGroup() {
     return this.http.get('api/getGroups');

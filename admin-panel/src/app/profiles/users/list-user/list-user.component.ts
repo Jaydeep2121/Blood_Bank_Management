@@ -33,6 +33,7 @@ export class ListUserComponent implements OnInit {
     'Contact',
     'action',
   ];
+  notFound: string;
 
   constructor(
     private serv: UserServiceService, 
@@ -55,6 +56,22 @@ export class ListUserComponent implements OnInit {
       this.MyDataSource.sort = this.sort;
     });
   }
+  filterData($event: any) {
+    this.notFound='';
+    if ($event.target.value.length === 0) {
+      this.getUser();
+    } else if ($event.target.value.length > 0) {
+      this.serv.searchData($event.target.value).subscribe(
+        (table_data) => {
+          this.MyDataSource = new MatTableDataSource(table_data);
+          this.MyDataSource = this.MyDataSource.filteredData.data;
+        },
+        (err) => {
+          this.notFound = 'not found';
+        }
+      );
+    }
+  }
   // To Edit User
   editUser(userid: string) {
     this.dialog.open(EditUserComponent);
@@ -63,19 +80,9 @@ export class ListUserComponent implements OnInit {
   deleteUser(userid: string) {
     this.serv.deleteUser(userid);
   }
-  // Search specific result
-  filterData($event : any){
-    this.MyDataSource.filter = $event.target.value;
-  }
   openDialog(userid: string) {
     this.serv.getUserref(userid).subscribe(val=>this.serv.setData(val));
     this.dialog.open(ViewListProfileComponent);
-  }
-  onChange($event:any){
-    let filteredData = _.filter(this.apiResponse,(item:any) =>{
-      return item.gender.toLowerCase() ==  $event.value.toLowerCase();
-    })
-    this.MyDataSource = new MatTableDataSource(filteredData); 
   }
 }
 

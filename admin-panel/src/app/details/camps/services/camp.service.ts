@@ -25,7 +25,7 @@ export class CampService {
     return this.http.get<any>('api/getCamp');
   }
   searchData(data:string): Observable<any>  {
-    return this.http.get<any>(`api/getSearch/${data}`);
+    return this.http.get<any>(`api/getCampSearch/${data}`);
   }
   // To Delete camp
   async deleteCamp(usrid: string) {
