@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Subject, BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';

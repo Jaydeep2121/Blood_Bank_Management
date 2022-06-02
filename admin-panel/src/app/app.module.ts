@@ -1,55 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSliderModule } from '@angular/material/slider';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-/* app routing */ 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-/* Components */
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
-import { ProfileComponent } from './profiles/profile.component';
-import { AddUserComponent } from './profiles/users/add-user/add-user.component';
-import { EditUserComponent } from './profiles/users/edit-user/edit-user.component';
-import { UsersComponent } from './profiles/users/users.component';
-import { ListUserComponent } from './profiles/users/list-user/list-user.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ViewProfileComponent } from './my-profile/view-profile/view-profile.component';
-import { DetailsComponent } from './details/details.component';
-import { StorageComponent } from './details/storage/storage.component';
-import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
-import { BviewProfileComponent } from './details/blood-bank/bview-profile/bview-profile.component';
-import { ViewListProfileComponent } from './profiles/users/list-user/view-list-profile/view-list-profile.component';
-import { StockComponent } from './details/storage/stock/stock.component';
-import { UrequestComponent } from './details/storage/urequest/urequest.component';
-import { AddStockComponent } from './details/storage/stock/add-stock/add-stock.component';
-import { EditStockComponent } from './details/storage/stock/edit-stock/edit-stock.component';
-import { ViewcomComponent } from './details/storage/stock/viewcom/viewcom.component';
-import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
-import { ViewListDonorComponent } from './profiles/donors/list-donor/view-list-donor/view-list-donor.component';
-import { DonorsComponent } from './profiles/donors/donors.component';
-import { AddDonorComponent } from './profiles/donors/add-donor/add-donor.component';
-import { EmployeesComponent } from './profiles/employees/employees.component';
-import { AddEmployeeComponent } from './profiles/employees/add-employee/add-employee.component';
-import { EditEmployeeComponent } from './profiles/employees/edit-employee/edit-employee.component';
-import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
-import { ViewEmpProfileComponent } from './profiles/employees/list-employee/view-emp-profile/view-emp-profile.component';
-import { CampsComponent } from './details/camps/camps.component';
-import { AddCampComponent } from './details/camps/add-camp/add-camp.component';
-import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
-import { EditCampComponent } from './details/camps/edit-camp/edit-camp.component';
 import { ApprlComponent } from './apprl/apprl.component';
-/* Angular Flex Layout */
-import { FlexLayoutModule } from '@angular/flex-layout';
-/* Angular material */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { LoadingInterceptor } from './auth/loading.interceptor';
+import { ProfilesModule } from './profiles/profiles.module';
+import { DetailModule } from './details/detail.module';
 
 @NgModule({
   declarations: [
@@ -57,36 +27,8 @@ import { LoadingInterceptor } from './auth/loading.interceptor';
     NavbarComponent,
     LoginComponentComponent,
     HomeComponentComponent,
-    ProfileComponent,
-    AddUserComponent,
-    EditUserComponent,
-    UsersComponent,
-    ListUserComponent,
     MyProfileComponent,
     ViewProfileComponent,
-    DetailsComponent,
-    StorageComponent,
-    BloodBankComponent,
-    BviewProfileComponent,
-    ViewListProfileComponent,
-    StockComponent,
-    UrequestComponent,
-    EditStockComponent,
-    AddStockComponent,
-    ListDonorComponent,
-    ViewcomComponent,
-    ViewListDonorComponent,
-    DonorsComponent,
-    EmployeesComponent,
-    AddEmployeeComponent,
-    EditEmployeeComponent,
-    ListEmployeeComponent,
-    ViewEmpProfileComponent,
-    CampsComponent,
-    AddCampComponent,
-    ListCampComponent,
-    EditCampComponent,
-    AddDonorComponent,
     ApprlComponent
   ],
   imports: [
@@ -97,6 +39,8 @@ import { LoadingInterceptor } from './auth/loading.interceptor';
     HttpClientModule,
     AppRoutingModule,
     MatSliderModule,
+    ProfilesModule,
+    DetailModule,
     AngularMaterialModule,
     FormsModule,ReactiveFormsModule
   ],

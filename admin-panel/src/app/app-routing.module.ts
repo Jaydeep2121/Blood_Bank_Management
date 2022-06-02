@@ -3,19 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
+
 import { DonorsComponent } from './profiles/donors/donors.component';
 import { ProfileComponent } from './profiles/profile.component';
 import { EmployeesComponent } from './profiles/employees/employees.component';
 import { UsersComponent } from './profiles/users/users.component';
 import { ListUserComponent } from './profiles/users/list-user/list-user.component';
+import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
+import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
+
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { DetailsComponent } from './details/details.component';
 import { StorageComponent } from './details/storage/storage.component';
 import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
 import { StockComponent } from './details/storage/stock/stock.component';
 import { UrequestComponent } from './details/storage/urequest/urequest.component';
-import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
-import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
 import { CampsComponent } from './details/camps/camps.component';
 import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
 import { ApprlComponent } from './apprl/apprl.component';
@@ -23,6 +25,7 @@ import { ApprlComponent } from './apprl/apprl.component';
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
   { path: 'login', component: LoginComponentComponent },
+  // { path:'mprofiles',redirectTo:'/Mmprofiles',pathMatch:'full'},
   {
     path: 'Mprofiles',
     component: ProfileComponent,
@@ -32,15 +35,15 @@ const routes: Routes = [
         component: UsersComponent,
         children: [{ path: '', component: ListUserComponent }],
       },
-      { 
-        path: 'donors', 
+      {
+        path: 'donors',
         component: DonorsComponent,
         children: [{ path: '', component: ListDonorComponent }],
       },
-      { 
-        path: 'employee', 
+      {
+        path: 'employee',
         component: EmployeesComponent,
-        children: [{ path: '', component: ListEmployeeComponent }], 
+        children: [{ path: '', component: ListEmployeeComponent }],
       },
     ],
   },
@@ -54,19 +57,19 @@ const routes: Routes = [
         children: [
           { path: '', component: StockComponent },
           { path: 'stock', component: StockComponent },
-          { path: 'urequest', component:  UrequestComponent}
+          { path: 'urequest', component: UrequestComponent },
         ],
       },
       { path: 'bbank', component: BloodBankComponent },
-      { 
-        path: 'camps', 
-        component:  CampsComponent,
+      {
+        path: 'camps',
+        component: CampsComponent,
         children: [{ path: '', component: ListCampComponent }],
-      }
+      },
     ],
   },
   { path: 'perProfile', component: MyProfileComponent },
-  { path: 'apprl',component:ApprlComponent },
+  { path: 'apprl', component: ApprlComponent },
   { path: '**', component: HomeComponentComponent },
 ];
 @NgModule({
