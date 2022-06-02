@@ -8,4 +8,7 @@ export class AuthService {
   isloggedIn(){
     return !(this.cookiser.get('jwt').length === 0)
   }
+  getToken(){
+    return this.cookiser.get('jwt');
+  }
 }
