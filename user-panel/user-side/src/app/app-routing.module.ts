@@ -9,6 +9,7 @@ import { UserRegComponent } from './user-reg/user-reg.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BloodAvaComponent } from './blood-ava/blood-ava.component';
 import { CampComponent } from './camp/camp.component';
+import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
   },
   { path:'usr_profile', component:UserProfileComponent},
   { path: 'login', component: LoginComponent },
+  { path: 'forget-pass', component: ForgetPassComponent },
   { path:'regi',component:UserRegComponent }
 ];
 

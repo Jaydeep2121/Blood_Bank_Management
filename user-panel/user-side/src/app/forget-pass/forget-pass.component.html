@@ -1,0 +1,31 @@
+<div class='box'>
+    <div class='box-form'>
+        <div class='box-login-tab'></div>
+        <div class='box-login-title'>
+            <div class='i i-login'></div>
+            <h2>LOGIN</h2>
+        </div>
+        <div class='box-login'>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class='fieldset-body' id='login_form'>
+                    <p class='field'>
+                        <label for='user'>E-MAIL
+                            <mat-error
+                                *ngIf="!loginForm.get('userEmail')?.errors?.required && (loginForm.get('userEmail')?.errors?.pattern)">
+                                *Please enter a valid email
+                            </mat-error>
+                            <mat-error class="valid_pass"
+                                *ngIf="loginForm.get('userEmail')?.invalid && (loginForm.get('userEmail')?.dirty || loginForm.get('userEmail')?.touched) && loginForm.get('userEmail')?.errors?.required">
+                                *Email is required
+                            </mat-error>
+                        </label>
+                        <input type='text' formControlName="userEmail" id='user' name='user' title='Username' />
+                        <span id='valida' class='i i-warning'></span>
+                    </p>
+                    <input type='submit' [disabled]="!loginForm.valid" id='do_login' value='FORGET PASSWORD'
+                        title='Get Started' />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

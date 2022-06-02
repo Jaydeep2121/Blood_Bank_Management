@@ -21,6 +21,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BloodAvaComponent } from './blood-ava/blood-ava.component';
 import { CampComponent } from './camp/camp.component';
 import { LoadingInterceptor } from 'auth/loading.interceptor';
+import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoadingInterceptor } from 'auth/loading.interceptor';
     LoginComponent,
     UserProfileComponent,
     BloodAvaComponent,
-    CampComponent
+    CampComponent,
+    ForgetPassComponent
   ],
   imports: [
     HttpClientModule,
