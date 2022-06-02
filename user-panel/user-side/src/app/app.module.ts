@@ -4,7 +4,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 // Angular Material Module
 import { AngularMaterialModule } from './angular-material.module';
@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BloodAvaComponent } from './blood-ava/blood-ava.component';
 import { CampComponent } from './camp/camp.component';
+import { LoadingInterceptor } from 'auth/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { CampComponent } from './camp/camp.component';
     ReactiveFormsModule,
     SlickCarouselModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
