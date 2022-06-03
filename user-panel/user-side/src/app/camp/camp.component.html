@@ -33,10 +33,19 @@
                         <td>{{camp.address}}</td>
                         <td>{{camp.conducted_by}}</td>
                         <td>{{camp.organized_by}}</td>
-                        <td *ngFor="let ids of idArr" >
-                            <button class="bookbtn" *ngIf="ids.refcamp!==camp._id" (click)="bookApp(camp._id)">BOOK</button>
-                            <button class="bookedbtn" *ngIf="ids.refcamp===camp._id" disabled>BOOKED</button>
-                        </td>
+                        <div *ngIf="authenticated">
+                            <td *ngFor="let ids of idArr">
+                                <button class="bookedbtn" *ngIf="ids.refcamp===camp._id && ids.refuser===userId"  disabled>BOOKED</button> 
+                                <div *ngIf="ids.refcamp!==camp._id">
+                                    <button class="bookbtn" (click)="bookApp(camp._id)">BOOK</button>
+                                </div>
+                            </td>
+                        </div>
+                        <div *ngIf="!authenticated">
+                            <td>
+                                <button class="bookbtn" (click)="bookApp(camp._id)">BOOK</button>
+                            </td>
+                        </div>
                     </tr>
                 </tbody>
                 <tbody *ngIf="camplist?.length == 0" id="myTable">

@@ -24,10 +24,7 @@ export class ForgetPassComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
-    this.serv.ForgetPassUser(this.loginForm.value).subscribe((reslt)=>{
-      console.log(reslt);
-    },(error)=>{
-      console.log(error);
-    })
+    this.serv.ForgetPassUser(this.loginForm.value);
+    this.loginForm.reset();
   }
 }

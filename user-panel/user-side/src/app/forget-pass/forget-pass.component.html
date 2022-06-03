@@ -9,7 +9,7 @@
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class='fieldset-body' id='login_form'>
                     <p class='field'>
-                        <label for='user'>E-MAIL
+                        <label for='user'>REGISTERED E-MAIL
                             <mat-error
                                 *ngIf="!loginForm.get('userEmail')?.errors?.required && (loginForm.get('userEmail')?.errors?.pattern)">
                                 *Please enter a valid email
@@ -22,7 +22,7 @@
                         <input type='text' formControlName="userEmail" id='user' name='user' title='Username' />
                         <span id='valida' class='i i-warning'></span>
                     </p>
-                    <input type='submit' [disabled]="!loginForm.valid" id='do_login' value='FORGET PASSWORD'
+                    <input type='submit' [disabled]="!loginForm.valid" id='do_login' value='Forgot Password'
                         title='Get Started' />
                 </div>
             </form>

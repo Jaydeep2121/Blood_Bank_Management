@@ -36,7 +36,10 @@ export class CampComponent implements OnInit {
     this.Sub = emitters.authEmitter.subscribe((auth: boolean) => {
       this.authenticated = auth;
     });
-    this.serv.getAppoint().subscribe((res) => (this.idArr = [...res]));
+    this.serv.editUser(localStorage.getItem('eid')).subscribe((val) =>this.userId=val._id);
+    this.serv.getAppoint().subscribe((res) =>{
+      (this.idArr = [...res]);
+    });
     this.getdata();
   }
   getdata() {
@@ -68,7 +71,6 @@ export class CampComponent implements OnInit {
     } else if ($event.target.value.length > 0) {
       this.serv.searchData($event.target.value).subscribe(
         (table_data) => {
-          console.log(table_data);
           this.camplist = table_data.data;
           this.campItems = table_data.length;
         },
@@ -81,10 +83,10 @@ export class CampComponent implements OnInit {
   bookApp(id: string) {
     if (!this.authenticated) {
       this.webser.showErrorDialog();
+      return;
     }
     this.serv.editUser(localStorage.getItem('eid')).subscribe((val) => {
-      this.userId = val._id;
-      this.serv.addappit({ campfield: id, userfield: this.userId });
+      this.serv.addappit({ campfield: id, userfield: val._id });
     });
   }
   ngOnDestroy(): void {
