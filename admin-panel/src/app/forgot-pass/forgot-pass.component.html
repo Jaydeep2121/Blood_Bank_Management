@@ -1,0 +1,23 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Forgot Password</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="example-form d-flex-center">
+          <div>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Enter Registered Email" formControlName="email">
+              <mat-error *ngIf="!loginForm.get('email')?.errors?.required && (loginForm.get('email')?.errors?.pattern)">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched) && loginForm.get('email')?.errors?.required">
+                Email is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mt-top">
+            <button [disabled]="!loginForm.valid" class="btn-block" mat-raised-button color="primary" mat-button>Forgot Password</button>
+          </div>
+      </form>
+    </mat-card>
+  </div>

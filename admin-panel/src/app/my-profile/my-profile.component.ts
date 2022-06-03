@@ -59,9 +59,9 @@ export class MyProfileComponent implements OnInit {
     formData.append('email', value['email']);
     formData.append('password', value['password']);
     formData.append('imageUrl', this.image);
-    if (this.form.valid) {
+    // if (this.form.valid) {
       this.proSer.updateAdminData(formData);
-    }
+    // }
   }
   editClick() {
     this.form.disabled ? this.form.enable() : this.form.disable();

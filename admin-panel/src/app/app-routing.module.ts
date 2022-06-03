@@ -21,10 +21,12 @@ import { UrequestComponent } from './details/storage/urequest/urequest.component
 import { CampsComponent } from './details/camps/camps.component';
 import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
 import { ApprlComponent } from './apprl/apprl.component';
+import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponentComponent },
   { path: 'login', component: LoginComponentComponent },
+  { path:'forget-pass',component:ForgotPassComponent },
   // { path:'mprofiles',redirectTo:'/Mmprofiles',pathMatch:'full'},
   {
     path: 'Mprofiles',

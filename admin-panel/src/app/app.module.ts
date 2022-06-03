@@ -20,6 +20,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { LoadingInterceptor } from './auth/loading.interceptor';
 import { ProfilesModule } from './profiles/profiles.module';
 import { DetailModule } from './details/detail.module';
+import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DetailModule } from './details/detail.module';
     HomeComponentComponent,
     MyProfileComponent,
     ViewProfileComponent,
-    ApprlComponent
+    ApprlComponent,
+    ForgotPassComponent
   ],
   imports: [
     BrowserModule,
