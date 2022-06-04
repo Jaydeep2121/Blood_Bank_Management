@@ -2,4 +2,8 @@
     cursor: pointer;
     color: #fe4066 !important;
     background-color: white !important;
+    transition: 0.5s;
+}
+.header-btn{
+    color: #ffffff;
 }
