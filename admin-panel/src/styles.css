@@ -56,7 +56,7 @@ mat-toolbar-row {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-}
+} 
 
 .alert-info {
   color: #31708f;
@@ -359,7 +359,7 @@ body {
 }
 .mat-table {
   overflow: auto;
-  max-height: 170px;
+  /* max-height: 170px; */
 }
 
 .mat-column-select {
@@ -373,7 +373,7 @@ body {
 }
 mat-table {
   overflow: auto;
-  max-height: 250px;
+  /* max-height: 250px; */
 }
 
 mat-header-cell,

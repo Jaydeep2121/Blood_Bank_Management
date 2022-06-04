@@ -13,6 +13,7 @@ export class ViewListDonorComponent implements OnInit {
   campname: string;
   address: string;
   img:string;
+  bgrp: string;
   constructor(private serv: DonorService) {}
   ngOnInit(): void {
     this.serv.getdata().subscribe((data)=>{
@@ -20,6 +21,7 @@ export class ViewListDonorComponent implements OnInit {
     });
   }
   getDonorByid(val: any) {
+    this.serv.getgrpbyid(val['refuser']['blood_group']).subscribe((data)=>this.bgrp=data[0].group)
     this.date=val['refcamp']['date'];
     this.time=val['refcamp']['time'];
     this.campname=val['refcamp']['camp_name'].toLowerCase();

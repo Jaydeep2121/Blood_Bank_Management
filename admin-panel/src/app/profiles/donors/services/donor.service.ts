@@ -38,6 +38,9 @@ export class DonorService {
       this.showDialog('Appointment Added!!');
     });
   }
+  getgrpbyid(id:string): Observable<any> {
+    return this.http.get<any>(`api/getGroupsById/${id}`);
+  }
   // To Get User Details For Single Record Using Id with ref
   getDonorref(usrid: string): Observable<any> {
     return this.http.get<any>(`api/getAppRef/${usrid}`);
