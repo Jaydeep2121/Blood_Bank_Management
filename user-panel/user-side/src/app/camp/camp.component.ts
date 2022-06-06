@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
 import { Subscription } from 'rxjs';
 import { HomeService } from '../home/home.service';
 import { WebService } from '../web.service';
@@ -33,14 +34,15 @@ export class CampComponent implements OnInit {
   ngOnInit(): void {
     this.webser.loadJsFile('../../assets/JsFiles/NavBar.js');
     this.homSer.isAuthenticate();
-    this.Sub = emitters.authEmitter.subscribe((auth: boolean) => {
-      this.authenticated = auth;
-    });
-    this.serv.editUser(localStorage.getItem('eid')).subscribe((val) =>this.userId=val._id);
-    this.serv.getAppoint().subscribe((res) =>{
-      (this.idArr = [...res]);
-    });
+    this.Sub = emitters.authEmitter.subscribe(
+      (auth: boolean) => (this.authenticated = auth)
+    );
+    this.serv
+      .editUser(localStorage.getItem('eid'))
+      .subscribe((val) => (this.userId = val._id));
+    this.serv.getAppoint().subscribe((res) => (this.idArr = [...res]));
     this.getdata();
+    document.getElementById('modalid').click();
   }
   getdata() {
     this.http

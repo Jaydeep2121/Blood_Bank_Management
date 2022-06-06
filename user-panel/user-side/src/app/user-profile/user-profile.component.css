@@ -51,3 +51,7 @@ section {
 .labels {
     font-size: 11px
 }
+.container{
+    border:1px solid #D3D3D3;
+    border-radius: 20px !important;
+}

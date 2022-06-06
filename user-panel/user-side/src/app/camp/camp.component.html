@@ -35,8 +35,9 @@
                         <td>{{camp.organized_by}}</td>
                         <div *ngIf="authenticated">
                             <td *ngFor="let ids of idArr">
-                                <button class="bookedbtn" *ngIf="ids.refcamp===camp._id && ids.refuser===userId"  disabled>BOOKED</button> 
-                                <div *ngIf="ids.refcamp!==camp._id">
+                                <button class="bookedbtn" *ngIf="ids.refcamp===camp._id && ids.refuser===userId"
+                                    disabled>BOOKED</button>
+                                <div *ngIf="ids.refcamp!==camp._id || ids.refuser!==userId">
                                     <button class="bookbtn" (click)="bookApp(camp._id)">BOOK</button>
                                 </div>
                             </td>
@@ -82,5 +83,72 @@
         <pagination-controls class="pagi" (pageChange)="gty((page = $event))"></pagination-controls>
     </div>
 </div>
+<!-- Button trigger modal -->
+<button type="button" style="display: none;" id="modalid" data-toggle="modal" data-target="#exampleModal"></button>
+<!-- Eligibility Requirements modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title w-100" id="exampleModalLabel">Eligibility Requirements</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-donor-elig></app-donor-elig>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Eligibility Form modal -->
+<!-- <div class="modal fade" id="EligibilityFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Send Request</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]=form (ngSubmit)="addStockForm()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" formControlName="volume" placeholder="Enter Quantity" class="form-control">
+                        <div class="err" *ngIf="volume.touched && volume.hasError('required')">Qty is required</div>
+                        <div class="err"
+                            *ngIf="!form.get('volume')?.errors?.required && (form.get('volume')?.errors?.pattern)">
+                            *Enter Number only
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_group">
+                            <option value="none" selected>Select BloodGroup</option>
+                            <option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}
+                            </option>
+                        </select>
+                        <div class="err" *ngIf="blood_group.touched && blood_group.hasError('required')">Bl.Group is
+                            required</div>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_compo">
+                            <option selected>Select BloodComponent</option>
+                            <option [value]="groupComData._id" *ngFor="let groupComData of ComArray">{{
+                                groupComData.component }}</option>
+                        </select>
+                        <div class="err" *ngIf="blood_comp.touched && blood_comp.hasError('required')">Bl.Comp is
+                            required</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-dismiss="modal">Close</button>
+                    <button type="submit" class="submit-btn" [disabled]="!form.valid">Do Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
 <br><br>
 <router-outlet></router-outlet>
