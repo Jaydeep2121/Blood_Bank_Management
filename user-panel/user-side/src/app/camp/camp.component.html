@@ -35,11 +35,16 @@
                         <td>{{camp.organized_by}}</td>
                         <div *ngIf="authenticated">
                             <td *ngFor="let ids of idArr">
-                                <button class="bookedbtn" *ngIf="ids.refcamp===camp._id && ids.refuser===userId"
+                                <button class="bookedbtn" *ngIf="ids.refcamp===camp._id && ids.refuser===userId;else other_content"
                                     disabled>BOOKED</button>
-                                <div *ngIf="ids.refcamp!==camp._id || ids.refuser!==userId">
-                                    <button class="bookbtn" (click)="bookApp(camp._id)">BOOK</button>
-                                </div>
+                                <ng-template #other_content>
+                                    <button class="bookbtn" data-toggle="modal"
+                                        (click)="bookApp(camp._id)">BOOK</button>
+                                </ng-template>
+                                <!-- <div *ngIf="ids.refcamp!==camp._id || ids.refuser!==userId">
+                                    <button class="bookbtn" data-toggle="modal"
+                                        (click)="bookApp(camp._id)">BOOK</button>
+                                </div> -->
                             </td>
                         </div>
                         <div *ngIf="!authenticated">
@@ -102,53 +107,70 @@
         </div>
     </div>
 </div>
+<!-- Button trigger modal -->
+<button type="button" style="display: none;" id="modalidform" data-toggle="modal" data-target="#EligibilityFormModal"></button>
 <!-- Eligibility Form modal -->
-<!-- <div class="modal fade" id="EligibilityFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="EligibilityFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Send Request</h5>
+            <div class="modal-header text-center">
+                <h5 class="modal-title w-100" id="exampleModalLongTitle">Eligiblity Form</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form [formGroup]=form (ngSubmit)="addStockForm()">
+            <form [formGroup]=form (ngSubmit)="addEligForm()">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" formControlName="volume" placeholder="Enter Quantity" class="form-control">
-                        <div class="err" *ngIf="volume.touched && volume.hasError('required')">Qty is required</div>
+                        <input type="text" formControlName="weight" placeholder="Enter Your Weight"
+                            class="form-control">
                         <div class="err"
-                            *ngIf="!form.get('volume')?.errors?.required && (form.get('volume')?.errors?.pattern)">
-                            *Enter Number only
+                            *ngIf="(form.get('weight')?.dirty || form.get('weight')?.touched) && form.get('weight')?.errors?.required">
+                            *Weight is required
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_group">
-                            <option value="none" selected>Select BloodGroup</option>
-                            <option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}
-                            </option>
-                        </select>
-                        <div class="err" *ngIf="blood_group.touched && blood_group.hasError('required')">Bl.Group is
-                            required</div>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_compo">
-                            <option selected>Select BloodComponent</option>
-                            <option [value]="groupComData._id" *ngFor="let groupComData of ComArray">{{
-                                groupComData.component }}</option>
-                        </select>
-                        <div class="err" *ngIf="blood_comp.touched && blood_comp.hasError('required')">Bl.Comp is
-                            required</div>
+                        <div class="err"
+                            *ngIf="!form.get('weight')?.errors?.required && (form.get('weight')?.errors?.pattern)">
+                            *Enter Number only
+                        </div><br>
+                        <input type="text" formControlName="hemog" placeholder="Enter Your Haemoglobin"
+                            class="form-control">
+                        <div class="err"
+                            *ngIf="(form.get('hemog')?.dirty || form.get('hemog')?.touched) && form.get('hemog')?.errors?.required">
+                            *Haemoglobin is required
+                        </div>
+                        <div class="err"
+                            *ngIf="!form.get('hemog')?.errors?.required && (form.get('hemog')?.errors?.pattern)">
+                            *Enter Number only
+                        </div><br>
+                        <div class="input-group">
+                            <input class="form-control" formControlName="dob" placeholder="DOB in YYYY-MM-DD"
+                            name="dp" ngbDatepicker #d="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                        <div class="err"
+                            *ngIf="(form.get('dob')?.dirty || form.get('dob')?.touched) && form.get('dob')?.errors?.required">
+                            *Date Of Birth is required
+                        </div><br>
+                        <div class="input-group">
+                            <input class="form-control" formControlName="last_donate" placeholder="Select Last Donate in YYYY-MM-DD"
+                            name="dp" ngbDatepicker #ls="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar" (click)="ls.toggle()" type="button"></button>
+                        </div>
+                        <div class="err"
+                                *ngIf="(form.get('last_donate')?.dirty || form.get('last_donate')?.touched) && form.get('last_donate')?.errors?.required">
+                                *Last Donate Date is required
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="close-btn" data-dismiss="modal">Close</button>
-                    <button type="submit" class="submit-btn" [disabled]="!form.valid">Do Request</button>
+                    <button type="submit" class="submit-btn">Book AppointMent</button>
+                    <!-- [disabled]="!form.valid" -->
                 </div>
             </form>
         </div>
     </div>
-</div> -->
+</div>
 <br><br>
 <router-outlet></router-outlet>

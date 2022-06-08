@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // Angular Material Module
 import { AngularMaterialModule } from './angular-material.module';
 // component Files
@@ -41,6 +42,7 @@ import { DonorEligComponent } from './donor-elig/donor-elig.component';
     DonorEligComponent
   ],
   imports: [
+    NgbModule,
     HttpClientModule,
     AngularMaterialModule,
     NgxPaginationModule,

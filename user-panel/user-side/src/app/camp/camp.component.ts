@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 import { HomeService } from '../home/home.service';
@@ -13,6 +21,8 @@ import { emitters } from '../emitters/emitters';
   styleUrls: ['./camp.component.css'],
 })
 export class CampComponent implements OnInit {
+  campid: string = '';
+  form: FormGroup;
   camplist: any;
   campItems: any;
   sort: string = 'asc';
@@ -30,7 +40,6 @@ export class CampComponent implements OnInit {
     private http: HttpClient,
     private webser: WebService
   ) {}
-
   ngOnInit(): void {
     this.webser.loadJsFile('../../assets/JsFiles/NavBar.js');
     this.homSer.isAuthenticate();
@@ -42,7 +51,30 @@ export class CampComponent implements OnInit {
       .subscribe((val) => (this.userId = val._id));
     this.serv.getAppoint().subscribe((res) => (this.idArr = [...res]));
     this.getdata();
-    document.getElementById('modalid').click();
+    this.formdata();
+    // document.getElementById('modalid').click();
+  }
+  formdata() {
+    this.form = new FormGroup({
+      weight: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+        // Validators.pattern(`(${'^[0-9]*$'})|(${'^[4-9][0-9]+$'})`)
+      ]),
+      hemog: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+      ]),
+      last_donate: new FormControl('', [Validators.required]),
+      dob: new FormControl('', [Validators.required]),
+    });
+  }
+  addEligForm() {
+    this.serv.editUser(localStorage.getItem('eid')).subscribe((val: any) => {
+      if (this.campid != '') {
+        this.serv.AddEli(this.form.value, val._id, this.campid);
+      }
+    });
   }
   getdata() {
     this.http
@@ -87,9 +119,8 @@ export class CampComponent implements OnInit {
       this.webser.showErrorDialog();
       return;
     }
-    this.serv.editUser(localStorage.getItem('eid')).subscribe((val) => {
-      this.serv.addappit({ campfield: id, userfield: val._id });
-    });
+    this.campid = id;
+    document.getElementById('modalidform').click();
   }
   ngOnDestroy(): void {
     this.Sub.unsubscribe();
