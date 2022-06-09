@@ -34,13 +34,13 @@ export class CampService {
       confirmButtonText: 'Yes, Book it!',
     });
     if (result.isConfirmed) {
-      this.http.post<any>(`api/adddnrEl/${refuser}`, body).subscribe(() => {
-        this.http
-          .post<any>('api/addApp', { userfield: refuser, refcamp: campid })
-          .subscribe(() => {
-            Swal.fire('Booked!', 'Your file has been Booked', 'success');
-          });
-      });
+      // this.http.post<any>(`api/adddnrEl/${refuser}`, body).subscribe(() => {
+        // this.http
+        //   .post<any>('api/addApp', { userfield: refuser, refcamp: campid })
+        //   .subscribe(() => {
+        //     Swal.fire('Booked!', 'Your file has been Booked', 'success');
+        //   });
+      // });
     }
   }
 }

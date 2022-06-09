@@ -14,6 +14,7 @@ import { HomeService } from '../home/home.service';
 import { WebService } from '../web.service';
 import { CampService } from './camp.service';
 import { emitters } from '../emitters/emitters';
+import { forbiddenWeightValidator } from '../public/_helpers/weight-validator';
 
 @Component({
   selector: 'app-camp',
@@ -31,6 +32,7 @@ export class CampComponent implements OnInit {
   userId: string;
   page: number = 1;
   idArr: any = [];
+  maxDate:any;
   private Sub: Subscription;
   authenticated: boolean = false;
   notFound: string;
@@ -53,28 +55,53 @@ export class CampComponent implements OnInit {
     this.getdata();
     this.formdata();
     // document.getElementById('modalid').click();
+    this.futureDateDisable();
+  }
+  futureDateDisable() {
+    var date:any = new Date();
+    var todayDate:any=date.getDate();
+    var month:any=date.getMonth()+1;
+    var year:any=date.getFullYear();
+    if (todayDate<10) {
+      todayDate = '0'+todayDate;
+    }
+    if (month<10) {
+      month = '0'+month;
+    }
+    this.maxDate=year + "-" + month + "-" + todayDate;
   }
   formdata() {
     this.form = new FormGroup({
       weight: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
-        // Validators.pattern(`(${'^[0-9]*$'})|(${'^[4-9][0-9]+$'})`)
+        forbiddenWeightValidator(new RegExp('^(4[^0-4]|[5-9][0-9]|[1-9][0-9][0-9])+$'))
       ]),
       hemog: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
+        forbiddenWeightValidator(new RegExp('^(1[^0-2]|[2-9][0-9])+$'))
       ]),
       last_donate: new FormControl('', [Validators.required]),
-      dob: new FormControl('', [Validators.required]),
+      dob: new FormControl('', [Validators.required]), 
     });
   }
+  ageInMilliseconds:Number;
   addEligForm() {
-    this.serv.editUser(localStorage.getItem('eid')).subscribe((val: any) => {
-      if (this.campid != '') {
-        this.serv.AddEli(this.form.value, val._id, this.campid);
-      }
-    });
+    console.log("eligiblity form add");
+    console.log(this.form.value);
+
+    this.ageInMilliseconds = new Date().valueOf() - new Date(this.form.value.dob).valueOf();  
+    console.log("year : " , Math.floor(+this.ageInMilliseconds/1000/60/60/24/365));
+    // ageInMilliseconds:Date = new Date() - new Date(this.form.value.dob);
+    // console.log(Math.floor(this.ageInMilliseconds/1000/60/60/24/365));
+
+    // this.serv.editUser(localStorage.getItem('eid')).subscribe((val: any) => {
+    //   if (this.campid != '') {
+    //     this.serv.AddEli(this.form.value, val._id, this.campid);
+    //     this.form.reset();
+    //   }
+    // });
   }
   getdata() {
     this.http

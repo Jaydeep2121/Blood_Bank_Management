@@ -35,7 +35,8 @@
                         <td>{{camp.organized_by}}</td>
                         <div *ngIf="authenticated">
                             <td *ngFor="let ids of idArr">
-                                <button class="bookedbtn" *ngIf="ids.refcamp===camp._id && ids.refuser===userId;else other_content"
+                                <button class="bookedbtn"
+                                    *ngIf="ids.refcamp===camp._id && ids.refuser===userId;else other_content"
                                     disabled>BOOKED</button>
                                 <ng-template #other_content>
                                     <button class="bookbtn" data-toggle="modal"
@@ -108,7 +109,8 @@
     </div>
 </div>
 <!-- Button trigger modal -->
-<button type="button" style="display: none;" id="modalidform" data-toggle="modal" data-target="#EligibilityFormModal"></button>
+<button type="button" style="display: none;" id="modalidform" data-toggle="modal"
+    data-target="#EligibilityFormModal"></button>
 <!-- Eligibility Form modal -->
 <div class="modal fade" id="EligibilityFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -131,7 +133,11 @@
                         </div>
                         <div class="err"
                             *ngIf="!form.get('weight')?.errors?.required && (form.get('weight')?.errors?.pattern)">
-                            *Enter Number only
+                            *Weight Must Number only
+                        </div>
+                        <div class="err"
+                            *ngIf="!form.get('weight')?.errors?.forbiddenWeight && !form.get('weight')?.errors?.required && !form.get('weight')?.errors?.pattern">
+                            *Weight Must Be Greater Than 45kg
                         </div><br>
                         <input type="text" formControlName="hemog" placeholder="Enter Your Haemoglobin"
                             class="form-control">
@@ -141,25 +147,28 @@
                         </div>
                         <div class="err"
                             *ngIf="!form.get('hemog')?.errors?.required && (form.get('hemog')?.errors?.pattern)">
-                            *Enter Number only
+                            *Enter Valid Haemoglobin level
+                        </div>
+                        <div class="err"
+                            *ngIf="!form.get('hemog')?.errors?.forbiddenWeight && !form.get('hemog')?.errors?.required && !form.get('hemog')?.errors?.pattern">
+                            *Haemoglobin level Must Be Greater Than 12 Deciliter
                         </div><br>
                         <div class="input-group">
-                            <input class="form-control" formControlName="dob" placeholder="DOB in YYYY-MM-DD"
-                            name="dp" ngbDatepicker #d="ngbDatepicker">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                            <input type="date" formControlName="dob" type="text" onfocus="(this.type='date')" id="date"
+                                class="form-control" max="{{maxDate}}" placeholder="Date Of Birth in DD-MM-YYYY">
                         </div>
                         <div class="err"
                             *ngIf="(form.get('dob')?.dirty || form.get('dob')?.touched) && form.get('dob')?.errors?.required">
                             *Date Of Birth is required
                         </div><br>
                         <div class="input-group">
-                            <input class="form-control" formControlName="last_donate" placeholder="Select Last Donate in YYYY-MM-DD"
-                            name="dp" ngbDatepicker #ls="ngbDatepicker">
-                            <button class="btn btn-outline-secondary calendar" (click)="ls.toggle()" type="button"></button>
+                            <input type="date" formControlName="last_donate" type="text" onfocus="(this.type='date')"
+                                id="date" class="form-control" max="{{maxDate}}"
+                                placeholder="Select Last Donate in DD-MM-YYYY">
                         </div>
                         <div class="err"
-                                *ngIf="(form.get('last_donate')?.dirty || form.get('last_donate')?.touched) && form.get('last_donate')?.errors?.required">
-                                *Last Donate Date is required
+                            *ngIf="(form.get('last_donate')?.dirty || form.get('last_donate')?.touched) && form.get('last_donate')?.errors?.required">
+                            *Last Donate Date is required
                         </div>
                     </div>
                 </div>
