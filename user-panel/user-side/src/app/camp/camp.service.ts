@@ -19,6 +19,10 @@ export class CampService {
   getAppoint(): Observable<any> {
     return this.http.get<any>('api/getappomt');
   }
+  //get DonorEl data
+  getDonrel(id:string): Observable<any> {
+    return this.http.get<any>(`api/getdnrEl/${id}`);
+  }
   searchData(data: string): Observable<any> {
     return this.http.get<any>(`api/getCampSearch/${data}`);
   }
@@ -35,6 +39,7 @@ export class CampService {
     });
     if (result.isConfirmed) {
       // this.http.post<any>(`api/adddnrEl/${refuser}`, body).subscribe(() => {
+        // console.log('elig reg done');
         // this.http
         //   .post<any>('api/addApp', { userfield: refuser, refcamp: campid })
         //   .subscribe(() => {

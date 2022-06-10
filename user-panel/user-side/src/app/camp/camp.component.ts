@@ -30,9 +30,10 @@ export class CampComponent implements OnInit {
   itemsPerPage = 3;
   totalItems: any;
   userId: string;
+  gender: string;
   page: number = 1;
   idArr: any = [];
-  maxDate:any;
+  maxDate: any;
   private Sub: Subscription;
   authenticated: boolean = false;
   notFound: string;
@@ -48,9 +49,10 @@ export class CampComponent implements OnInit {
     this.Sub = emitters.authEmitter.subscribe(
       (auth: boolean) => (this.authenticated = auth)
     );
-    this.serv
-      .editUser(localStorage.getItem('eid'))
-      .subscribe((val) => (this.userId = val._id));
+    this.serv.editUser(localStorage.getItem('eid')).subscribe((val) => {
+      this.userId = val._id;
+      this.gender = val.gender;
+    });
     this.serv.getAppoint().subscribe((res) => (this.idArr = [...res]));
     this.getdata();
     this.formdata();
@@ -58,50 +60,89 @@ export class CampComponent implements OnInit {
     this.futureDateDisable();
   }
   futureDateDisable() {
-    var date:any = new Date();
-    var todayDate:any=date.getDate();
-    var month:any=date.getMonth()+1;
-    var year:any=date.getFullYear();
-    if (todayDate<10) {
-      todayDate = '0'+todayDate;
+    var date: any = new Date();
+    var todayDate: any = date.getDate();
+    var month: any = date.getMonth() + 1;
+    var year: any = date.getFullYear();
+    if (todayDate < 10) {
+      todayDate = '0' + todayDate;
     }
-    if (month<10) {
-      month = '0'+month;
+    if (month < 10) {
+      month = '0' + month;
     }
-    this.maxDate=year + "-" + month + "-" + todayDate;
+    this.maxDate = year + '-' + month + '-' + todayDate;
   }
   formdata() {
     this.form = new FormGroup({
       weight: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
-        forbiddenWeightValidator(new RegExp('^(4[^0-4]|[5-9][0-9]|[1-9][0-9][0-9])+$'))
+        // forbiddenWeightValidator(
+        //   new RegExp('^(4[^0-4]|[5-9][0-9]|[1-9][0-9][0-9])+$')
+        // )
       ]),
       hemog: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
-        forbiddenWeightValidator(new RegExp('^(1[^0-2]|[2-9][0-9])+$'))
+        // forbiddenWeightValidator(new RegExp('^(1[^0-2]|[2-9][0-9])+$')),
       ]),
-      last_donate: new FormControl('', [Validators.required]),
-      dob: new FormControl('', [Validators.required]), 
+      dob: new FormControl('', [Validators.required]),
     });
   }
-  ageInMilliseconds:Number;
   addEligForm() {
-    console.log("eligiblity form add");
     console.log(this.form.value);
-
-    this.ageInMilliseconds = new Date().valueOf() - new Date(this.form.value.dob).valueOf();  
-    console.log("year : " , Math.floor(+this.ageInMilliseconds/1000/60/60/24/365));
-    // ageInMilliseconds:Date = new Date() - new Date(this.form.value.dob);
-    // console.log(Math.floor(this.ageInMilliseconds/1000/60/60/24/365));
-
-    // this.serv.editUser(localStorage.getItem('eid')).subscribe((val: any) => {
-    //   if (this.campid != '') {
-    //     this.serv.AddEli(this.form.value, val._id, this.campid);
-    //     this.form.reset();
-    //   }
-    // });
+    let ageInMilliseconds =
+      new Date().valueOf() - new Date(this.form.value.dob).valueOf();
+    let age = Math.floor(+ageInMilliseconds / 1000 / 60 / 60 / 24 / 365);
+    if (age < 18) {
+      alert(
+        'Your Age Is Not Eligible To Donate....!!'
+      );
+      return;
+    }
+    if (age > 65) {
+      alert(
+        'Your Age Is ' +
+          age +
+          ' And Donor Age must between 18-65....!!'
+      );
+      return;
+    }
+    this.serv.getDonrel(this.userId).subscribe((val) => {
+      if(val===null || val.last_donate === null){
+        return;
+      }
+      if (val.last_donate !== null) {
+        let months;
+        months =
+          (new Date().getFullYear() -
+            new Date(val.last_donate.slice(0, -14)).getFullYear()) *
+          12;
+        months -= new Date(val.last_donate.slice(0, -14)).getMonth();
+        months += new Date().getMonth();
+        months = months <= 0 ? 0 : months;
+        if (this.gender === 'm' && months < 3) {
+          alert(
+            'You Can Donate Safely Once In Every Three Months And Your Month Gap Is ' +
+              months +
+              ' So You Are Not Eligible for Now To Donate'
+          );
+          return;
+        }
+        if (this.gender === 'f' && months < 4) {
+          alert(
+            'You Can Donate Every Four Months And Your Month Gap Is ' +
+              months +
+              ' So You Are Not Eligible for Now To Donate'
+          );
+          return;
+        }
+      }
+    });
+    // if (this.campid != '') {
+    //   this.serv.AddEli(this.form.value, this.userId, this.campid);
+    //   this.form.reset();
+    // }
   }
   getdata() {
     this.http
@@ -147,6 +188,7 @@ export class CampComponent implements OnInit {
       return;
     }
     this.campid = id;
+    this.form.reset();
     document.getElementById('modalidform').click();
   }
   ngOnDestroy(): void {

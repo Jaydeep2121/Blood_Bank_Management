@@ -36,22 +36,18 @@
                         <div *ngIf="authenticated">
                             <td *ngFor="let ids of idArr">
                                 <button class="bookedbtn"
-                                    *ngIf="ids.refcamp===camp._id && ids.refuser===userId;else other_content"
+                                    *ngIf="ids.refcamp===camp._id && ids.refuser===userId;else other_content" 
                                     disabled>BOOKED</button>
-                                <ng-template #other_content>
-                                    <button class="bookbtn" data-toggle="modal"
-                                        (click)="bookApp(camp._id)">BOOK</button>
-                                </ng-template>
-                                <!-- <div *ngIf="ids.refcamp!==camp._id || ids.refuser!==userId">
-                                    <button class="bookbtn" data-toggle="modal"
-                                        (click)="bookApp(camp._id)">BOOK</button>
-                                </div> -->
                             </td>
                         </div>
-                        <div *ngIf="!authenticated">
-                            <td>
+                        <div>
+                            <td *ngIf="idArr.length===0">
                                 <button class="bookbtn" (click)="bookApp(camp._id)">BOOK</button>
                             </td>
+                            <ng-template #other_content>
+                                <button class="bookbtn" data-toggle="modal"
+                                    (click)="bookApp(camp._id)">BOOK</button>
+                            </ng-template>
                         </div>
                     </tr>
                 </tbody>
@@ -149,10 +145,10 @@
                             *ngIf="!form.get('hemog')?.errors?.required && (form.get('hemog')?.errors?.pattern)">
                             *Enter Valid Haemoglobin level
                         </div>
-                        <div class="err"
+                        <!-- <div class="err"
                             *ngIf="!form.get('hemog')?.errors?.forbiddenWeight && !form.get('hemog')?.errors?.required && !form.get('hemog')?.errors?.pattern">
                             *Haemoglobin level Must Be Greater Than 12 Deciliter
-                        </div><br>
+                        </div><br> -->
                         <div class="input-group">
                             <input type="date" formControlName="dob" type="text" onfocus="(this.type='date')" id="date"
                                 class="form-control" max="{{maxDate}}" placeholder="Date Of Birth in DD-MM-YYYY">
@@ -160,21 +156,18 @@
                         <div class="err"
                             *ngIf="(form.get('dob')?.dirty || form.get('dob')?.touched) && form.get('dob')?.errors?.required">
                             *Date Of Birth is required
-                        </div><br>
-                        <div class="input-group">
+                        </div>
+                        <!-- <div class="input-group">
                             <input type="date" formControlName="last_donate" type="text" onfocus="(this.type='date')"
                                 id="date" class="form-control" max="{{maxDate}}"
-                                placeholder="Select Last Donate in DD-MM-YYYY">
-                        </div>
-                        <div class="err"
-                            *ngIf="(form.get('last_donate')?.dirty || form.get('last_donate')?.touched) && form.get('last_donate')?.errors?.required">
-                            *Last Donate Date is required
-                        </div>
+                                placeholder="Select Last Donate[optional] in DD-MM-YYYY">
+                        </div> -->
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="close-btn" data-dismiss="modal">Close</button>
-                    <button type="submit" class="submit-btn">Book AppointMent</button>
+                    <button type="submit" [disabled]="!form.valid" class="submit-btn">Book AppointMent</button>
+                    <!-- <input type="submit" [disabled]="!form.valid" class="submit-btn" value="Book AppointMent"> -->
                     <!-- [disabled]="!form.valid" -->
                 </div>
             </form>
