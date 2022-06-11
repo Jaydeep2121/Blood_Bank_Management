@@ -1,7 +1,12 @@
 <app-navbar></app-navbar>
 <div class="block-sec">
     <div class="page-header">
-        <h3 class="text-danger">Camp Schedule</h3>
+        <div class="page-header">
+        <h3 class="text-danger">Camp Schedule<button data-toggle="modal"
+             *ngIf="authenticated" data-toggle="modal"
+                 class="btn" data-toggle="modal"
+                 (click)="bookApp()">BOOK</button></h3>
+        </div>  
     </div>
     <div class="panel panel-danger">
         <div class="panel-heading">Search Camp</div><br>
@@ -17,7 +22,6 @@
                         <th>Address&nbsp;<i (click)="onApply('address')" class="fa fa-sort"></i></th>
                         <th>Conducted By&nbsp;<i (click)="onApply('conducted_by')" class="fa fa-sort"></i></th>
                         <th>Organized by&nbsp;<i (click)="onApply('organized_by')" class="fa fa-sort"></i></th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody *ngIf="camplist?.length != 0" id="myTable">
@@ -26,29 +30,13 @@
                         currentPage: page,
                         totalItems: totalItems
                     }; index as i">
-                        <td>{{i+1}}</td>
-                        <td>{{camp.date}}</td>
-                        <td>{{camp.time}}</td>
-                        <td>{{camp.camp_name}}</td>
-                        <td>{{camp.address}}</td>
-                        <td>{{camp.conducted_by}}</td>
-                        <td>{{camp.organized_by}}</td>
-                        <div *ngIf="authenticated">
-                            <td *ngFor="let ids of idArr">
-                                <button class="bookedbtn"
-                                    *ngIf="ids.refcamp===camp._id && ids.refuser===userId;else other_content" 
-                                    disabled>BOOKED</button>
-                            </td>
-                        </div>
-                        <div>
-                            <td *ngIf="idArr.length===0">
-                                <button class="bookbtn" (click)="bookApp(camp._id)">BOOK</button>
-                            </td>
-                            <ng-template #other_content>
-                                <button class="bookbtn" data-toggle="modal"
-                                    (click)="bookApp(camp._id)">BOOK</button>
-                            </ng-template>
-                        </div>
+                            <td>{{i+1}}</td>
+                            <td>{{camp.date}}</td>
+                            <td>{{camp.time}}</td>
+                            <td>{{camp.camp_name}}</td>
+                            <td>{{camp.address}}</td>
+                            <td>{{camp.conducted_by}}</td>
+                            <td>{{camp.organized_by}}</td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="camplist?.length == 0" id="myTable">
@@ -68,7 +56,6 @@
                         <th>Address&nbsp;<i class="fa fa-sort"></i></th>
                         <th>Conducted By&nbsp;<i class="fa fa-sort"></i></th>
                         <th>Organized by&nbsp;<i class="fa fa-sort"></i></th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,6 +108,14 @@
             <form [formGroup]=form (ngSubmit)="addEligForm()">
                 <div class="modal-body">
                     <div class="form-group">
+                        <select formControlName="camp_name" class="form-control">
+                            <option [value]="data._id" *ngFor="let data of CampArray">{{ data.camp_name }}
+                            </option>
+                        </select>
+                        <div class="err"
+                            *ngIf="form.get('camp_name')?.touched && !form.get('camp_name')?.valid">
+                            *Please Select Camp
+                        </div><br>
                         <input type="text" formControlName="weight" placeholder="Enter Your Weight"
                             class="form-control">
                         <div class="err"
@@ -132,7 +127,7 @@
                             *Weight Must Number only
                         </div>
                         <div class="err"
-                            *ngIf="!form.get('weight')?.errors?.forbiddenWeight && !form.get('weight')?.errors?.required && !form.get('weight')?.errors?.pattern">
+                            *ngIf="form.get('weight')?.errors?.forbiddenWeight!==null && !form.get('weight')?.errors?.required && !form.get('weight')?.errors?.pattern">
                             *Weight Must Be Greater Than 45kg
                         </div><br>
                         <input type="text" formControlName="hemog" placeholder="Enter Your Haemoglobin"
@@ -144,11 +139,11 @@
                         <div class="err"
                             *ngIf="!form.get('hemog')?.errors?.required && (form.get('hemog')?.errors?.pattern)">
                             *Enter Valid Haemoglobin level
-                        </div>
-                        <!-- <div class="err"
-                            *ngIf="!form.get('hemog')?.errors?.forbiddenWeight && !form.get('hemog')?.errors?.required && !form.get('hemog')?.errors?.pattern">
+                        </div> 
+                        <div class="err"
+                            *ngIf="form.get('hemog')?.errors?.forbiddenWeight!==null && !form.get('hemog')?.errors?.required && !form.get('hemog')?.errors?.pattern">
                             *Haemoglobin level Must Be Greater Than 12 Deciliter
-                        </div><br> -->
+                        </div><br>
                         <div class="input-group">
                             <input type="date" formControlName="dob" type="text" onfocus="(this.type='date')" id="date"
                                 class="form-control" max="{{maxDate}}" placeholder="Date Of Birth in DD-MM-YYYY">
@@ -157,18 +152,11 @@
                             *ngIf="(form.get('dob')?.dirty || form.get('dob')?.touched) && form.get('dob')?.errors?.required">
                             *Date Of Birth is required
                         </div>
-                        <!-- <div class="input-group">
-                            <input type="date" formControlName="last_donate" type="text" onfocus="(this.type='date')"
-                                id="date" class="form-control" max="{{maxDate}}"
-                                placeholder="Select Last Donate[optional] in DD-MM-YYYY">
-                        </div> -->
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="close-btn" data-dismiss="modal">Close</button>
                     <button type="submit" [disabled]="!form.valid" class="submit-btn">Book AppointMent</button>
-                    <!-- <input type="submit" [disabled]="!form.valid" class="submit-btn" value="Book AppointMent"> -->
-                    <!-- [disabled]="!form.valid" -->
                 </div>
             </form>
         </div>

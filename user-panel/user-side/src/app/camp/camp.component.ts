@@ -22,7 +22,6 @@ import { forbiddenWeightValidator } from '../public/_helpers/weight-validator';
   styleUrls: ['./camp.component.css'],
 })
 export class CampComponent implements OnInit {
-  campid: string = '';
   form: FormGroup;
   camplist: any;
   campItems: any;
@@ -32,7 +31,7 @@ export class CampComponent implements OnInit {
   userId: string;
   gender: string;
   page: number = 1;
-  idArr: any = [];
+  CampArray: any = [];
   maxDate: any;
   private Sub: Subscription;
   authenticated: boolean = false;
@@ -53,10 +52,10 @@ export class CampComponent implements OnInit {
       this.userId = val._id;
       this.gender = val.gender;
     });
-    this.serv.getAppoint().subscribe((res) => (this.idArr = [...res]));
+    this.serv.getCamp().subscribe((data: any) => (this.CampArray = [...data]));
     this.getdata();
     this.formdata();
-    // document.getElementById('modalid').click();
+    document.getElementById('modalid').click();
     this.futureDateDisable();
   }
   futureDateDisable() {
@@ -74,42 +73,49 @@ export class CampComponent implements OnInit {
   }
   formdata() {
     this.form = new FormGroup({
+      camp_name: new FormControl('', [Validators.required]),
       weight: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
-        // forbiddenWeightValidator(
-        //   new RegExp('^(4[^0-4]|[5-9][0-9]|[1-9][0-9][0-9])+$')
-        // )
+        forbiddenWeightValidator(
+          new RegExp('^(4[^0-4]|[5-9][0-9]|[1-9][0-9][0-9])+$')
+        ),
       ]),
       hemog: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
-        // forbiddenWeightValidator(new RegExp('^(1[^0-2]|[2-9][0-9])+$')),
+        forbiddenWeightValidator(new RegExp('^(1[^0-2]|[2-9][0-9])+$')),
       ]),
       dob: new FormControl('', [Validators.required]),
     });
   }
   addEligForm() {
-    console.log(this.form.value);
+    if (!this.form.valid) {
+      return;
+    }
+    this.serv.getAppoint(this.userId).subscribe((val: any) => {
+      if (val === null) return;
+      const data = val.find(
+        (item: any) => item.refcamp === this.form.value.camp_name
+      );
+      if (data !== null) {
+        alert('Selected campAlready in your Appointment....!!');
+        return;
+      }
+    });
     let ageInMilliseconds =
       new Date().valueOf() - new Date(this.form.value.dob).valueOf();
     let age = Math.floor(+ageInMilliseconds / 1000 / 60 / 60 / 24 / 365);
     if (age < 18) {
-      alert(
-        'Your Age Is Not Eligible To Donate....!!'
-      );
+      alert('Your Age Is Not Eligible To Donate....!!');
       return;
     }
     if (age > 65) {
-      alert(
-        'Your Age Is ' +
-          age +
-          ' And Donor Age must between 18-65....!!'
-      );
+      alert('Donor Age must between 18-65....!!');
       return;
     }
     this.serv.getDonrel(this.userId).subscribe((val) => {
-      if(val===null || val.last_donate === null){
+      if (val === null || val.last_donate === null) {
         return;
       }
       if (val.last_donate !== null) {
@@ -139,10 +145,8 @@ export class CampComponent implements OnInit {
         }
       }
     });
-    // if (this.campid != '') {
-    //   this.serv.AddEli(this.form.value, this.userId, this.campid);
-    //   this.form.reset();
-    // }
+    this.serv.AddEli(this.form.value, this.userId);
+    this.form.reset();
   }
   getdata() {
     this.http
@@ -182,12 +186,11 @@ export class CampComponent implements OnInit {
       );
     }
   }
-  bookApp(id: string) {
+  bookApp() {
     if (!this.authenticated) {
       this.webser.showErrorDialog();
       return;
     }
-    this.campid = id;
     this.form.reset();
     document.getElementById('modalidform').click();
   }
