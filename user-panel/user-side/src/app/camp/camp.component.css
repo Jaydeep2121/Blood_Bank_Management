@@ -19,3 +19,7 @@
     display: block;
     overflow-x: auto;
 }
+.input-error{
+    border:1px solid red;
+    background-color: #f2dede;
+}

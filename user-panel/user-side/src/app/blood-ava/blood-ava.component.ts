@@ -74,6 +74,10 @@ export class BloodAvaComponent implements OnInit {
         this.totalItems = res.length;
       });
   }
+  bookApp() {
+    this.form.reset();
+    document.getElementById('modalidform').click();
+  }
   gty(page: any) {
     this.http
       .get(`api/getStock?page=${page}&size=${this.itemsPerPage}`)

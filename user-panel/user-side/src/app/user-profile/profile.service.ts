@@ -22,6 +22,10 @@ export class ProfileService {
   editUser(usrid: string): Observable<any> {
     return this.http.get<any>(`api/editUserByEmail/${usrid}`);
   }
+  //get appointment data
+  getAppoint(id:string): Observable<any> {
+    return this.http.get<any>(`api/getappomt/${id}`);
+  }
   //update user data
   UpdateUser(body: any,usrid: string) {
     this.http.patch(`api/UpdateUser/${usrid}`, body).subscribe(() => {

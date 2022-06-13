@@ -19,7 +19,12 @@ export class UserProfileComponent implements OnInit {
   email:string;
   imagPath:string;
   GroupArray: any = [];
-  constructor(private serv: ProfileService,private aser:HomeService,private lser:LoginService) {}
+  CampArray: any = [];
+  constructor(
+    private serv: ProfileService,
+    private aser:HomeService,
+    private lser:LoginService
+  ) {}
 
   ngOnInit(): void {
     this.aser.isAuthenticate();
@@ -43,9 +48,12 @@ export class UserProfileComponent implements OnInit {
         userEmail: val.email,
         gender: val.gender,
         userCont: val.mobile,
-        // userPass: val.password,
         blood_group: val.blood_group,
       });
+      this.serv.getAppoint(val._id).subscribe((val: any) =>{
+        this.CampArray=[...val];
+        console.log(val);
+      }) 
     });
   }
   formData() {

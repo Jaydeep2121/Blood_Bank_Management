@@ -2,11 +2,9 @@
 <div class="block-sec">
     <div class="page-header">
         <div class="page-header">
-        <h3 class="text-danger">Camp Schedule<button data-toggle="modal"
-             *ngIf="authenticated" data-toggle="modal"
-                 class="btn" data-toggle="modal"
-                 (click)="bookApp()">BOOK</button></h3>
-        </div>  
+            <h3 class="text-danger">Camp Schedule<button data-toggle="modal" *ngIf="authenticated" class="btn"
+                    (click)="bookApp()">BOOK</button></h3>
+        </div>
     </div>
     <div class="panel panel-danger">
         <div class="panel-heading">Search Camp</div><br>
@@ -30,13 +28,13 @@
                         currentPage: page,
                         totalItems: totalItems
                     }; index as i">
-                            <td>{{i+1}}</td>
-                            <td>{{camp.date}}</td>
-                            <td>{{camp.time}}</td>
-                            <td>{{camp.camp_name}}</td>
-                            <td>{{camp.address}}</td>
-                            <td>{{camp.conducted_by}}</td>
-                            <td>{{camp.organized_by}}</td>
+                        <td>{{i+1}}</td>
+                        <td>{{camp.date}}</td>
+                        <td>{{camp.time}}</td>
+                        <td>{{camp.camp_name}}</td>
+                        <td>{{camp.address}}</td>
+                        <td>{{camp.conducted_by}}</td>
+                        <td>{{camp.organized_by}}</td>
                     </tr>
                 </tbody>
                 <tbody *ngIf="camplist?.length == 0" id="myTable">
@@ -108,15 +106,24 @@
             <form [formGroup]=form (ngSubmit)="addEligForm()">
                 <div class="modal-body">
                     <div class="form-group">
-                        <select formControlName="camp_name" class="form-control">
+                        <select formControlName="camp_name" [ngClass]="{
+                                'input-error': 
+                                    form.get('camp_name')?.invalid && 
+                                    form.get('camp_name')?.touched && 
+                                    form.get('camp_name')?.errors?.required
+                                }" class="form-control">
                             <option [value]="data._id" *ngFor="let data of CampArray">{{ data.camp_name }}
                             </option>
                         </select>
-                        <div class="err"
-                            *ngIf="form.get('camp_name')?.touched && !form.get('camp_name')?.valid">
+                        <div class="err" *ngIf="form.get('camp_name')?.touched && !form.get('camp_name')?.valid">
                             *Please Select Camp
                         </div><br>
-                        <input type="text" formControlName="weight" placeholder="Enter Your Weight"
+                        <input [ngClass]="{
+                            'input-error': 
+                                form.get('weight')?.errors?.required &&
+                                form.get('weight')?.touched && form.get('weight')?.errors?.pattern ||
+                                form.get('weight')?.touched && form.get('weight')?.errors?.forbiddenWeight!==null
+                            }" type="text" formControlName="weight" placeholder="Enter Your Weight"
                             class="form-control">
                         <div class="err"
                             *ngIf="(form.get('weight')?.dirty || form.get('weight')?.touched) && form.get('weight')?.errors?.required">
@@ -130,8 +137,12 @@
                             *ngIf="form.get('weight')?.errors?.forbiddenWeight!==null && !form.get('weight')?.errors?.required && !form.get('weight')?.errors?.pattern">
                             *Weight Must Be Greater Than 45kg
                         </div><br>
-                        <input type="text" formControlName="hemog" placeholder="Enter Your Haemoglobin"
-                            class="form-control">
+                        <input type="text" [ngClass]="{
+                                'input-error': 
+                                    form.get('hemog')?.errors?.required &&
+                                    form.get('hemog')?.touched && form.get('hemog')?.errors?.pattern ||
+                                    form.get('hemog')?.touched && form.get('hemog')?.errors?.forbiddenWeight!==null
+                                }" formControlName="hemog" placeholder="Enter Your Haemoglobin" class="form-control">
                         <div class="err"
                             *ngIf="(form.get('hemog')?.dirty || form.get('hemog')?.touched) && form.get('hemog')?.errors?.required">
                             *Haemoglobin is required
@@ -139,13 +150,17 @@
                         <div class="err"
                             *ngIf="!form.get('hemog')?.errors?.required && (form.get('hemog')?.errors?.pattern)">
                             *Enter Valid Haemoglobin level
-                        </div> 
+                        </div>
                         <div class="err"
                             *ngIf="form.get('hemog')?.errors?.forbiddenWeight!==null && !form.get('hemog')?.errors?.required && !form.get('hemog')?.errors?.pattern">
                             *Haemoglobin level Must Be Greater Than 12 Deciliter
                         </div><br>
                         <div class="input-group">
-                            <input type="date" formControlName="dob" type="text" onfocus="(this.type='date')" id="date"
+                            <input type="date" [ngClass]="{
+                                'input-error': 
+                                    form.get('dob')?.errors?.required &&
+                                    form.get('dob')?.touched
+                                }" formControlName="dob" type="text" onfocus="(this.type='date')" id="date"
                                 class="form-control" max="{{maxDate}}" placeholder="Date Of Birth in DD-MM-YYYY">
                         </div>
                         <div class="err"

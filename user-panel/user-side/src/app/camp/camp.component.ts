@@ -55,7 +55,7 @@ export class CampComponent implements OnInit {
     this.serv.getCamp().subscribe((data: any) => (this.CampArray = [...data]));
     this.getdata();
     this.formdata();
-    document.getElementById('modalid').click();
+    // document.getElementById('modalid').click();
     this.futureDateDisable();
   }
   futureDateDisable() {
@@ -94,11 +94,13 @@ export class CampComponent implements OnInit {
       return;
     }
     this.serv.getAppoint(this.userId).subscribe((val: any) => {
-      if (val === null) return;
+      if(val.length<1){
+        return;
+      }
       const data = val.find(
-        (item: any) => item.refcamp === this.form.value.camp_name
+        (item: any) => item.refcamp._id === this.form.value.camp_name
       );
-      if (data !== null) {
+      if (data !== null || typeof(data) !== undefined) {
         alert('Selected campAlready in your Appointment....!!');
         return;
       }
@@ -145,7 +147,8 @@ export class CampComponent implements OnInit {
         }
       }
     });
-    this.serv.AddEli(this.form.value, this.userId);
+    
+    // this.serv.AddEli(this.form.value, this.userId);
     this.form.reset();
   }
   getdata() {

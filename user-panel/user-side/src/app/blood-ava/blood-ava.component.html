@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <div class="block-sec">
     <div class="page-header">
-        <h3 class="text-danger">Blood Stock Availability<button *ngIf="authenticated" data-toggle="modal" data-target="#exampleModalCenter"
-                 class="btn">Request</button></h3>
+        <h3 class="text-danger">Blood Stock Availability<button *ngIf="authenticated" data-toggle="modal"
+                (click)="bookApp()" class="btn">Request</button></h3>
     </div>
     <div class="panel panel-danger">
         <div class="panel-heading">Search Blood Stock</div><br>
@@ -42,8 +42,11 @@
         <pagination-controls class="pagi" (pageChange)="gty((page = $event))"></pagination-controls>
     </div>
 </div>
+<!-- Button trigger modal -->
+<button type="button" style="display: none;" id="modalidform" data-toggle="modal"
+    data-target="#EligibilityFormModal"></button>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="EligibilityFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -56,7 +59,10 @@
             <form [formGroup]=form (ngSubmit)="addStockForm()">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" formControlName="volume" placeholder="Enter Quantity" class="form-control">
+                        <input type="text" [ngClass]="{
+                            'input-error': 
+                                form.get('volume')?.touched || form.get('volume')?.errors?.pattern
+                            }" formControlName="volume" placeholder="Enter Quantity" class="form-control">
                         <div class="err" *ngIf="volume.touched && volume.hasError('required')">Qty is required</div>
                         <div class="err"
                             *ngIf="!form.get('volume')?.errors?.required && (form.get('volume')?.errors?.pattern)">
@@ -64,8 +70,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_group">
-                            <option value="none" selected>Select BloodGroup</option>
+                        <select class="form-control" [ngClass]="{
+                            'input-error': 
+                                form.get('blood_group')?.invalid && 
+                                form.get('blood_group')?.touched && 
+                                form.get('blood_group')?.errors?.required
+                            }" id="exampleFormControlSelect1" formControlName="blood_group">
                             <option [value]="groupData._id" *ngFor="let groupData of GroupArray">{{ groupData.group }}
                             </option>
                         </select>
@@ -73,8 +83,12 @@
                             required</div>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" formControlName="blood_compo">
-                            <option selected>Select BloodComponent</option>
+                        <select class="form-control" [ngClass]="{
+                            'input-error': 
+                                form.get('blood_compo')?.invalid && 
+                                form.get('blood_compo')?.touched && 
+                                form.get('blood_compo')?.errors?.required
+                            }" id="exampleFormControlSelect1" formControlName="blood_compo">
                             <option [value]="groupComData._id" *ngFor="let groupComData of ComArray">{{
                                 groupComData.component }}</option>
                         </select>
