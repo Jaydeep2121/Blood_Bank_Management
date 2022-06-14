@@ -16,6 +16,7 @@ import { CustomValidators } from 'src/app/public/_helpers/custom-validators';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
+  maxDate  = new Date();
   constructor(private ser: UserServiceService, public router: Router) {}
   regForm: FormGroup;
   text: any;
