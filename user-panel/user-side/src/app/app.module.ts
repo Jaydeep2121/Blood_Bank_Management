@@ -24,6 +24,7 @@ import { CampComponent } from './camp/camp.component';
 import { LoadingInterceptor } from 'auth/loading.interceptor';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { DonorEligComponent } from './donor-elig/donor-elig.component';
+import { CampDetailsComponent } from './user-profile/camp-details/camp-details.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DonorEligComponent } from './donor-elig/donor-elig.component';
     BloodAvaComponent,
     CampComponent,
     ForgetPassComponent,
-    DonorEligComponent
+    DonorEligComponent,
+    CampDetailsComponent
   ],
   imports: [
     NgbModule,

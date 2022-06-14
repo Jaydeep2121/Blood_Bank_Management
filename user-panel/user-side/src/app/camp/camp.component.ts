@@ -93,6 +93,7 @@ export class CampComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
+    console.log(this.form.value);
     this.serv.getAppoint(this.userId).subscribe((val: any) => {
       if(val.length<1){
         return;

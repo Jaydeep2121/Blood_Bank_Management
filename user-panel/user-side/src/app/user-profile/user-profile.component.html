@@ -3,9 +3,7 @@
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded mt-5"
-                        width="150px"
-                        src="api/{{imagPath}}" ><span
-                        class="font-weight-bold">{{name}}</span><span
+                        width="150px" src="api/{{imagPath}}"><span class="font-weight-bold">{{name}}</span><span
                         class="text-black-50">{{email}}</span><span> </span></div>
             </div>
             <div class="col-md-5 ">
@@ -72,7 +70,7 @@
                         </div>
                     </div>
                     <div class="col mt-3">
-                        <div class="frmerr" 
+                        <div class="frmerr"
                             *ngIf="regForm.get('imageUrl')?.invalid && regForm.get('imageUrl')?.touched">
                             *Profile is required
                         </div>
@@ -117,41 +115,5 @@
     </form>
 </div>
 <div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-6 border-right">
-            <div class="p-3 text-right" style="font-weight: bold;">
-                BAG REQUEST&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-pen-to-square"></i>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="p-3 text-right" style="font-weight: bold;">
-                CAMP DETAILS&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-pen-to-square"></i>
-            </div>
-            <div *ngIf="CampArray.length != 0" class="container rounded overflow-auto p-3 mb-3 bg-light" style="max-height: 150px">
-                <table class="table">
-                    <tbody>
-                      <tr *ngFor="let camp of CampArray">
-                        <th scope="row">1</th>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                    <!-- This is an example of using <code>.overflow-auto</code> on an element with set width and height dimensions. By
-                    design, this content will vertically scroll.    This is an example of using <code>.overflow-auto</code> on an element with set width and height dimensions. By
-                    design, this content will vertically scroll.    This is an example of using <code>.overflow-auto</code> on an element with set width and height dimensions. By
-                    design, this content will vertically scroll. -->
-            </div>
-        </div>
-    </div>
+    <app-camp-details></app-camp-details>
 </div>
