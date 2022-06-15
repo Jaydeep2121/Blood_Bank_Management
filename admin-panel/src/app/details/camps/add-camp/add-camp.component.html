@@ -3,37 +3,37 @@
     <form role="form" [formGroup]=form (ngSubmit)="addUserForm()">
         <mat-form-field>
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="date">
+            <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="dob">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="date.touched && date.hasError('required')">*Date is required</mat-error>
+            <mat-error *ngIf="form.get('dob')?.touched && form.get('dob')?.errors?.required">*Date is required</mat-error>
         </mat-form-field><br>
         <!-- appearance="outline",appearance="fill" -->
         <mat-form-field>
             <input matInput [ngxMatTimepicker]="picker1" placeholder="Enter Time" formControlName="time">
             <ngx-mat-timepicker #picker1></ngx-mat-timepicker>
-            <mat-error *ngIf="time.touched && time.hasError('required')">*Time is required</mat-error>
+            <mat-error *ngIf="form.get('time')?.touched && form.get('time')?.errors?.required">*Time is required</mat-error>
         </mat-form-field>
         <mat-form-field>
             <input type="text" matInput placeholder="Camp Name" formControlName="camp_name">
-            <mat-error *ngIf="camp_name.touched && camp_name.hasError('required')">*CampName is required</mat-error>
+            <mat-error *ngIf="form.get('camp_name')?.touched && form.get('camp_name')?.errors?.required">*CampName is required</mat-error>
         </mat-form-field><br>
 
         <mat-form-field class="example-full-width">
             <textarea matInput placeholder="Enter Address" formControlName="address" style="resize: none;"></textarea>
-            <mat-error *ngIf="address.touched && address.hasError('required')">*Address is required</mat-error>
+            <mat-error *ngIf="form.get('address')?.touched && form.get('address')?.errors?.required">*Address is required</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <input type="text" matInput placeholder="Enter Conducted" formControlName="conducted_by">
-            <mat-error *ngIf="conducted_by.touched && conducted_by.hasError('required')">*Conducted is required
+            <mat-error *ngIf="form.get('conducted_by')?.touched && form.get('conducted_by')?.errors?.required">*Conducted is required
             </mat-error>
         </mat-form-field><br>
 
         <mat-form-field>
             <input type="text" matInput placeholder="Enter Organizer" formControlName="organized_by">
-            <mat-error *ngIf="organized_by.touched && organized_by.hasError('required')">*Organizer is required
+            <mat-error *ngIf="form.get('organized_by')?.touched && form.get('organized_by')?.errors?.required">*Organizer is required
             </mat-error>
         </mat-form-field><br>
 

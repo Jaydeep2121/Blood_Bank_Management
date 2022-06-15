@@ -10,6 +10,7 @@ export class ViewListProfileComponent implements OnInit {
   displayStyle: string = '';
   name: string;
   email: string;
+  dob:Date;
   mobile: string;
   gender:string;
   group:string;
@@ -21,6 +22,7 @@ export class ViewListProfileComponent implements OnInit {
   getUserByid(val: any) {
     this.name = val['name'];
     this.email = val['email'];
+    this.dob = new Date(val['dob'])
     this.mobile = val['mobile'];
     this.gender = val['gender'];
     this.group = val['blood_group']['group'];

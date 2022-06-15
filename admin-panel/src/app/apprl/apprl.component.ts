@@ -10,7 +10,7 @@ import { ApprlService } from './apprl.service';
 @Component({
   selector: 'app-apprl',
   templateUrl: './apprl.component.html',
-  styleUrls: ['./apprl.component.css']
+  styleUrls: ['./apprl.component.css'],
 })
 export class ApprlComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,9 +25,13 @@ export class ApprlComponent implements OnInit {
     'Emp Contact',
     'Volume',
     'Bl.Group',
-    'Bl.Component'
+    'Bl.Component',
   ];
-  constructor(public dialog: MatDialog, private Ser: ApprlService,private homeSer:HomeService) {}
+  constructor(
+    public dialog: MatDialog,
+    private Ser: ApprlService,
+    private homeSer: HomeService
+  ) {}
 
   ngOnInit(): void {
     this.homeSer.isAuthenticate();
@@ -54,5 +58,4 @@ export class ApprlComponent implements OnInit {
     });
     this.MyDataSource = new MatTableDataSource(filteredData);
   }
-
 }

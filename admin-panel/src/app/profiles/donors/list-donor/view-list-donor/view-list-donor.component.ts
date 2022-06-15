@@ -21,6 +21,7 @@ export class ViewListDonorComponent implements OnInit {
     });
   }
   getDonorByid(val: any) {
+    if(val===null)return
     this.serv.getgrpbyid(val['refuser']['blood_group']).subscribe((data)=>this.bgrp=data[0].group)
     this.date=val['refcamp']['date'];
     this.time=val['refcamp']['time'];

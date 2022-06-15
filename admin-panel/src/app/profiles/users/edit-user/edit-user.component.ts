@@ -15,23 +15,12 @@ import { UserServiceService } from '../services/user-service.service';
   styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent implements OnInit {
+  maxDate  = new Date();
+  regForm: FormGroup;
   text: any;
   image: any;
   GroupArray: any = [];
   userID: string = '';
-  form: FormGroup = new FormGroup(
-    {
-      name: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      gender: new FormControl(null, Validators.required),
-      mobile: new FormControl(null, Validators.required),
-      password: new FormControl(null, [Validators.required]),
-      passwordConfirm: new FormControl(null, [Validators.required]),
-      blood_group: new FormControl(null, [Validators.required]),
-      imageUrl: new FormControl(null, [Validators.required]),
-    },
-    { validators: CustomValidators.passwordsMatching }
-  );
   constructor(private ser: UserServiceService) {
     this.ser.currval.subscribe((val) => (this.userID = val));
     this.ser.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
@@ -39,66 +28,63 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserByid(this.userID);
+    this.formData();
   }
-
+  formData() {
+    this.regForm = new FormGroup({
+      userName: new FormControl('', [Validators.required]),
+      userEmail: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$'),
+      ]),
+      dob: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      userPass: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
+        ),
+      ]),
+      userCont: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^([6789]{1})([0-9]{1})([0-9]{8})$'),  
+      ]),
+      passwordConfirm: new FormControl('', [Validators.required]),
+      blood_group: new FormControl('', [Validators.required]),
+      imageUrl: new FormControl('', [Validators.required]),
+    },{ validators: CustomValidators.passwordsMatching });
+  }
   uploadFileEvt(imgFile: any) {
     this.text = imgFile.target.files[0].name;
     this.image = imgFile.target.files[0];
   }
   UpdateUserForm() {
-    const value = this.form.value;
+    const value = this.regForm.value;
     let formData = new FormData();
-    formData.append('name', value['name']);
-    formData.append('email', value['email']);
+    formData.append('name', value['userName']);
+    formData.append('email', value['userEmail']);
+    formData.append('dob', value['dob']);
     formData.append('gender', value['gender']);
-    formData.append('mobile', value['mobile']);
-    formData.append('password', value['password']);
+    formData.append('mobile', value['userCont']);
+    formData.append('password', value['userPass']);
     formData.append('imageUrl', this.image);
     formData.append('blood_group', value['blood_group']);
-    if (this.form.valid) {
+    if (this.regForm.valid) {
       this.ser.UpdateUser(formData,this.userID);
     }
   }
   getUserByid(id: string) {
     this.ser.editUser(id).subscribe((val) => {
-      this.form.patchValue({
-        name: val.name,
-        email: val.email,
+      this.regForm.patchValue({
+        userName: val.name,
+        userEmail: val.email,
+        dob:val.dob,
         gender: val.gender,
-        mobile: val.mobile,
-        password: val.password,
+        userCont: val.mobile,
+        userPass: val.password,
         blood_group: val.blood_group,
       });
     });
-  }
-
-  get email(): FormControl {
-    return this.form.get('email') as FormControl;
-  }
-
-  get name(): FormControl {
-    return this.form.get('name') as FormControl;
-  }
-
-  get gender(): FormControl {
-    return this.form.get('gender') as FormControl;
-  }
-
-  get mobile(): FormControl {
-    return this.form.get('mobile') as FormControl;
-  }
-
-  get password(): FormControl {
-    return this.form.get('password') as FormControl;
-  }
-
-  get passwordConfirm(): FormControl {
-    return this.form.get('passwordConfirm') as FormControl;
-  }
-  get blood_group(): FormControl {
-    return this.form.get('blood_group') as FormControl;
-  }
-  get imageUrl(): FormControl {
-    return this.form.get('imageUrl') as FormControl;
   }
 }

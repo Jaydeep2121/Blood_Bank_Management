@@ -3,11 +3,11 @@
     <form role="form" [formGroup]=form (ngSubmit)="addAppForm()">
         <mat-form-field>
             <mat-label>CampName</mat-label>
-            <mat-select formControlName="campfield">
+            <mat-select formControlName="refcamp">
                 <mat-option [value]="camp._id" *ngFor="let camp of campNames">{{ camp.camp_name }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="campfield.touched && campfield.hasError('required')">*CampName is required</mat-error>
+            <mat-error *ngIf="form.get('refcamp')?.touched && form.get('refcamp')?.errors?.required">*CampName is required</mat-error>
         </mat-form-field>
         
         <mat-form-field>
@@ -16,7 +16,7 @@
                 <mat-option [value]="user._id" *ngFor="let user of userNames">{{ user.email }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="userfield.touched && userfield.hasError('required')">*UserName is required</mat-error>
+            <mat-error *ngIf="form.get('userfield')?.touched && form.get('userfield')?.errors?.required">*UserName is required</mat-error>
         </mat-form-field>
 
         <div class="mbutton">

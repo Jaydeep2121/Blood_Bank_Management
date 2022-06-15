@@ -61,7 +61,6 @@ export class ListEmployeeComponent implements OnInit {
   }
   // Search specific result
   filterData($event: any) {
-    console.log($event.target.value);
     this.notFound='';
     if ($event.target.value.length === 0) {
       this.getEmp();

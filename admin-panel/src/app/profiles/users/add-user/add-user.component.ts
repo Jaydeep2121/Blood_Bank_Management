@@ -39,6 +39,7 @@ export class AddUserComponent implements OnInit {
         Validators.email,
         Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$'),
       ]),
+      dob: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       userPass: new FormControl('', [
         Validators.required,
@@ -63,6 +64,7 @@ export class AddUserComponent implements OnInit {
     let formData = new FormData();
     formData.append('name', value['userName']);
     formData.append('email', value['userEmail']);
+    formData.append('dob', value['dob']);
     formData.append('gender', value['gender']);
     formData.append('mobile', value['userCont']);
     formData.append('password', value['userPass']);
