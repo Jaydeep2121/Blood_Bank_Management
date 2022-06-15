@@ -154,18 +154,6 @@
                         <div class="err"
                             *ngIf="form.get('hemog')?.errors?.forbiddenWeight!==null && !form.get('hemog')?.errors?.required && !form.get('hemog')?.errors?.pattern">
                             *Haemoglobin level Must Be Greater Than 12 Deciliter
-                        </div><br>
-                        <div class="input-group">
-                            <input type="date" [ngClass]="{
-                                'input-error': 
-                                    form.get('dob')?.errors?.required &&
-                                    form.get('dob')?.touched
-                                }" formControlName="dob" type="text" onfocus="(this.type='date')" id="date"
-                                class="form-control" max="{{maxDate}}" placeholder="Date Of Birth in DD-MM-YYYY">
-                        </div>
-                        <div class="err"
-                            *ngIf="(form.get('dob')?.dirty || form.get('dob')?.touched) && form.get('dob')?.errors?.required">
-                            *Date Of Birth is required
                         </div>
                     </div>
                 </div>

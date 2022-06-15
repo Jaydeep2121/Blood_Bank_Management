@@ -30,6 +30,7 @@ export class CampComponent implements OnInit {
   totalItems: any;
   userId: string;
   gender: string;
+  dob: Date;
   page: number = 1;
   CampArray: any = [];
   maxDate: any;
@@ -51,6 +52,7 @@ export class CampComponent implements OnInit {
     this.serv.editUser(localStorage.getItem('eid')).subscribe((val) => {
       this.userId = val._id;
       this.gender = val.gender;
+      this.dob = val.dob;
     });
     this.serv.getCamp().subscribe((data: any) => (this.CampArray = [...data]));
     this.getdata();
@@ -86,28 +88,24 @@ export class CampComponent implements OnInit {
         Validators.pattern('^[0-9]*$'),
         forbiddenWeightValidator(new RegExp('^(1[^0-2]|[2-9][0-9])+$')),
       ]),
-      dob: new FormControl('', [Validators.required]),
     });
   }
   addEligForm() {
     if (!this.form.valid) {
       return;
     }
-    console.log(this.form.value);
+    let selcamp = this.form.value.camp_name;
     this.serv.getAppoint(this.userId).subscribe((val: any) => {
-      if(val.length<1){
+      if (val.length < 1) {
         return;
       }
-      const data = val.find(
-        (item: any) => item.refcamp._id === this.form.value.camp_name
-      );
-      if (data !== null || typeof(data) !== undefined) {
+      const data = val.find((item: any) => item.refcamp._id === selcamp);
+      if (data !== undefined) {
         alert('Selected campAlready in your Appointment....!!');
         return;
       }
     });
-    let ageInMilliseconds =
-      new Date().valueOf() - new Date(this.form.value.dob).valueOf();
+    let ageInMilliseconds = new Date().valueOf() - this.dob.valueOf();
     let age = Math.floor(+ageInMilliseconds / 1000 / 60 / 60 / 24 / 365);
     if (age < 18) {
       alert('Your Age Is Not Eligible To Donate....!!');
@@ -148,7 +146,7 @@ export class CampComponent implements OnInit {
         }
       }
     });
-    
+    console.log(this.form.value);
     // this.serv.AddEli(this.form.value, this.userId);
     this.form.reset();
   }

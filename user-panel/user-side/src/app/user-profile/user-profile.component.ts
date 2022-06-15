@@ -72,7 +72,7 @@ export class UserProfileComponent implements OnInit {
         ]),
         userCont: new FormControl('', [
           Validators.required,
-          Validators.pattern('^([6789]{1})([234789]{1})([0-9]{8})$'),
+          Validators.pattern('^([6789]{1})([0-9]{1})([0-9]{8})$')
         ]),
         passwordConfirm: new FormControl('', [Validators.required]),
         blood_group: new FormControl('', [Validators.required]),

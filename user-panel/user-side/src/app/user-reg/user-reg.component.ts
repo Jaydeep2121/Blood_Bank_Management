@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class UserRegComponent implements OnInit {
   regForm: FormGroup;
   text: any;
+  maxDate: any;
   image: any;
   GroupArray: any = [];
   constructor(
@@ -22,6 +23,20 @@ export class UserRegComponent implements OnInit {
   ngOnInit(): void {
     this.formData();
     this.serv.getGroup().subscribe((data: any) => this.GroupArray=[...data]);
+    this.futureDateDisable();
+  }
+  futureDateDisable() {
+    var date: any = new Date();
+    var todayDate: any = date.getDate();
+    var month: any = date.getMonth() + 1;
+    var year: any = date.getFullYear();
+    if (todayDate < 10) {
+      todayDate = '0' + todayDate;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    this.maxDate = year + '-' + month + '-' + todayDate;
   }
   formData() {
     this.regForm = new FormGroup({
@@ -31,6 +46,7 @@ export class UserRegComponent implements OnInit {
         Validators.email,
         Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$'),
       ]),
+      dob: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       userPass: new FormControl('', [
         Validators.required,
@@ -59,6 +75,7 @@ export class UserRegComponent implements OnInit {
     let formData = new FormData();
     formData.append('name', value['userName']);
     formData.append('email', value['userEmail']);
+    formData.append('dob', value['dob']);
     formData.append('gender', value['gender']);
     formData.append('mobile', value['userCont']);
     formData.append('password', value['userPass']);
