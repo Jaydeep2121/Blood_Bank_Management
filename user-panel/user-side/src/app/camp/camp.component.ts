@@ -57,7 +57,7 @@ export class CampComponent implements OnInit {
     this.serv.getCamp().subscribe((data: any) => (this.CampArray = [...data]));
     this.getdata();
     this.formdata();
-    // document.getElementById('modalid').click();
+    document.getElementById('modalid').click();
     this.futureDateDisable();
   }
   futureDateDisable() {
@@ -105,7 +105,7 @@ export class CampComponent implements OnInit {
         return;
       }
     });
-    let ageInMilliseconds = new Date().valueOf() - this.dob.valueOf();
+    let ageInMilliseconds = new Date().valueOf() - new Date(this.dob).valueOf();
     let age = Math.floor(+ageInMilliseconds / 1000 / 60 / 60 / 24 / 365);
     if (age < 18) {
       alert('Your Age Is Not Eligible To Donate....!!');
@@ -146,7 +146,7 @@ export class CampComponent implements OnInit {
         }
       }
     });
-    console.log(this.form.value);
+    // console.log(this.form.value);
     // this.serv.AddEli(this.form.value, this.userId);
     this.form.reset();
   }
