@@ -21,6 +21,7 @@ import { LoadingInterceptor } from './auth/loading.interceptor';
 import { ProfilesModule } from './profiles/profiles.module';
 import { DetailModule } from './details/detail.module';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
     MyProfileComponent,
     ViewProfileComponent,
     ApprlComponent,
-    ForgotPassComponent
+    ForgotPassComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
