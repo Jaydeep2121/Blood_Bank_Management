@@ -45,6 +45,11 @@ export class LoginComponentComponent implements OnInit {
       return;
     }
     this.loading=true;
-    this.serv.LoginAdmin(this.loginForm.value);
+    this.serv.LoginAdmin(this.loginForm.value).subscribe(() => {
+      this.router.navigate(['/']);
+    },(err) => {
+      this.serv.showErrorDialog();
+      this.loading=false;
+    });
   }
 }
