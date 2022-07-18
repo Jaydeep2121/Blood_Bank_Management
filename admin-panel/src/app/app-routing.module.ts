@@ -1,25 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
-
-import { DonorsComponent } from './profiles/donors/donors.component';
-import { ProfileComponent } from './profiles/profile.component';
-import { EmployeesComponent } from './profiles/employees/employees.component';
-import { UsersComponent } from './profiles/users/users.component';
-import { ListUserComponent } from './profiles/users/list-user/list-user.component';
-import { ListDonorComponent } from './profiles/donors/list-donor/list-donor.component';
-import { ListEmployeeComponent } from './profiles/employees/list-employee/list-employee.component';
-
 import { MyProfileComponent } from './my-profile/my-profile.component';
-import { DetailsComponent } from './details/details.component';
-import { StorageComponent } from './details/storage/storage.component';
-import { BloodBankComponent } from './details/blood-bank/blood-bank.component';
-import { StockComponent } from './details/storage/stock/stock.component';
-import { UrequestComponent } from './details/storage/urequest/urequest.component';
-import { CampsComponent } from './details/camps/camps.component';
-import { ListCampComponent } from './details/camps/list-camp/list-camp.component';
 import { ApprlComponent } from './apprl/apprl.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 
@@ -27,48 +12,13 @@ const routes: Routes = [
   { path: '', component: HomeComponentComponent },
   { path: 'login', component: LoginComponentComponent },
   { path:'forget-pass',component:ForgotPassComponent },
-  // { path:'mprofiles',redirectTo:'/Mmprofiles',pathMatch:'full'},
-  {
-    path: 'Mprofiles',
-    component: ProfileComponent,
-    children: [
-      {
-        path: 'users',
-        component: UsersComponent,
-        children: [{ path: '', component: ListUserComponent }],
-      },
-      {
-        path: 'donors',
-        component: DonorsComponent,
-        children: [{ path: '', component: ListDonorComponent }],
-      },
-      {
-        path: 'employee',
-        component: EmployeesComponent,
-        children: [{ path: '', component: ListEmployeeComponent }],
-      },
-    ],
+  { 
+    path:'Mprofiles',
+    loadChildren:()=>import('./profiles/profiles.module').then(m=>m.ProfilesModule)
   },
   {
-    path: 'Mdetails',
-    component: DetailsComponent,
-    children: [
-      {
-        path: 'storage',
-        component: StorageComponent,
-        children: [
-          { path: '', component: StockComponent },
-          { path: 'stock', component: StockComponent },
-          { path: 'urequest', component: UrequestComponent },
-        ],
-      },
-      { path: 'bbank', component: BloodBankComponent },
-      {
-        path: 'camps',
-        component: CampsComponent,
-        children: [{ path: '', component: ListCampComponent }],
-      },
-    ],
+    path:'Mdetails',
+    loadChildren:()=>import('./details/detail.module').then(m=>m.DetailModule)
   },
   { path: 'perProfile', component: MyProfileComponent },
   { path: 'apprl', component: ApprlComponent },

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-/* All Profile Components And Modules */
+/* All Details Components And Modules */
 import { AngularMaterialModule } from '../angular-material.module';
 import { DetailsComponent } from './details.component';
 import { StorageComponent } from './storage/storage.component';
@@ -17,6 +17,7 @@ import { CampsComponent } from './camps/camps.component';
 import { AddCampComponent } from './camps/add-camp/add-camp.component';
 import { ListCampComponent } from './camps/list-camp/list-camp.component';
 import { EditCampComponent } from './camps/edit-camp/edit-camp.component';
+import { DetailRoutingModule } from './detail-routing.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { EditCampComponent } from './camps/edit-camp/edit-camp.component';
   imports: [
     CommonModule,
     RouterModule,
+    DetailRoutingModule,
     ReactiveFormsModule,
     AngularMaterialModule,
   ],

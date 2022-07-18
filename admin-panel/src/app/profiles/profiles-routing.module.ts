@@ -13,7 +13,7 @@ import { DisplayDonorService } from './MainService/display-donor.service';
 import { DisplayEmpService } from './MainService/display-emp.service';
 const routes: Routes = [
   {
-    path: 'Mmprofiles',
+    path: '',
     component: ProfileComponent,
     children: [
       {
@@ -23,7 +23,7 @@ const routes: Routes = [
           {
             path: '',
             component: ListUserComponent,
-            resolve: [DisplayUserService],
+            // resolve: [DisplayUserService],
           },
         ],
       },
@@ -34,7 +34,7 @@ const routes: Routes = [
           {
             path: '',
             component: ListDonorComponent,
-            resolve: [DisplayDonorService],
+            // resolve: [DisplayDonorService],
           },
         ],
       },
@@ -45,7 +45,7 @@ const routes: Routes = [
           {
             path: '',
             component: ListEmployeeComponent,
-            resolve: [DisplayEmpService],
+            // resolve: [DisplayEmpService],
           },
         ],
       },

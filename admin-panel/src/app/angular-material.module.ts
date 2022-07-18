@@ -37,41 +37,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 
 const materialModules = [
-  CdkTreeModule,
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatNativeDateModule,
-  MatChipsModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatPaginatorModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatFormFieldModule,
-  MatButtonToggleModule,
-  MatTreeModule,
-  OverlayModule,
-  PortalModule,
-  MatBadgeModule,
-  MatGridListModule,
-  MatRadioModule,
-  MatDatepickerModule,
-  NgxMatTimepickerModule,
-  MatTooltipModule
+  CdkTreeModule,MatAutocompleteModule,MatButtonModule,MatCardModule,MatCheckboxModule,MatDialogModule,
+  MatNativeDateModule,MatChipsModule,MatDividerModule,MatExpansionModule,MatIconModule,MatInputModule,
+  MatListModule,MatMenuModule,MatProgressSpinnerModule,MatPaginatorModule,MatRippleModule,MatSelectModule,
+  MatSidenavModule,MatSnackBarModule,MatSortModule,MatTableModule,MatTabsModule,MatToolbarModule,
+  MatFormFieldModule,MatButtonToggleModule,MatTreeModule,OverlayModule,PortalModule,MatBadgeModule,
+  MatGridListModule,MatRadioModule,MatDatepickerModule,NgxMatTimepickerModule,MatTooltipModule
 ];
 @NgModule({
   imports: [
